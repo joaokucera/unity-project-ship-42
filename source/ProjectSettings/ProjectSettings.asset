@@ -11,7 +11,7 @@ PlayerSettings:
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: "Jo\xE3o Kucera"
-  productName: Rescue Flat Ship
+  productName: Ship 42
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
@@ -73,7 +73,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.joaokucera.rescueflatship
+  iPhoneBundleIdentifier: com.joaokucera.ship42
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: a605f6af4530f4da4a311e0db82a91fa
