@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class GameObjectExtensions {
+public static class GameObjectExtensions 
+{
 	
 }

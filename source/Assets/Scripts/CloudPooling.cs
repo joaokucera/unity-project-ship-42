@@ -13,17 +13,21 @@ public class CloudPooling : GenericPooling {
 	{
 		base.Initialize ();
 
-		float width = Screen.width * 1.1f;
+		Camera mainCamera = Camera.main;
+		Vector2 currentCameraPosition = mainCamera.transform.position;
+
+		float xPosition = currentCameraPosition.x + (mainCamera.aspect * mainCamera.orthographicSize);
+		float yPosition = currentCameraPosition.x + mainCamera.orthographicSize;
 
 		transform.parent.CreateTrigger(
-			"Cloud Trigger Up", Camera.main.ScreenToWorldPoint (new Vector2(width, Screen.height)),
+			"Cloud Trigger Up", new Vector2(xPosition, yPosition),
 			"InvisiblePoint", "InvisiblePoint");
 
 		transform.parent.CreateTrigger(
-			"Cloud Trigger Down", Camera.main.ScreenToWorldPoint (new Vector2(width, Screen.height * 75 / 100)),
+			"Cloud Trigger Down", new Vector2(xPosition, 0), 
 			"InvisiblePoint", "InvisiblePoint");
 
-		transform.position = Camera.main.ScreenToWorldPoint (new Vector2(width, Screen.height * 87.5f / 100));
+		transform.position = new Vector2 (xPosition, yPosition / 2);
 	
 		if (cloudSprites == null || cloudSprites.Count == 0) 
 		{
@@ -61,6 +65,8 @@ public class CloudPooling : GenericPooling {
 		ReverseTranslate ();
 
 		GameObject cloud = GetObjectFromPool (transform.position);
+		cloud.renderer.sortingLayerName = "Background";
+		cloud.renderer.sortingOrder = 1;
 
 		int index = Random.Range (0, cloudSprites.Count);
 		((SpriteRenderer)cloud.renderer).sprite = cloudSprites [index];

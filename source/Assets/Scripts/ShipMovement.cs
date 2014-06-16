@@ -14,47 +14,78 @@ public class ShipMovement : MonoBehaviour {
 
 	private MovementSide movementSide = MovementSide.NONE;
 	private Camera mainCamera;
-	private SpriteRenderer spriteRenderer;
 	private Vector2 boundSize;
-
-	private float verticalFixedPosition;
+	private float fixedVerticalPosition;
 
 	void Start () 
 	{
 		mainCamera = Camera.main;
-		spriteRenderer = (SpriteRenderer)renderer;
-		boundSize = spriteRenderer.sprite.bounds.size / 2;
+		boundSize = renderer.bounds.size / 2;
 
-
-		Vector2 startPosition = //new Vector2((mainCamera.aspect) / 2,
-//		                                    0); 
-//		Debug.Log (startPosition);
-
-		Camera.main.ScreenToWorldPoint (new Vector2 (Screen.width / 2, spriteRenderer.bounds.size.x * 3.5f));
+		float yPosition = -mainCamera.orthographicSize + (renderer.bounds.size.y / 3f);
+		Vector2 startPosition = new Vector2 (0, yPosition);
 
 		transform.position = startPosition;
-		verticalFixedPosition = startPosition.y;
+		fixedVerticalPosition = startPosition.y;
 	}
 
 	void Update () 
 	{
 		transform.TranslateTo ((int)movementSide * speed, 0, 0, Time.deltaTime);
 
-		transform.position = new Vector2 (transform.position.x, verticalFixedPosition);
+		transform.position = new Vector2 (transform.position.x, fixedVerticalPosition);
+
+#if UNITY_EDITOR
+		ClickMovement();
+#else
+		TouchMovement ();
+#endif
 
 		// Enforce ship inside the screen.
 		EnforceBounds ();
 	}
 
-	void OnGUI()
+	private void ClickMovement ()
 	{
-		if (GUI.Button(new Rect(0, Screen.height - 40, 40, 40), "<<"))
+		// Just 1 tap.
+		if (Input.GetButtonDown("Fire1"))
 		{
-			movementSide = MovementSide.LEFT;
+			Vector2 position = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+			if (position.x < transform.position.x)
+			{
+				movementSide = MovementSide.LEFT;
+			}
+			else if (position.x > transform.position.x)
+			{
+				movementSide = MovementSide.RIGHT;
+			}
+			else
+			{
+				movementSide = MovementSide.NONE;
+			}
 		}
-		else if (GUI.Button(new Rect(Screen.width - 40, Screen.height - 40, 40, 40), ">>"))
+	}
+
+	private void TouchMovement ()
+	{
+		// Just 1 tap.
+		if (Input.touchCount == 1)
 		{
-			movementSide = MovementSide.RIGHT;
+			Touch touch = Input.GetTouch(0);
+
+			if (touch.position.x < transform.position.x)
+			{
+				movementSide = MovementSide.LEFT;
+			}
+			else if (touch.position.x > transform.position.x)
+			{
+				movementSide = MovementSide.RIGHT;
+			}
+			else
+			{
+				movementSide = MovementSide.NONE;
+			}
 		}
 	}
 
