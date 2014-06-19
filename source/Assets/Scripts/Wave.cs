@@ -2,12 +2,12 @@
 using System;
 using System.Collections;
 
-public class Wave : MonoBehaviour {
-
-	public float speed;
-
+public class Wave : GenericMovement {
+	
 	void Update()
 	{
-		transform.TranslateTo (-speed, 0, 0, Time.deltaTime);
+		int direction = (int)side;
+
+		transform.TranslateTo (direction * speed, 0, 0, Time.deltaTime);
 	}
 }

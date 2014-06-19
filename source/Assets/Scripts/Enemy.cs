@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cloud : GenericMovement {
-	
+public class Enemy : GenericMovement {
+
 }

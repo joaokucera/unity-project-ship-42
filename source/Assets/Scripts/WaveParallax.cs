@@ -13,17 +13,22 @@ public enum WaveGroup
 public class WaveParallax : MonoBehaviour {
 
 	[SerializeField] private WaveGroup waveGroup;
-	[SerializeField] private List<Transform> waves;
 
+	private List<Transform> waves = new List<Transform>();
 	private Camera mainCamera;
 
 	void Start()
 	{
 		mainCamera = Camera.main;
 
+		for (int i = 0; i < transform.childCount; i++) 
+		{
+			waves.Add(transform.GetChild(i));
+		}
+		
 		if (waves == null || waves.Count == 0) 
 		{
-			Debug.LogError("There are no waves's transform included!");
+			Debug.LogError("There are no waves available!");
 		}
 
 		waves.OrderBy (w => w.position.x).ToList();

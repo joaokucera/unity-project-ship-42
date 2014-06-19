@@ -2,13 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum TagName
+{
+	CloudSpawnerLimit,
+	EnemySpawnerLimit
+}
+
+public enum LayerName
+{
+	CloudSpawnerLimit,
+	EnemySpawnerLimit
+}
+
 public class GenericPooling : MonoBehaviour {
 
-	public GameObject prefab;
-	public int poolSize;
-	public bool poolCanGrow;
+	[SerializeField] protected GameObject prefab;
+	[SerializeField] private int poolSize;
+	[SerializeField] private bool poolCanGrow;
 
-	protected List<GameObject> pool = new List<GameObject>();
+	private List<GameObject> pool = new List<GameObject>();
 	
 	void Start () 
 	{
@@ -48,7 +60,7 @@ public class GenericPooling : MonoBehaviour {
 
 	private GameObject CreateNewObject ()
 	{
-		GameObject newObject = (GameObject)Instantiate (prefab);
+		GameObject newObject = Instantiate (prefab) as GameObject;
 		newObject.SetActive (false);
 
 		pool.Add (newObject);

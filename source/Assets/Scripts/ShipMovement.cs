@@ -1,16 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum MovementSide
-{
-	NONE = 0,
-	LEFT = -1,
-	RIGHT = 1
-}
-
 public class ShipMovement : MonoBehaviour {
 
-	public float speed;
+	[SerializeField] private float speed;
 
 	private MovementSide movementSide = MovementSide.NONE;
 	private Camera mainCamera;
