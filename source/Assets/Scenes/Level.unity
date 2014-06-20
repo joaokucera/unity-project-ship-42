@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf97d047b3d5a4f8fb5c71c61ccea9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 1.5
   side: -1
 --- !u!212 &642233671
 SpriteRenderer:
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf97d047b3d5a4f8fb5c71c61ccea9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 1.5
   side: -1
 --- !u!212 &945083339
 SpriteRenderer:
@@ -1190,15 +1190,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 74c9daac5540b4034a4f701b741eef7e, type: 2}
       propertyPath: speed
-      value: 10
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 74c9daac5540b4034a4f701b741eef7e, type: 2}
       propertyPath: speed
-      value: 10
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 74c9daac5540b4034a4f701b741eef7e, type: 2}
       propertyPath: speed
-      value: 10
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74c9daac5540b4034a4f701b741eef7e, type: 2}
@@ -1459,7 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf97d047b3d5a4f8fb5c71c61ccea9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 1.5
   side: -1
 --- !u!212 &1590460771
 SpriteRenderer:
