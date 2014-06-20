@@ -10,11 +10,8 @@ public class CloudPooling : GenericPooling {
 	
 	void Awake()
 	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-
+		Instance = this;
+	
 		if (cloudSprites == null || cloudSprites.Count == 0) 
 		{
 			Debug.LogError("There are no cloud sprites available!");

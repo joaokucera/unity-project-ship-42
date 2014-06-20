@@ -7,10 +7,7 @@ public class EnemyPooling : GenericPooling {
 
 	void Awake()
 	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
+		Instance = this;
 	}
 
 	public static void SpawnEnemyFromPool (Vector2 position, MovementSide side)

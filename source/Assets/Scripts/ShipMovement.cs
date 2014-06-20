@@ -41,22 +41,15 @@ public class ShipMovement : MonoBehaviour {
 	private void ClickMovement ()
 	{
 		// Just 1 tap.
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButton("Fire1"))
 		{
-			Vector2 position = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-			if (position.x < transform.position.x)
-			{
-				movementSide = MovementSide.LEFT;
-			}
-			else if (position.x > transform.position.x)
-			{
-				movementSide = MovementSide.RIGHT;
-			}
-			else
-			{
-				movementSide = MovementSide.NONE;
-			}
+			Movement(mousePosition);
+		}
+		else
+		{
+			movementSide = MovementSide.NONE;
 		}
 	}
 
@@ -67,18 +60,34 @@ public class ShipMovement : MonoBehaviour {
 		{
 			Touch touch = Input.GetTouch(0);
 
-			if (touch.position.x < transform.position.x)
-			{
-				movementSide = MovementSide.LEFT;
-			}
-			else if (touch.position.x > transform.position.x)
-			{
-				movementSide = MovementSide.RIGHT;
-			}
-			else
+			if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
 			{
 				movementSide = MovementSide.NONE;
 			}
+			else
+			{
+				Movement(touch.position);
+			}
+		}
+		else
+		{
+			movementSide = MovementSide.NONE;
+		}
+	}
+
+	private void Movement(Vector2 position)
+	{
+		if (position.x < transform.position.x - renderer.bounds.size.x / 2)
+		{
+			movementSide = MovementSide.LEFT;
+		}
+		else if (position.x > transform.position.x + renderer.bounds.size.x / 2)
+		{
+			movementSide = MovementSide.RIGHT;
+		}
+		else
+		{
+			movementSide = MovementSide.NONE;
 		}
 	}
 
