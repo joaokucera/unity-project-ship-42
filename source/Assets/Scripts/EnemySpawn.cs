@@ -29,7 +29,7 @@ public class EnemySpawn : GenericSpawn {
 
 	private void SpawnEnemy ()
 	{
-		//ReverseTranslate ();
+		ReverseTranslate ();
 
 		EnemyPooling.SpawnEnemyFromPool (transform.position, side);
 
