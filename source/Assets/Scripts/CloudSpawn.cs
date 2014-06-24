@@ -42,6 +42,11 @@ public class CloudSpawn : GenericSpawn {
 	{
 		ReverseTranslate ();
 
-		CloudPooling.SpawnCloudFromPool (transform.position);
+		if (CloudPooling.Instance == null)
+		{
+			Debug.LogError("CloudPooling.Instance == null");
+		}
+
+		CloudPooling.Instance.SpawnCloudFromPool (transform.position);
 	}
 }

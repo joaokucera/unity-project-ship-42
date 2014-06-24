@@ -3,16 +3,19 @@ using System.Collections;
 
 public class EnemyPooling : GenericPooling {
 
-	private static EnemyPooling Instance;
+	public static EnemyPooling Instance;
 
 	void Awake()
 	{
-		Instance = this;
+		if (Instance == null)
+		{
+			Instance = this;
+		}
 	}
 
-	public static void SpawnEnemyFromPool (Vector2 position, MovementSide side)
+	public void SpawnEnemyFromPool (Vector2 position, MovementSide side)
 	{
-		GameObject enemy = EnemyPooling.Instance.GetObjectFromPool (position);
+		GameObject enemy = GetObjectFromPool (position);
 
 		if (enemy != null)
 		{

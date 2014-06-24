@@ -4,13 +4,16 @@ using System.Collections.Generic;
 
 public class CloudPooling : GenericPooling {
 
-	private static CloudPooling Instance;
+	public static CloudPooling Instance;
 
 	[SerializeField] private List<Sprite> cloudSprites;
 	
 	void Awake()
 	{
-		Instance = this;
+		if (Instance == null)
+		{
+			Instance = this;
+		}
 	
 		if (cloudSprites == null || cloudSprites.Count == 0) 
 		{
@@ -18,9 +21,9 @@ public class CloudPooling : GenericPooling {
 		}
 	}
 	
-	public static void SpawnCloudFromPool (Vector2 position)
+	public void SpawnCloudFromPool (Vector2 position)
 	{
-		GameObject cloud = CloudPooling.Instance.GetObjectFromPool (position);
+		GameObject cloud = GetObjectFromPool (position);
 
 		if (cloud != null)
 		{

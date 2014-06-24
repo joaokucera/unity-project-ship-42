@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d81cd0f4945ef4beaa71ff6c28666bf0
+guid: b68d22ac538b142b99f7d0136377ab2e
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -21,7 +21,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: -1
     aniso: 1
@@ -45,23 +45,23 @@ TextureImporter:
     compressionQuality: 50
   spriteSheet:
     sprites:
-    - name: credits_0
+    - name: exit_0
       rect:
         serializedVersion: 2
         x: 0
         y: 155
-        width: 1116
+        width: 610
         height: 155
       alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: credits_1
+      pivot: {x: 0, y: 0}
+    - name: exit_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1116
+        width: 610
         height: 155
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
   spritePackingTag: 
   userData: 

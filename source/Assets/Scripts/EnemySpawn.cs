@@ -31,7 +31,12 @@ public class EnemySpawn : GenericSpawn {
 	{
 		ReverseTranslate ();
 
-		EnemyPooling.SpawnEnemyFromPool (transform.position, side);
+		if (EnemyPooling.Instance == null)
+		{
+			Debug.LogError("EnemyPooling.Instance == null");
+		}
+
+		EnemyPooling.Instance.SpawnEnemyFromPool (transform.position, side);
 
 		CancelInvoke ("SpawnEnemy");
 	}

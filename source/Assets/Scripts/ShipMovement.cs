@@ -28,11 +28,11 @@ public class ShipMovement : MonoBehaviour {
 
 		transform.position = new Vector2 (transform.position.x, fixedVerticalPosition);
 
-#if UNITY_EDITOR
-		ClickMovement();
-#else
+//#if UNITY_EDITOR
+		//ClickMovement();
+//#else
 		TouchMovement ();
-#endif
+//#endif
 
 		// Enforce ship inside the screen.
 		EnforceBounds ();
@@ -59,6 +59,7 @@ public class ShipMovement : MonoBehaviour {
 		if (Input.touchCount == 1)
 		{
 			Touch touch = Input.GetTouch(0);
+			Vector2 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
 
 			if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
 			{
@@ -66,7 +67,7 @@ public class ShipMovement : MonoBehaviour {
 			}
 			else
 			{
-				Movement(touch.position);
+				Movement(touchPosition);
 			}
 		}
 		else
