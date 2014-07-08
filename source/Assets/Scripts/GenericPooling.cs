@@ -49,11 +49,13 @@ public class GenericPooling : MonoBehaviour {
 
 	protected void Initialize ()
 	{
-		if (prefab == null) {
-			Debug.LogError ("Não foi definido um prefab!");
+		if (prefab == null) 
+		{
+			Debug.LogError ("Has not been defined a prefab!");
 		}
 
-		for (int i = 0; i < poolSize; i++) {
+		for (int i = 0; i < poolSize; i++) 
+		{
 			CreateNewObject ();
 		}
 	}

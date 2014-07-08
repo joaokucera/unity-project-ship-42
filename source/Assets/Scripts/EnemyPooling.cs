@@ -1,32 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyPooling : GenericPooling {
-
-	public static EnemyPooling Instance;
+	
+	[SerializeField] private List<EnemySpawn> spawnEnemyPoints;
+	private float spawnTime = 5f;
 
 	void Awake()
 	{
-		if (Instance == null)
+		if (spawnEnemyPoints == null || spawnEnemyPoints.Count == 0)
 		{
-			Instance = this;
+			Debug.LogError("There are no spawn pointss available!");
 		}
 	}
 
-	public void SpawnEnemyFromPool (Vector2 position, MovementSide side)
+	void Update () 
+	{
+		Invoke ("SpawnEnemy", spawnTime);
+	}
+	
+	private void SpawnEnemy ()
+	{
+		int index = Random.Range (0, spawnEnemyPoints.Count);
+
+		var enemySpawn = spawnEnemyPoints [index];
+		enemySpawn.ReverseTranslate ();
+
+		SpawnEnemyFromPool (enemySpawn.transform.position, enemySpawn.side);
+		
+		CancelInvoke ("SpawnEnemy");
+	}
+
+	private void SpawnEnemyFromPool (Vector2 position, MovementSide side)
 	{
 		GameObject enemy = GetObjectFromPool (position);
 
 		if (enemy != null)
 		{
-			if (side == MovementSide.LEFT)
+			if (side == MovementSide.LEFTorDOWN)
 			{
-				enemy.GetComponent<Enemy> ().side = MovementSide.RIGHT;
+				enemy.GetComponent<Enemy> ().side = MovementSide.RIGHTorUP;
 				enemy.transform.localScale = new Vector2(-1, 1);
 			}
-			else if (side == MovementSide.RIGHT)
+			else if (side == MovementSide.RIGHTorUP)
 			{
-				enemy.GetComponent<Enemy> ().side = MovementSide.LEFT;
+				enemy.GetComponent<Enemy> ().side = MovementSide.LEFTorDOWN;
 				enemy.transform.localScale = new Vector2(1, 1);
 			}
 

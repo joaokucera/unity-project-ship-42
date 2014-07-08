@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 
@@ -8,6 +8,6 @@ public class Wave : GenericMovement {
 	{
 		int direction = (int)side;
 
-		transform.TranslateTo (direction * speed, 0, 0, Time.deltaTime);
+		transform.TranslateTo (direction * horizontalSpeed, 0, 0, Time.deltaTime);
 	}
 }

@@ -4,14 +4,19 @@ using System.Collections.Generic;
 
 public class Menu : GenericScreen {
 	
-	[SerializeField] private Transform playButton, aboutButton, exitButton;
-	[SerializeField] private Sprite playButtonActivated, aboutButtonActivated, exitButtonActivated;
+	[SerializeField] private Transform playButton = null, aboutButton = null, exitButton = null;
+	[SerializeField] private Sprite playButtonActivated = null, aboutButtonActivated = null, exitButtonActivated = null;
 
 	void Start()
 	{
-		if (playButtonActivated == null || aboutButtonActivated == null || exitButtonActivated== null)
+		if (playButton == null || aboutButton == null || exitButton == null)
 		{
-			Debug.LogError("There are not sprite buttons available!");
+			Debug.LogError("There are no transform buttons available!");
+		}
+
+		if (playButtonActivated == null || aboutButtonActivated == null || exitButtonActivated == null)
+		{
+			Debug.LogError("There are no sprite buttons available!");
 		}
 
 		base.Initialize ();

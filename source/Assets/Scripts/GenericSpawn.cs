@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GenericSpawn : MonoBehaviour {
 
-	[SerializeField] protected MovementSide side = MovementSide.RIGHT;
+	public MovementSide side = MovementSide.RIGHTorUP;
+
 	[SerializeField] protected TagName tagName;
 	[SerializeField] protected LayerName layerName;
 	
@@ -33,7 +34,7 @@ public class GenericSpawn : MonoBehaviour {
 		}
 	}
 	
-	protected void ReverseTranslate ()
+	public void ReverseTranslate ()
 	{
 		yTranslate *= -1;
 	}

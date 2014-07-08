@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class EnemySpawn : GenericSpawn {
-
-	private float spawnTime = 5f;
 	
 	void Start () 
 	{
@@ -22,23 +20,6 @@ public class EnemySpawn : GenericSpawn {
 	
 	void Update () 
 	{
-		Invoke ("SpawnEnemy", spawnTime);
-
 		transform.TranslateTo (0, yTranslate, 0, Time.deltaTime);
 	}
-
-	private void SpawnEnemy ()
-	{
-		ReverseTranslate ();
-
-		if (EnemyPooling.Instance == null)
-		{
-			Debug.LogError("EnemyPooling.Instance == null");
-		}
-
-		EnemyPooling.Instance.SpawnEnemyFromPool (transform.position, side);
-
-		CancelInvoke ("SpawnEnemy");
-	}
-
 }

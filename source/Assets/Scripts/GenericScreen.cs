@@ -47,12 +47,6 @@ public abstract class GenericScreen : MonoBehaviour {
 			Invoke("LoadLevel", 0f);
 		}
 	}
-		
-	void OnGUI()
-	{
-		GUI.skin = screenSkin;
-		GUI.Label (new Rect(10, 5, 120, 40), "v.0.0.2");
-	}
 
 	protected void Initialize ()
 	{

@@ -4,14 +4,22 @@ using System.Collections;
 public enum MovementSide
 {
 	NONE = 0,
-	LEFT = -1,
-	RIGHT = 1
+	LEFTorDOWN = -1,
+	RIGHTorUP = 1,
+}
+
+public enum MovementAngle
+{
+	HORIZONTAL,
+	VERTICAL
 }
 
 public class GenericMovement : MonoBehaviour {
 
-	[SerializeField] protected float speed;
-	[SerializeField] public MovementSide side = MovementSide.LEFT;
+	[SerializeField] protected float horizontalSpeed;
+	[SerializeField] protected float verticalSpeed;
+	[SerializeField] public MovementSide side = MovementSide.LEFTorDOWN;
+	[SerializeField] public MovementAngle angle = MovementAngle.HORIZONTAL;
 
 	protected Camera mainCamera;
 	
@@ -22,11 +30,11 @@ public class GenericMovement : MonoBehaviour {
 	
 	void Update()
 	{
-		if (side == MovementSide.LEFT)
+		if (side == MovementSide.LEFTorDOWN)
 		{
 			LeftMovement ();
 		}
-		else if (side == MovementSide.RIGHT)
+		else if (side == MovementSide.RIGHTorUP)
 		{
 			RightMovement ();
 		}
@@ -40,24 +48,26 @@ public class GenericMovement : MonoBehaviour {
 	protected void LeftMovement()
 	{
 		float xLimit = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
+		float yLimit = mainCamera.transform.position.y - mainCamera.orthographicSize;
 
-		if (!renderer.isVisible && renderer.bounds.max.x < xLimit)
+		if (!renderer.isVisible && (renderer.bounds.max.x < xLimit || renderer.bounds.max.y < yLimit))
 		{
 			gameObject.SetActive(false);
 		}
 
-		transform.TranslateTo (-speed, 0, 0, Time.deltaTime);
+		transform.TranslateTo (-horizontalSpeed, -verticalSpeed, 0, Time.deltaTime);
 	}
 
 	protected void RightMovement()
 	{
 		float xLimit = mainCamera.transform.position.x + (mainCamera.aspect * mainCamera.orthographicSize);
+		float yLimit = mainCamera.transform.position.y + mainCamera.orthographicSize;
 
-		if (!renderer.isVisible && renderer.bounds.min.x > xLimit)
+		if (!renderer.isVisible && (renderer.bounds.min.x > xLimit || renderer.bounds.min.y > yLimit))
 		{
 			gameObject.SetActive(false);
 		}
 		
-		transform.TranslateTo (speed, 0, 0, Time.deltaTime);
+		transform.TranslateTo (horizontalSpeed, verticalSpeed, 0, Time.deltaTime);
 	}
 }

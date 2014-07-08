@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShipMovement : MonoBehaviour {
 
-	[SerializeField] private float speed;
+	public float speed;
 
 	private MovementSide movementSide = MovementSide.NONE;
 	private Camera mainCamera;
@@ -80,11 +80,11 @@ public class ShipMovement : MonoBehaviour {
 	{
 		if (position.x < transform.position.x - renderer.bounds.size.x / 2)
 		{
-			movementSide = MovementSide.LEFT;
+			movementSide = MovementSide.LEFTorDOWN;
 		}
 		else if (position.x > transform.position.x + renderer.bounds.size.x / 2)
 		{
-			movementSide = MovementSide.RIGHT;
+			movementSide = MovementSide.RIGHTorUP;
 		}
 		else
 		{
