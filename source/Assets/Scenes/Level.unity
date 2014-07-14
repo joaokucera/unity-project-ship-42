@@ -1752,7 +1752,7 @@ MonoBehaviour:
   missileAttack: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
 --- !u!1001 &1708416411
 Prefab:
   m_ObjectHideFlags: 0
@@ -2220,6 +2220,10 @@ Prefab:
     - target: {fileID: 400000, guid: 9b93d1303e47f43c3b3e3273ae722e1a, type: 2}
       propertyPath: m_RootMapOrder
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 9b93d1303e47f43c3b3e3273ae722e1a, type: 2}
+      propertyPath: layerMask.m_Bits
+      value: 2048
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b93d1303e47f43c3b3e3273ae722e1a, type: 2}

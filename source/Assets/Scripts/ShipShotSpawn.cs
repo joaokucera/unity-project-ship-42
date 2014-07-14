@@ -36,7 +36,7 @@ public class ShipShotSpawn : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            CheckAction(mousePosition);
+            ActivateMissile(mousePosition);
         }
     }
 
@@ -49,21 +49,16 @@ public class ShipShotSpawn : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 Vector2 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
-                CheckAction(touchPosition);
+                ActivateMissile(touchPosition);
             }
         }
-    }
-
-    private void CheckAction(Vector2 position)
-    {
-        ActivateMissile(position);
     }
 
     private void ActivateMissile(Vector2 position)
     {
         Collider2D collider = Physics2D.OverlapPoint(position, layerMask);
 
-        if (collider.transform != null)
+        if (collider != null && collider.transform != null)
         {
             if (collider.transform.tag == "Enemy")
             {
