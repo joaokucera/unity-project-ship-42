@@ -1,12 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ShotStatus
-{
-	INACTIVE,
-	ACTIVE
-}
-
 public class EnemyShotSpawn : MonoBehaviour {
 	
 	[SerializeField] private LayerMask layerMask;

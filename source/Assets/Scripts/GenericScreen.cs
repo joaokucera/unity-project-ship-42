@@ -81,10 +81,10 @@ public abstract class GenericScreen : MonoBehaviour {
 		if (Input.touchCount == 1)
 		{
 			Touch touch = Input.GetTouch(0);
-			Vector2 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
 			
 			if (touch.phase == TouchPhase.Began)
 			{
+                Vector2 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
 				CheckAction (touchPosition);
 			}
 		}

@@ -8,10 +8,16 @@ public enum MovementSide
 	RIGHTorUP = 1,
 }
 
-public enum MovementAngle
+//public enum MovementAngle
+//{
+//    HORIZONTAL,
+//    VERTICAL
+//}
+
+public enum ShotStatus
 {
-	HORIZONTAL,
-	VERTICAL
+    INACTIVE,
+    ACTIVE
 }
 
 public class GenericMovement : MonoBehaviour {
@@ -19,7 +25,7 @@ public class GenericMovement : MonoBehaviour {
 	[SerializeField] protected float horizontalSpeed;
 	[SerializeField] protected float verticalSpeed;
 	[SerializeField] public MovementSide side = MovementSide.LEFTorDOWN;
-	[SerializeField] public MovementAngle angle = MovementAngle.HORIZONTAL;
+	//[SerializeField] public MovementAngle angle = MovementAngle.HORIZONTAL;
 
 	protected Camera mainCamera;
 	
@@ -30,35 +36,50 @@ public class GenericMovement : MonoBehaviour {
 	
 	void Update()
 	{
-		if (side == MovementSide.LEFTorDOWN)
-		{
-			LeftMovement ();
-		}
-		else if (side == MovementSide.RIGHTorUP)
-		{
-			RightMovement ();
-		}
+        Updating();
 	}
+
+    private void Updating()
+    {
+        if (side == MovementSide.LEFTorDOWN)
+        {
+            LeftOrDownMovement();
+        }
+        else if (side == MovementSide.RIGHTorUP)
+        {
+            RightOrUpMovement();
+        }
+    }
 
 	protected void Initialize()
 	{
 		mainCamera = Camera.main;
 	}
-	
-	protected void LeftMovement()
-	{
-		float xLimit = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
-		float yLimit = mainCamera.transform.position.y - mainCamera.orthographicSize;
 
-		if (!renderer.isVisible && (renderer.bounds.max.x < xLimit || renderer.bounds.max.y < yLimit))
-		{
-			gameObject.SetActive(false);
-		}
+    protected virtual void TranslateLeftOrDown()
+    {
+        transform.TranslateTo(-horizontalSpeed, -verticalSpeed, 0, Time.deltaTime);
+    }
 
-		transform.TranslateTo (-horizontalSpeed, -verticalSpeed, 0, Time.deltaTime);
-	}
+    protected virtual void TranslateRightOrDown()
+    {
+        transform.TranslateTo(horizontalSpeed, verticalSpeed, 0, Time.deltaTime);
+    }
 
-	protected void RightMovement()
+    private void LeftOrDownMovement()
+    {
+        float xLimit = mainCamera.transform.position.x - (mainCamera.aspect * mainCamera.orthographicSize);
+        float yLimit = mainCamera.transform.position.y - mainCamera.orthographicSize;
+
+        if (!renderer.isVisible && (renderer.bounds.max.x < xLimit || renderer.bounds.max.y < yLimit))
+        {
+            gameObject.SetActive(false);
+        }
+
+        TranslateLeftOrDown();
+    }
+
+    private void RightOrUpMovement()
 	{
 		float xLimit = mainCamera.transform.position.x + (mainCamera.aspect * mainCamera.orthographicSize);
 		float yLimit = mainCamera.transform.position.y + mainCamera.orthographicSize;
@@ -67,7 +88,7 @@ public class GenericMovement : MonoBehaviour {
 		{
 			gameObject.SetActive(false);
 		}
-		
-		transform.TranslateTo (horizontalSpeed, verticalSpeed, 0, Time.deltaTime);
+
+        TranslateRightOrDown();
 	}
 }

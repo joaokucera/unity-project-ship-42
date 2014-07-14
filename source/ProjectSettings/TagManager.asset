@@ -6,19 +6,20 @@ TagManager:
   - CloudSpawnerLimit
   - EnemySpawnerLimit
   - Bomb
+  - Enemy
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
   Builtin Layer 3: 
   Builtin Layer 4: Water
-  Builtin Layer 5: 
+  Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: CloudSpawnerLimit
   User Layer 9: EnemySpawnerLimit
   User Layer 10: Player
-  User Layer 11: 
+  User Layer 11: Enemy
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 
