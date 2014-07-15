@@ -69,10 +69,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSpeed: 0
-  verticalSpeed: 10
+  verticalSpeed: 4
   side: 1
   target: {fileID: 0}
   missileAttack: 0
+  verticalCurveSpeed: 4
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

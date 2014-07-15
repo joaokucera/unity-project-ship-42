@@ -5,12 +5,14 @@ public class EnemyShotPooling : GenericPooling {
 
 	public static EnemyShotPooling Instance;
 
-	void Awake()
+	void Start()
 	{
 		if (Instance == null)
 		{
 			Instance = this;
 		}
+
+        base.Initialize();
 	}
 	
 	public void SpawnShotFromPool (Vector2 position)

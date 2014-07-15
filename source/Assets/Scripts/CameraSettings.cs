@@ -5,7 +5,7 @@ public class CameraSettings : MonoBehaviour {
 
 	private const float OrthographicSize = 15.4f;
 
-	void Awake () 
+	void Start () 
 	{
 		Camera mainCamera = Camera.main;
 

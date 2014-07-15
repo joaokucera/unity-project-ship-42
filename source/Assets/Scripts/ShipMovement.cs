@@ -28,17 +28,17 @@ public class ShipMovement : MonoBehaviour {
 
 		transform.position = new Vector2 (transform.position.x, fixedVerticalPosition);
 
-//#if UNITY_EDITOR
-		//ClickMovement();
-//#else
-		TouchMovement ();
-//#endif
+#if UNITY_EDITOR
+		MouseAction();
+#else
+		TouchAction ();
+#endif
 
 		// Enforce ship inside the screen.
 		EnforceBounds ();
 	}
 
-	private void ClickMovement ()
+	private void MouseAction ()
 	{
 		// Just 1 tap.
 		if (Input.GetButton("Fire1"))
@@ -53,7 +53,7 @@ public class ShipMovement : MonoBehaviour {
 		}
 	}
 
-	private void TouchMovement ()
+	private void TouchAction ()
 	{
 		// Just 1 tap.
 		if (Input.touchCount == 1)

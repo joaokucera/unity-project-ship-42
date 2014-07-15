@@ -18,10 +18,11 @@ public class Missile : GenericMovement
         {
             case MissileAttack.Straight:
             default:
-                transform.TranslateTo(horizontalSpeed, verticalSpeed, 0, Time.deltaTime);
+                transform.TranslateTo(horizontalSpeed, verticalSpeed * 3, 0, Time.deltaTime);
                 break;
             case MissileAttack.Curve:
-                transform.position = Vector3.Slerp(transform.position, target.position, verticalSpeed);
+                transform.position = Vector2.Lerp(transform.position, target.position, verticalSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, verticalSpeed * Time.deltaTime);
                 break;
         }
     }

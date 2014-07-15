@@ -5,12 +5,14 @@ public class ShipShotPooling : GenericPooling {
 
     public static ShipShotPooling Instance;
 
-    void Awake()
+    void Start()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
+        base.Initialize();
     }
 
     public void SpawnShotFromPool(Vector2 position, MissileAttack missileAttack, Transform target)

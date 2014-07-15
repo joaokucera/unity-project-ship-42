@@ -3,22 +3,22 @@ using System.Collections;
 
 public class ShipShotSpawn : MonoBehaviour
 {
-    [HideInInspector]
-    public MissileAttack missileAttack = MissileAttack.Straight;
-
     protected Camera mainCamera;
 
-    private const float StartTimerLevel = 5;
-    private const int MissileComb = 4;
-
+    private int missileAmmo;
+    [SerializeField]
+    private float startTimerLevel = 5;
+    [SerializeField]
+    private int startMissileAmmo = 4;
+    [SerializeField]
+    private MissileAttack missileAttack;
     [SerializeField]
     private LayerMask layerMask;
-    private int missileCombAmmount;
 
     void Start()
     {
         mainCamera = Camera.main;
-        missileCombAmmount = ShipShotSpawn.MissileComb;
+        missileAmmo = startMissileAmmo;
     }
 
     void Update()
@@ -30,7 +30,12 @@ public class ShipShotSpawn : MonoBehaviour
 #endif
     }
 
-    protected void MouseAction()
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, Screen.height - 20, 200, 100), "AMMO: " + missileAmmo);
+    }
+
+    private void MouseAction()
     {
         // Just 1 tap.
         if (Input.GetButtonDown("Fire1"))
@@ -40,9 +45,9 @@ public class ShipShotSpawn : MonoBehaviour
         }
     }
 
-    void TouchAction()
+    private void TouchAction()
     {
-        if (Input.touchCount > 0 && missileCombAmmount >= 0)
+        if (Input.touchCount > 0 && missileAmmo >= 0)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -62,8 +67,8 @@ public class ShipShotSpawn : MonoBehaviour
         {
             if (collider.transform.tag == "Enemy")
             {
-                missileCombAmmount--;
-                StartCoroutine(MissileCombCooldownVerification());
+                missileAmmo--;
+                //StartCoroutine(MissileCombCooldownVerification());
 
                 ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
             }
@@ -72,14 +77,14 @@ public class ShipShotSpawn : MonoBehaviour
 
     private IEnumerator MissileCombCooldownVerification()
     {
-        for (float timerLevel = StartTimerLevel; timerLevel >= 0; timerLevel -= Time.deltaTime)
+        for (float timerLevel = startTimerLevel; timerLevel >= 0; timerLevel -= Time.deltaTime)
         {
             yield return 0;
         }
 
-        if (missileCombAmmount < MissileComb)
+        if (missileAmmo < startMissileAmmo)
         {
-            missileCombAmmount++;
+            missileAmmo++;
         }
     }
 }

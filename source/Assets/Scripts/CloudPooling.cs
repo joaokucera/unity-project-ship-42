@@ -7,20 +7,22 @@ public class CloudPooling : GenericPooling {
 	public static CloudPooling Instance;
 
 	[SerializeField] private List<Sprite> cloudSprites;
-	
-	void Awake()
+
+    void Start()
 	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-	
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+        base.Initialize();
+
 		if (cloudSprites == null || cloudSprites.Count == 0) 
 		{
 			Debug.LogError("There are no cloud sprites available!");
 		}
 	}
-	
+
 	public void SpawnCloudFromPool (Vector2 position)
 	{
 		GameObject cloud = GetObjectFromPool (position);

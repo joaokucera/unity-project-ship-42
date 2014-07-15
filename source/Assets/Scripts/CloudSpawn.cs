@@ -44,7 +44,9 @@ public class CloudSpawn : GenericSpawn {
 
 		if (CloudPooling.Instance == null)
 		{
-			Debug.LogError("CloudPooling.Instance == null");
+            CloudPooling.Instance = GameObject.Find("Generic Pooling").GetComponent<CloudPooling>();
+
+			//Debug.LogError("CloudPooling.Instance == null");
 		}
 
 		CloudPooling.Instance.SpawnCloudFromPool (transform.position);

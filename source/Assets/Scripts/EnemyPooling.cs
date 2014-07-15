@@ -7,11 +7,11 @@ public class EnemyPooling : GenericPooling {
 	[SerializeField] private List<EnemySpawn> spawnEnemyPoints;
 	private float spawnTime = 5f;
 
-	void Awake()
+    void Start()
 	{
 		if (spawnEnemyPoints == null || spawnEnemyPoints.Count == 0)
 		{
-			Debug.LogError("There are no spawn pointss available!");
+			Debug.LogError("There are no spawn points available!");
 		}
 	}
 
@@ -50,7 +50,7 @@ public class EnemyPooling : GenericPooling {
 			}
 
 			enemy.renderer.sortingLayerName = "Foreground";
-			enemy.renderer.sortingOrder = 2;
+			enemy.renderer.sortingOrder = 1;
 		}
 	}
 }

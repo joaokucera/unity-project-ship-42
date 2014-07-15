@@ -4,7 +4,13 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField]
-    public int health = 1;
+    private int startHealth = 1;
+    private int health;
+
+    void Start()
+    {
+        health = startHealth;
+    }
 
     void Update()
     {
@@ -16,11 +22,16 @@ public class EnemyHealth : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Missile")
+        if (collider.tag == "Missile" && collider.renderer.enabled)
         {
             collider.gameObject.SetActive(false);
 
             health -= 1;
         }
+    }
+
+    void OnBecameVisible()
+    {
+        health = startHealth;
     }
 }
