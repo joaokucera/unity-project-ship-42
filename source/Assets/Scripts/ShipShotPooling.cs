@@ -3,13 +3,25 @@ using System.Collections;
 
 public class ShipShotPooling : GenericPooling {
 
-    public static ShipShotPooling Instance;
+    private static ShipShotPooling instance;
+    public static ShipShotPooling Instance
+    {
+        get
+        {
+            if (ShipShotPooling.instance == null)
+            {
+                ShipShotPooling.instance = GameObject.Find("Generic Pooling").GetComponent<ShipShotPooling>();
+            }
+
+            return ShipShotPooling.instance;
+        }
+    }
 
     void Start()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
 
         base.Initialize();
@@ -21,7 +33,7 @@ public class ShipShotPooling : GenericPooling {
 
         if (shot != null)
         {
-            shot.renderer.sortingLayerName = "Foreground";
+            shot.renderer.sortingLayerName = "Middleground";
             shot.renderer.sortingOrder = 0;
 
             Missile missile = shot.GetComponent<Missile>();

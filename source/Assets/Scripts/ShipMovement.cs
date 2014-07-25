@@ -3,8 +3,7 @@ using System.Collections;
 
 public class ShipMovement : MonoBehaviour {
 
-	public float speed;
-
+	private float speed;
 	private MovementSide movementSide = MovementSide.NONE;
 	private Camera mainCamera;
 	private Vector2 boundSize;
@@ -24,6 +23,8 @@ public class ShipMovement : MonoBehaviour {
 
 	void Update () 
 	{
+        speed = CrewStatus.Instance.captainStamina / 10;
+
 		transform.TranslateTo ((int)movementSide * speed, 0, 0, Time.deltaTime);
 
 		transform.position = new Vector2 (transform.position.x, fixedVerticalPosition);

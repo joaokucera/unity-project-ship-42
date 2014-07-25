@@ -9,20 +9,34 @@ public enum MissileAttack
 
 public class Missile : GenericMovement
 {
-    [HideInInspector] public Transform target;
-    [HideInInspector] public MissileAttack missileAttack;
+    [HideInInspector]
+    public Transform target;
+    [HideInInspector]
+    public MissileAttack missileAttack;
+    private Vector2 moveDirection;
+
+    void FixedUpdate()
+    {
+        rigidbody2D.velocity = transform.up * verticalSpeed;
+    }
 
     protected override void TranslateRightOrDown()
     {
+        if (!target.renderer.isVisible)
+        {
+            missileAttack = MissileAttack.Straight;
+        }
+
         switch (missileAttack)
         {
             case MissileAttack.Straight:
             default:
-                transform.TranslateTo(horizontalSpeed, verticalSpeed * 3, 0, Time.deltaTime);
+                rigidbody2D.gravityScale = -2;
                 break;
             case MissileAttack.Curve:
-                transform.position = Vector2.Lerp(transform.position, target.position, verticalSpeed * Time.deltaTime);
-                transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, verticalSpeed * Time.deltaTime);
+                Vector3 normalized = (target.position - transform.position).normalized;
+                float angle = Mathf.Atan2(normalized.y, normalized.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
                 break;
         }
     }

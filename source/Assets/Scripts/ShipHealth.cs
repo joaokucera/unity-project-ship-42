@@ -13,6 +13,7 @@ public class ShipHealth : MonoBehaviour
     private int health = 100;
     [SerializeField]
     private List<Sprite> energyBarSprites;
+    private float recoverTime;
 
     void Start()
     {
@@ -26,6 +27,8 @@ public class ShipHealth : MonoBehaviour
             Debug.LogError("There are no energy bar sprites available!");
         }
 
+        recoverTime = CrewStatus.Instance.mechanicStamina / 100;
+
         int key = 0;
         foreach (Sprite sprite in energyBarSprites)
         {
@@ -34,6 +37,16 @@ public class ShipHealth : MonoBehaviour
         }
 
         SetEnergyBarSprite();
+    }
+
+    void Update()
+    {
+
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(Screen.width - 100, Screen.height - 20, 200, 100), "RECOVER: " + recoverTime);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

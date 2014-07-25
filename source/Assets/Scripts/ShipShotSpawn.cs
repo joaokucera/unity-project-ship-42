@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ShipShotSpawn : MonoBehaviour
 {
@@ -7,16 +9,23 @@ public class ShipShotSpawn : MonoBehaviour
 
     private int missileAmmo;
     [SerializeField]
-    private float startTimerLevel = 5;
+    private float cooldownMissileAmmo;
     [SerializeField]
     private int startMissileAmmo = 4;
     [SerializeField]
     private MissileAttack missileAttack;
     [SerializeField]
     private LayerMask layerMask;
+    [SerializeField]
+    private List<Renderer> ammoRenderers;
 
     void Start()
     {
+        if (ammoRenderers == null || ammoRenderers.Count <= 0)
+        {
+            Debug.LogError("There are no ammo renderes available!");
+        }
+
         mainCamera = Camera.main;
         missileAmmo = startMissileAmmo;
     }
@@ -32,7 +41,8 @@ public class ShipShotSpawn : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(10, Screen.height - 20, 200, 100), "AMMO: " + missileAmmo);
+        GUI.Label(new Rect(10, Screen.height - 35, 200, 100), "AMMO: " + missileAmmo);
+        GUI.Label(new Rect(10, Screen.height - 20, 200, 100), "COOLDOWN: " + cooldownMissileAmmo);
     }
 
     private void MouseAction()
@@ -67,17 +77,33 @@ public class ShipShotSpawn : MonoBehaviour
         {
             if (collider.transform.tag == "Enemy")
             {
-                missileAmmo--;
-                //StartCoroutine(MissileCombCooldownVerification());
+                EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
+                //if (!enemy.marketAsTaget)
+                {
+                    enemy.marketAsTaget = true;
 
-                ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
+                    StartCoroutine(MissileAmmoCooldownVerification());
+
+                    ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
+                }
             }
         }
     }
 
-    private IEnumerator MissileCombCooldownVerification()
+    private IEnumerator MissileAmmoCooldownVerification()
     {
-        for (float timerLevel = startTimerLevel; timerLevel >= 0; timerLevel -= Time.deltaTime)
+        missileAmmo--;
+        foreach (var item in ammoRenderers)
+        {
+            if (item.enabled)
+            {
+                item.enabled = false;
+                break;
+            }
+        }
+
+        cooldownMissileAmmo = 100 / CrewStatus.Instance.soldierStamina;
+        for (float timerLevel = cooldownMissileAmmo; timerLevel >= 0; timerLevel -= Time.deltaTime)
         {
             yield return 0;
         }
@@ -85,6 +111,14 @@ public class ShipShotSpawn : MonoBehaviour
         if (missileAmmo < startMissileAmmo)
         {
             missileAmmo++;
+            foreach (var item in ammoRenderers)
+            {
+                if (!item.enabled)
+                {
+                    item.enabled = true;
+                    break;
+                }
+            }
         }
     }
 }

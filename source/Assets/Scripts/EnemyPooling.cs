@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EnemyPooling : GenericPooling {
 	
 	[SerializeField] private List<EnemySpawn> spawnEnemyPoints;
-	private float spawnTime = 5f;
+	public float spawnTime = 5f;
 
     void Start()
 	{
@@ -13,6 +13,8 @@ public class EnemyPooling : GenericPooling {
 		{
 			Debug.LogError("There are no spawn points available!");
 		}
+
+        base.Initialize();
 	}
 
 	void Update () 

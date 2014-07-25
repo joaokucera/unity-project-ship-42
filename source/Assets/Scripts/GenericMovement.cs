@@ -22,7 +22,7 @@ public enum ShotStatus
 
 public class GenericMovement : MonoBehaviour {
 
-	[SerializeField] protected float horizontalSpeed;
+	[SerializeField] public float horizontalSpeed;
 	[SerializeField] protected float verticalSpeed;
 	[SerializeField] public MovementSide side = MovementSide.LEFTorDOWN;
 	//[SerializeField] public MovementAngle angle = MovementAngle.HORIZONTAL;
