@@ -7,11 +7,11 @@ public class ShipShotSpawn : MonoBehaviour
 {
     protected Camera mainCamera;
 
+    private const int StartMissileAmmo = 4;
+
     private int missileAmmo;
-    [SerializeField]
     private float cooldownMissileAmmo;
-    [SerializeField]
-    private int startMissileAmmo = 4;
+
     [SerializeField]
     private MissileAttack missileAttack;
     [SerializeField]
@@ -27,7 +27,7 @@ public class ShipShotSpawn : MonoBehaviour
         }
 
         mainCamera = Camera.main;
-        missileAmmo = startMissileAmmo;
+        missileAmmo = StartMissileAmmo;
     }
 
     void Update()
@@ -37,12 +37,6 @@ public class ShipShotSpawn : MonoBehaviour
 #else
 		TouchAction ();
 #endif
-    }
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, Screen.height - 35, 200, 100), "AMMO: " + missileAmmo);
-        GUI.Label(new Rect(10, Screen.height - 20, 200, 100), "COOLDOWN: " + cooldownMissileAmmo);
     }
 
     private void MouseAction()
@@ -75,17 +69,11 @@ public class ShipShotSpawn : MonoBehaviour
 
         if (collider != null && collider.transform != null)
         {
-            if (collider.transform.tag == "Enemy")
+            if (collider.transform.tag.Contains("Enemy"))
             {
-                EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
-                //if (!enemy.marketAsTaget)
-                {
-                    enemy.marketAsTaget = true;
+                StartCoroutine(MissileAmmoCooldownVerification());
 
-                    StartCoroutine(MissileAmmoCooldownVerification());
-
-                    ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
-                }
+                ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
             }
         }
     }
@@ -102,13 +90,16 @@ public class ShipShotSpawn : MonoBehaviour
             }
         }
 
+        float adder = Time.deltaTime;
         cooldownMissileAmmo = 100 / CrewStatus.Instance.soldierStamina;
-        for (float timerLevel = cooldownMissileAmmo; timerLevel >= 0; timerLevel -= Time.deltaTime)
+
+        for (float timer = 0; timer <= cooldownMissileAmmo; timer += adder)
         {
+            CrewStatus.Instance.LoadBarSoldier(cooldownMissileAmmo, adder);
             yield return 0;
         }
 
-        if (missileAmmo < startMissileAmmo)
+        if (missileAmmo < StartMissileAmmo)
         {
             missileAmmo++;
             foreach (var item in ammoRenderers)
@@ -116,6 +107,7 @@ public class ShipShotSpawn : MonoBehaviour
                 if (!item.enabled)
                 {
                     item.enabled = true;
+                    CrewStatus.Instance.ClearBarSoldier();
                     break;
                 }
             }

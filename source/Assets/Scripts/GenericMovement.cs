@@ -8,12 +8,6 @@ public enum MovementSide
 	RIGHTorUP = 1,
 }
 
-//public enum MovementAngle
-//{
-//    HORIZONTAL,
-//    VERTICAL
-//}
-
 public enum ShotStatus
 {
     INACTIVE,
@@ -25,7 +19,6 @@ public class GenericMovement : MonoBehaviour {
 	[SerializeField] public float horizontalSpeed;
 	[SerializeField] protected float verticalSpeed;
 	[SerializeField] public MovementSide side = MovementSide.LEFTorDOWN;
-	//[SerializeField] public MovementAngle angle = MovementAngle.HORIZONTAL;
 
 	protected Camera mainCamera;
 	

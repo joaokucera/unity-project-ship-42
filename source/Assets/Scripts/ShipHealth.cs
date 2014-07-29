@@ -4,67 +4,70 @@ using System.Collections.Generic;
 
 public class ShipHealth : MonoBehaviour
 {
-    private Dictionary<int, Sprite> energyBarDictionary = new Dictionary<int, Sprite>();
+    private const int StartHealth = 100;
+
+    private float cooldownHealth;
+    private int health;
+    private float loadBarFactor;
+
     [SerializeField]
-    private SpriteRenderer energySpriteRenderer;
+    private GUITexture shipBox = null;
     [SerializeField]
-    private int damage = 20;
-    [SerializeField]
-    private int health = 100;
-    [SerializeField]
-    private List<Sprite> energyBarSprites;
-    private float recoverTime;
+    private GUITexture shipLoadBar = null;
 
     void Start()
     {
-        if (energySpriteRenderer == null)
-        {
-            Debug.LogError("There is no energy bar renderer available!");
-        }
+        health = StartHealth;
+        loadBarFactor = shipBox.pixelInset.width / StartHealth;
 
-        if (energyBarSprites == null || energyBarSprites.Count <= 0)
-        {
-            Debug.LogError("There are no energy bar sprites available!");
-        }
-
-        recoverTime = CrewStatus.Instance.mechanicStamina / 100;
-
-        int key = 0;
-        foreach (Sprite sprite in energyBarSprites)
-        {
-            energyBarDictionary.Add(key, sprite);
-            key += damage;
-        }
-
-        SetEnergyBarSprite();
-    }
-
-    void Update()
-    {
-
-    }
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(Screen.width - 100, Screen.height - 20, 200, 100), "RECOVER: " + recoverTime);
+        // HUD Ship Box & Load Bar.
+        shipBox.transform.position = new Vector2(0.5f, 0.03f);
+        shipLoadBar.transform.position = new Vector2(0.5f, 0.03f);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if ((collider.tag == "Bomb" || collider.tag == "Barril") && collider.renderer.enabled)
+        if (collider.tag == "EnemyAmmo" && collider.renderer.enabled)
         {
             collider.gameObject.SetActive(false);
 
-            health -= damage;
-            SetEnergyBarSprite();
+            StartCoroutine(HealthCooldownVerification(((IAmmo)collider.GetComponent<GenericMovement>()).Damage));
         }
     }
 
-    private void SetEnergyBarSprite()
+    private void SetHealthBar()
     {
-        if (energyBarDictionary.ContainsKey(health))
+        float value = loadBarFactor * health;
+
+        float clamp = Mathf.Clamp(value, 0, shipBox.pixelInset.width);
+
+        shipLoadBar.pixelInset = new Rect(shipLoadBar.pixelInset.x, shipLoadBar.pixelInset.y, clamp, shipLoadBar.pixelInset.height);
+    }
+
+    private IEnumerator HealthCooldownVerification(int damage)
+    {
+        health -= damage;
+        SetHealthBar();
+
+        while (health < StartHealth)
         {
-            energySpriteRenderer.sprite = energyBarDictionary[health];
+            float adder = Time.deltaTime;
+            cooldownHealth = 100 / CrewStatus.Instance.mechanicStamina;
+
+            for (float timer = 0; timer <= cooldownHealth; timer += adder)
+            {
+                CrewStatus.Instance.LoadBarMechanic(cooldownHealth, adder);
+                yield return 0;
+            }
+
+            if (health < StartHealth)
+            {
+                health++;
+                CrewStatus.Instance.ClearBarMechanic();
+                SetHealthBar();
+            }
+
+            yield return 0;
         }
     }
 }

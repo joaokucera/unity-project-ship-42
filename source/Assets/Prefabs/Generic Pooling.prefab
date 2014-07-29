@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +42,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d859b76beee9d4efda0ae7b9d830eeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: 86f0c40ffb782c9449bc4baacb291b5c, type: 2}
+  poolSize: 5
+  poolCanGrow: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +56,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69e207188f834dbf80cd36deb393be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: 7fae9a304d9894db2be87af28783c63b, type: 2}
+  poolSize: 5
+  poolCanGrow: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,6 +73,10 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: 40eedf74f5bb34af6a83fd98645c5ffc, type: 2}
   poolSize: 5
   poolCanGrow: 0
+  spawnEnemyPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnTime: 5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

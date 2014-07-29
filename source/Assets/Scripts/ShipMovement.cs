@@ -79,11 +79,11 @@ public class ShipMovement : MonoBehaviour {
 
 	private void Movement(Vector2 position)
 	{
-		if (position.x < transform.position.x - renderer.bounds.size.x / 2)
+        if (position.x < transform.position.x)
 		{
 			movementSide = MovementSide.LEFTorDOWN;
 		}
-		else if (position.x > transform.position.x + renderer.bounds.size.x / 2)
+        else if (position.x > transform.position.x)
 		{
 			movementSide = MovementSide.RIGHTorUP;
 		}

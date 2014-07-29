@@ -5,9 +5,10 @@ TagManager:
   tags:
   - CloudSpawnerLimit
   - EnemySpawnerLimit
-  - Bomb
+  - EnemyAmmo
   - Enemy
   - Missile
+  - Wave
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

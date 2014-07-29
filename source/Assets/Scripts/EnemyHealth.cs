@@ -3,9 +3,6 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [HideInInspector]
-    public bool marketAsTaget = false;
-
     [SerializeField]
     private int startHealth = 1;
     private int health;
@@ -36,6 +33,5 @@ public class EnemyHealth : MonoBehaviour
     void OnBecameVisible()
     {
         health = startHealth;
-        marketAsTaget = false;
     }
 }
