@@ -12,13 +12,29 @@ GameObject:
   - 61: {fileID: 6100000}
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bomb
   m_TagString: EnemyAmmo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400002}
+  - 96: {fileID: 9600000}
+  m_Layer: 0
+  m_Name: Trail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -26,10 +42,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.17168093, y: 6.09795904, z: 0}
+  m_LocalPosition: {x: -.736690998, y: 13.1474056, z: 0}
   m_LocalScale: {x: .5, y: .5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 400002}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_Children: []
+  m_Father: {fileID: 400000}
   m_RootOrder: 0
 --- !u!50 &5000000
 Rigidbody2D:
@@ -57,6 +86,47 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: 1.84000003, y: 5.11999989}
   m_Center: {x: 0, y: 0}
+--- !u!96 &9600000
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 33f6b79c9e3bd4f4eb6be4d09a68d150, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: .200000003
+  m_StartWidth: .5
+  m_EndWidth: .100000001
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4194369535
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 3355492607
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 2516615423
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 1677738239
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 838861055
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -96,6 +96,7 @@ public class ShipShotSpawn : MonoBehaviour
         for (float timer = 0; timer <= cooldownMissileAmmo; timer += adder)
         {
             CrewStatus.Instance.LoadBarSoldier(cooldownMissileAmmo, adder);
+
             yield return 0;
         }
 
@@ -108,6 +109,7 @@ public class ShipShotSpawn : MonoBehaviour
                 {
                     item.enabled = true;
                     CrewStatus.Instance.ClearBarSoldier();
+
                     break;
                 }
             }

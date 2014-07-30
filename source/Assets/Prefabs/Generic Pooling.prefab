@@ -12,6 +12,9 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400012}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: Generic Pooling
   m_TagString: Untagged
@@ -95,6 +98,48 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bfa4012e845dc48ba80a9b851f126289, type: 3}
   - {fileID: 21300000, guid: 7b20316503a2d41b5991d970c673c9c9, type: 3}
   - {fileID: 21300000, guid: 13a7d533179844e35a0964724af75c32, type: 3}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7d8f25b0c430a4181ad97ba2508914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: 4cf3a591d3209a54e84afadac4a891d8, type: 2}
+  poolSize: 5
+  poolCanGrow: 1
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a279b525a9565b94ca8433c76d77a36b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: d003a5e27208c414fb3831fc9c107628, type: 2}
+  poolSize: 5
+  poolCanGrow: 1
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149f76520e96da34ebd03defbfb2a369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: f87bd8d668a6de745a3e8f59b153744f, type: 2}
+  poolSize: 5
+  poolCanGrow: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

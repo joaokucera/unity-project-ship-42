@@ -3,8 +3,8 @@ using System.Collections;
 
 public class WaterSplash : MonoBehaviour
 {
-    void Update()
+    private void Disable()
     {
-        transform.Translate(transform.up * 5 * Time.deltaTime);
+         transform.parent.gameObject.SetActive(false);
     }
 }

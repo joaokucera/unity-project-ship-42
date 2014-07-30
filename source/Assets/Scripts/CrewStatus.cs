@@ -18,8 +18,18 @@ public class CrewStatus : MonoBehaviour
         }
     }
 
+    public bool CaptainBoost
+    {
+        set
+        {
+            captainBoostText.enabled = value;
+        }
+    }
+
     private Camera mainCamera;
 
+    [SerializeField]
+    private float crewStaminaDecreaseFactor = 10, captainBoostDecreaseFactor = 20;
     [SerializeField]
     private GUITexture captainTexture = null, mechanicTexture = null, soldierTexture = null;
     [SerializeField]
@@ -30,6 +40,8 @@ public class CrewStatus : MonoBehaviour
     private GUITexture captainBox = null, mechanicBox = null, soldierBox = null;
     [SerializeField]
     private GUITexture captainLoadBar = null, mechanicLoadBar = null, soldierLoadBar = null;
+    [SerializeField]
+    private GUIText captainBoostText = null;
 
     void Start()
     {
@@ -64,45 +76,29 @@ public class CrewStatus : MonoBehaviour
         captainLoadBar.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.03f);
         mechanicLoadBar.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.03f);
         soldierLoadBar.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.03f);
+
+        // HUD Captain Boost.
+        captainBoostText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.15f);
+        captainBoostText.enabled = false;
     }
 
     void Update()
     {
-        captainText.text = string.Format("{0}/100", captainStamina);
-        mechanicText.text = string.Format("{0}/100", mechanicStamina);
-        soldierText.text = string.Format("{0}/100", soldierStamina);
+        SetCrewStamina();
 
-        //SetCaptainStamina();
-        //SetMechanicStamina();
-        //SetSoldierStamina();
+        captainText.text = string.Format("{0}/100", (int)captainStamina);
+        mechanicText.text = string.Format("{0}/100", (int)mechanicStamina);
+        soldierText.text = string.Format("{0}/100", (int)soldierStamina);
     }
 
-    //private void SetCaptainStamina()
-    //{
-    //    float value = loadBarFactor * captainStamina;
+    private void SetCrewStamina()
+    {
+        float value = Time.deltaTime / crewStaminaDecreaseFactor;
 
-    //    float clamp = Mathf.Clamp(value, 0, captainBox.pixelInset.width);
-
-    //    captainLoadBar.pixelInset = new Rect(captainLoadBar.pixelInset.x, captainLoadBar.pixelInset.y, clamp, captainLoadBar.pixelInset.height);
-    //}
-
-    //private void SetMechanicStamina()
-    //{
-    //    float value = loadBarFactor * mechanicStamina;
-
-    //    float clamp = Mathf.Clamp(value, 0, mechanicBox.pixelInset.width);
-
-    //    mechanicLoadBar.pixelInset = new Rect(mechanicLoadBar.pixelInset.x, mechanicLoadBar.pixelInset.y, clamp, mechanicLoadBar.pixelInset.height);
-    //}
-
-    //private void SetSoldierStamina()
-    //{
-    //    float value = loadBarFactor * soldierStamina;
-
-    //    float clamp = Mathf.Clamp(value, 0, soldierBox.pixelInset.width);
-
-    //    soldierLoadBar.pixelInset = new Rect(soldierLoadBar.pixelInset.x, soldierLoadBar.pixelInset.y, clamp, soldierLoadBar.pixelInset.height);
-    //}
+        captainStamina -= value;
+        mechanicStamina -= value;
+        soldierStamina -= value;
+    }
 
     public void ClearBarCaptain()
     {
@@ -119,23 +115,20 @@ public class CrewStatus : MonoBehaviour
         soldierLoadBar.pixelInset = new Rect(soldierLoadBar.pixelInset.x, soldierLoadBar.pixelInset.y, 0, soldierLoadBar.pixelInset.height);
     }
 
-    public void LoadBarCaptain(float cooldown, float adder)
+    public bool LoadBarCaptain(float speed, float time)
     {
-        float slice = (captainBox.pixelInset.width / cooldown) * adder;
-
-        float value = captainLoadBar.pixelInset.width + slice;
-
+        float value = speed == 0 ? captainLoadBar.pixelInset.width - (captainBoostDecreaseFactor * time) : captainLoadBar.pixelInset.width + Mathf.Abs(speed * time);
         float clamp = Mathf.Clamp(value, 0, captainBox.pixelInset.width);
 
         captainLoadBar.pixelInset = new Rect(captainLoadBar.pixelInset.x, captainLoadBar.pixelInset.y, clamp, captainLoadBar.pixelInset.height);
+
+        return (clamp == captainBox.pixelInset.width);
     }
 
     public void LoadBarMechanic(float cooldown, float adder)
     {
         float slice = (mechanicBox.pixelInset.width / cooldown) * adder;
-
         float value = mechanicLoadBar.pixelInset.width + slice;
-
         float clamp = Mathf.Clamp(value, 0, mechanicBox.pixelInset.width);
 
         mechanicLoadBar.pixelInset = new Rect(mechanicLoadBar.pixelInset.x, mechanicLoadBar.pixelInset.y, clamp, mechanicLoadBar.pixelInset.height);
@@ -144,9 +137,7 @@ public class CrewStatus : MonoBehaviour
     public void LoadBarSoldier(float cooldown, float adder)
     {
         float slice = (soldierBox.pixelInset.width / cooldown) * adder;
-
         float value = soldierLoadBar.pixelInset.width + slice;
-
         float clamp = Mathf.Clamp(value, 0, soldierBox.pixelInset.width);
 
         soldierLoadBar.pixelInset = new Rect(soldierLoadBar.pixelInset.x, soldierLoadBar.pixelInset.y, clamp, soldierLoadBar.pixelInset.height);

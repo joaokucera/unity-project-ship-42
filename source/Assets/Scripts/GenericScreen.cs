@@ -13,7 +13,6 @@ public enum SceneName
 
 public abstract class GenericScreen : MonoBehaviour {
 
-	[SerializeField] private GUISkin screenSkin;
 	[SerializeField] private Transform title;
 	[SerializeField] private SpriteRenderer giftBoxRenderer;
 	[SerializeField] private List<Sprite> giftBoxSprites;

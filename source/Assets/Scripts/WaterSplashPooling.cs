@@ -31,14 +31,12 @@ public class WaterSplashPooling : GenericPooling
     {
         GameObject splash = GetObjectFromPool(position);
 
-        Vector2 newPosition = splash.transform.position;
-        newPosition.y -= splash.renderer.bounds.size.y;
-        splash.transform.position = newPosition;
-
         if (splash != null)
         {
-            splash.renderer.sortingLayerName = "Foreground";
-            splash.renderer.sortingOrder = 0;
+            SpriteRenderer splashRenderer = splash.GetComponentInChildren<SpriteRenderer>();
+ 
+            splashRenderer.sortingLayerName = "Foreground";
+            splashRenderer.sortingOrder = 0;
         }
     }
 }

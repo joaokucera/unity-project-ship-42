@@ -12,7 +12,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
   - 61: {fileID: 6100000}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Barril
   m_TagString: EnemyAmmo
   m_Icon: {fileID: 0}

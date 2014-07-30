@@ -29,10 +29,18 @@ public class ShipHealth : MonoBehaviour
     {
         if (collider.tag == "EnemyAmmo" && collider.renderer.enabled)
         {
+            SpawnParticleEffects(collider.transform.position);
+
             collider.gameObject.SetActive(false);
 
             StartCoroutine(HealthCooldownVerification(((IAmmo)collider.GetComponent<GenericMovement>()).Damage));
         }
+    }
+
+    private void SpawnParticleEffects(Vector3 position)
+    {
+        ExplosionPooling.Instance.SpawnExplosionFromPool(transform, position);
+        SmokePooling.Instance.SpawnSmokeFromPool(transform, position);
     }
 
     private void SetHealthBar()
@@ -57,14 +65,16 @@ public class ShipHealth : MonoBehaviour
             for (float timer = 0; timer <= cooldownHealth; timer += adder)
             {
                 CrewStatus.Instance.LoadBarMechanic(cooldownHealth, adder);
+
                 yield return 0;
             }
 
             if (health < StartHealth)
             {
                 health++;
-                CrewStatus.Instance.ClearBarMechanic();
                 SetHealthBar();
+
+                CrewStatus.Instance.ClearBarMechanic();
             }
 
             yield return 0;

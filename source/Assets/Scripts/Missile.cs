@@ -7,13 +7,33 @@ public enum MissileAttack
     Curve
 }
 
-public class Missile : GenericMovement
+public class Missile : GenericMovement, IAmmo
 {
+    public bool Splashed { get; set; }
+
+    public int Damage
+    {
+        get { return (int)AmmoDamage.Missile; }
+    }
+
     [HideInInspector]
     public Transform target;
     [HideInInspector]
     public MissileAttack missileAttack;
     private Vector2 moveDirection;
+
+    void Start()
+    {
+        base.Initialize();
+
+        TrailRenderer trail = GetComponentInChildren<TrailRenderer>();
+        
+        if (trail != null)
+        {
+            trail.sortingLayerName = "Middleground";
+            trail.sortingOrder = 0;
+        }
+    }
 
     void FixedUpdate()
     {
