@@ -5,6 +5,8 @@ public class ShipMovement : MonoBehaviour
 {
     [SerializeField]
     private float speedIncreaseFactor = 100;
+    [SerializeField]
+    private Renderer leftParticleSplash = null, rightParticleSplash = null;
 
     private float speed;
     private MovementSide movementSide = MovementSide.NONE;
@@ -19,9 +21,15 @@ public class ShipMovement : MonoBehaviour
 
         float yPosition = -mainCamera.orthographicSize + (renderer.bounds.size.y / 3f);
         Vector2 startPosition = new Vector2(0, yPosition);
-
         transform.position = startPosition;
         fixedVerticalPosition = startPosition.y;
+
+        leftParticleSplash.sortingLayerName = "Middleground";
+        leftParticleSplash.sortingOrder = 0;
+        leftParticleSplash.enabled = false;
+        rightParticleSplash.sortingLayerName = "Middleground";
+        rightParticleSplash.sortingOrder = 0;
+        rightParticleSplash.enabled = false;
     }
 
     void Update()
@@ -31,11 +39,23 @@ public class ShipMovement : MonoBehaviour
         {
             speed += movement / speedIncreaseFactor;
             CrewStatus.Instance.CaptainBoost = true;
+
+            if (movementSide == MovementSide.LEFTorDOWN)
+            {
+                rightParticleSplash.enabled = true;
+            }
+            else if (movementSide == MovementSide.RIGHTorUP)
+            {
+                leftParticleSplash.enabled = true;
+            }
         }
         else
         {
             speed = movement;
             CrewStatus.Instance.CaptainBoost = false;
+
+            leftParticleSplash.enabled = false;
+            rightParticleSplash.enabled = false;
         }
 
         transform.TranslateTo(speed, 0, 0, Time.deltaTime);

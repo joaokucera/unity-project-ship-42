@@ -37,7 +37,6 @@ public class EnemyPooling : GenericPooling {
 	private void SpawnEnemyFromPool (Vector2 position, MovementSide side)
 	{
 		GameObject enemy = GetObjectFromPool (position);
-        print("NEW PLANE!");
 
 		if (enemy != null)
 		{

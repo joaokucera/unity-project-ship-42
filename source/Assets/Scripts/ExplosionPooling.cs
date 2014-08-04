@@ -31,15 +31,13 @@ public class ExplosionPooling : GenericPooling
     {
         GameObject explosion = GetObjectFromPool(position - Vector2.up * 1.5f);
 
-        if (explosion != null)
+        if (explosion != null && explosion.particleSystem != null)
         {
+            explosion.SendMessage("InvokeDeactivate");
             explosion.transform.parent = parent;
 
-            if (explosion.particleSystem != null)
-            {
-                explosion.particleSystem.renderer.sortingLayerName = "Foreground";
-                explosion.particleSystem.renderer.sortingOrder = 2;
-            }
+            explosion.particleSystem.renderer.sortingLayerName = "Foreground";
+            explosion.particleSystem.renderer.sortingOrder = 2;
         }
     }
 }
