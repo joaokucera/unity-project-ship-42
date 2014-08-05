@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyShotSpawn : MonoBehaviour {
 	
 	[SerializeField] private LayerMask layerMask;
-	public ShotStatus shotStatus = ShotStatus.INACTIVE;
+    private ShotStatus shotStatus = ShotStatus.INACTIVE;
 
 	void Update()
 	{
@@ -27,7 +27,10 @@ public class EnemyShotSpawn : MonoBehaviour {
 
 	private void Shoot()
 	{
-		EnemyShotPooling.Instance.SpawnShotFromPool(transform.position);
+        if (transform.parent.gameObject.activeInHierarchy)
+        {
+            EnemyShotPooling.Instance.SpawnShotFromPool(transform.position);
+        }
 
 		CancelInvoke ("Shoot");
 	}

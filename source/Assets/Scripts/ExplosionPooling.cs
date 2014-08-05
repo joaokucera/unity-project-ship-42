@@ -29,7 +29,7 @@ public class ExplosionPooling : GenericPooling
 
     public void SpawnExplosionFromPool(Transform parent, Vector2 position)
     {
-        GameObject explosion = GetObjectFromPool(position - Vector2.up * 1.5f);
+        GameObject explosion = GetObjectFromPool(position);
 
         if (explosion != null && explosion.particleSystem != null)
         {

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDamage
 {
     [SerializeField]
     private int startHealth = 1;
-    private int health;
+    protected int health;
 
     void Start()
     {
@@ -20,18 +20,18 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.tag == "Missile" && collider.renderer.enabled)
-        {
-            collider.gameObject.SetActive(false);
-
-            health -= 1;
-        }
-    }
-
     void OnBecameVisible()
     {
         health = startHealth;
+    }
+
+    public void SetDamage()
+    {
+        health -= 1;
+
+        if (health > 0)
+        {
+            SendMessage("IncreaseTorque");
+        }
     }
 }

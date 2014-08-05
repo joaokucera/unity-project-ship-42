@@ -32,7 +32,7 @@ public class GenericMovement : MonoBehaviour {
         Updating();
 	}
 
-    private void Updating()
+    protected void Updating()
     {
         if (side == MovementSide.LEFTorDOWN)
         {

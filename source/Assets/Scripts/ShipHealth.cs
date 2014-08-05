@@ -29,15 +29,15 @@ public class ShipHealth : MonoBehaviour
     {
         if (collider.tag == "EnemyAmmo" && collider.renderer.enabled)
         {
-            SpawnParticleEffects(collider.transform.position);
+            Vector2 position = collider.transform.position - Vector3.up * 1.5f;
+            SpawnParticleEffects(position);
 
             collider.gameObject.SetActive(false);
-
             StartCoroutine(HealthCooldownVerification(((IAmmo)collider.GetComponent<GenericMovement>()).Damage));
         }
     }
 
-    private void SpawnParticleEffects(Vector3 position)
+    private void SpawnParticleEffects(Vector2 position)
     {
         ExplosionPooling.Instance.SpawnExplosionFromPool(transform, position);
         SmokePooling.Instance.SpawnSmokeFromPool(transform, position);

@@ -9,15 +9,15 @@ public class ShipShotSpawn : MonoBehaviour
 
     private const int StartMissileAmmo = 4;
 
-    private int missileAmmo;
-    private float cooldownMissileAmmo;
-
     [SerializeField]
     private MissileAttack missileAttack;
     [SerializeField]
     private LayerMask layerMask;
     [SerializeField]
     private List<Renderer> ammoRenderers;
+
+    private int missileAmmo;
+    private float cooldownMissileAmmo;
 
     void Start()
     {
@@ -51,7 +51,7 @@ public class ShipShotSpawn : MonoBehaviour
 
     private void TouchAction()
     {
-        if (Input.touchCount > 0 && missileAmmo >= 0)
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -67,10 +67,12 @@ public class ShipShotSpawn : MonoBehaviour
     {
         Collider2D collider = Physics2D.OverlapPoint(position, layerMask);
 
-        if (collider != null && collider.transform != null)
+        if (collider != null && collider.transform != null && missileAmmo > 0)
         {
             if (collider.transform.tag.Contains("Enemy"))
             {
+                TargetPooling.Instance.SpawnTargetFromPool(collider.transform);
+
                 StartCoroutine(MissileAmmoCooldownVerification());
 
                 ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);

@@ -15,6 +15,8 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: Generic Pooling
   m_TagString: Untagged
@@ -46,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: 86f0c40ffb782c9449bc4baacb291b5c, type: 2}
-  poolSize: 5
+  poolSize: 4
   poolCanGrow: 1
 --- !u!114 &11400002
 MonoBehaviour:
@@ -60,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: 7fae9a304d9894db2be87af28783c63b, type: 2}
-  poolSize: 5
+  poolSize: 4
   poolCanGrow: 1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -74,8 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: 40eedf74f5bb34af6a83fd98645c5ffc, type: 2}
-  poolSize: 5
-  poolCanGrow: 0
+  poolSize: 2
+  poolCanGrow: 1
   spawnEnemyPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -110,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: 4cf3a591d3209a54e84afadac4a891d8, type: 2}
-  poolSize: 5
+  poolSize: 4
   poolCanGrow: 1
 --- !u!114 &11400010
 MonoBehaviour:
@@ -124,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: d003a5e27208c414fb3831fc9c107628, type: 2}
-  poolSize: 5
+  poolSize: 4
   poolCanGrow: 1
 --- !u!114 &11400012
 MonoBehaviour:
@@ -138,7 +140,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: f87bd8d668a6de745a3e8f59b153744f, type: 2}
-  poolSize: 5
+  poolSize: 4
+  poolCanGrow: 1
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35c5b8efe40c44408891e336e436aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: 70c617f12d3b64e4b87d2b20633decdf, type: 2}
+  poolSize: 4
+  poolCanGrow: 1
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f9f5ed864a4474d8c92695817d3604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: d3b8dc36522e9bd4eac5aa013dc0ab9d, type: 2}
+  poolSize: 4
   poolCanGrow: 1
 --- !u!1001 &100100000
 Prefab:

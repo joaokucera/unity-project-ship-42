@@ -20,7 +20,7 @@ public static class TransformExtensions {
 		trigger.AddComponent<Rigidbody2D> ().gravityScale = 0;
 		trigger.transform.position = position;
 		trigger.tag = tag;
-		trigger.layer = LayerMask.NameToLayer (layerName);
+		//trigger.layer = LayerMask.NameToLayer (layerName);
 		trigger.transform.parent = transform;
 
 		return trigger;
@@ -34,7 +34,7 @@ public static class TransformExtensions {
 		trigger.AddComponent<Rigidbody2D> ().gravityScale = 0;
 		trigger.transform.position = position;
 		trigger.tag = tag;
-		trigger.layer = LayerMask.NameToLayer (layerName);
+		//trigger.layer = LayerMask.NameToLayer (layerName);
 		trigger.transform.parent = transform;
 		trigger.transform.localScale = scale;
 

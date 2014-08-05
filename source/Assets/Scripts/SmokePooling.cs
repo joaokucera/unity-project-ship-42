@@ -29,7 +29,7 @@ public class SmokePooling : GenericPooling
 
     public void SpawnSmokeFromPool(Transform parent, Vector2 position)
     {
-        GameObject smoke = GetObjectFromPool(position - Vector2.up * 1.5f);
+        GameObject smoke = GetObjectFromPool(position);
 
         if (smoke != null)
         {

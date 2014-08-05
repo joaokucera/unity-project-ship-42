@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bomb : GenericMovement, IAmmo
+public class Bomb : GenericMovement, IAmmo, IDamage, IEnemy
 {
     public bool Splashed { get; set; }
 
@@ -31,17 +31,26 @@ public class Bomb : GenericMovement, IAmmo
             
             WaterSplashPooling.Instance.SpawnSplashFromPool(transform.position);
         }
-
-        if (collider.tag == "Missile" && collider.renderer.enabled)
-        {
-            collider.gameObject.SetActive(false);
-
-            gameObject.SetActive(false);
-        }
     }
 
     void OnBecameVisible()
     {
         Splashed = false;
+    }
+
+    //void OnBecameInVisible()
+    //{
+    //    foreach (Transform chield in transform)
+    //    {
+    //        if (chield.tag == "Target")
+    //        {
+    //            chield.parent = null;
+    //        }
+    //    }
+    //}
+
+    public void SetDamage()
+    {
+        gameObject.SetActive(false);
     }
 }
