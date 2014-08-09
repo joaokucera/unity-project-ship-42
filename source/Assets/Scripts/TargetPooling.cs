@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TargetPooling : GenericPooling {
+public class TargetPooling : GenericPooling
+{
 
     private static TargetPooling instance;
     public static TargetPooling Instance
@@ -27,9 +28,9 @@ public class TargetPooling : GenericPooling {
         base.Initialize();
     }
 
-    public void SpawnTargetFromPool(Transform parent)
+    public GameObject SpawnTargetFromPool(Vector2 position, Transform parent)
     {
-        GameObject shot = GetObjectFromPool(parent.position);
+        GameObject shot = GetObjectFromPool(position);
 
         if (shot != null)
         {
@@ -38,5 +39,7 @@ public class TargetPooling : GenericPooling {
             shot.renderer.sortingLayerName = "Foreground";
             shot.renderer.sortingOrder = 2;
         }
+
+        return shot;
     }
 }

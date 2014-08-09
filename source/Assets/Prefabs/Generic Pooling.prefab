@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: 8f0a650e5d6ae4a65a41a3197e6a9f7a, type: 2}
-  poolSize: 10
+  poolSize: 30
   poolCanGrow: 1
   cloudSprites:
   - {fileID: 21300000, guid: bfa4012e845dc48ba80a9b851f126289, type: 3}

@@ -3,9 +3,9 @@ using System.Collections;
 
 public enum MovementSide
 {
-	NONE = 0,
-	LEFTorDOWN = -1,
-	RIGHTorUP = 1,
+    NONE = 0,
+    LEFTorDOWN = -1,
+    RIGHTorUP = 1,
 }
 
 public enum ShotStatus
@@ -14,23 +14,29 @@ public enum ShotStatus
     ACTIVE
 }
 
-public class GenericMovement : MonoBehaviour {
+public class GenericMovement : MonoBehaviour
+{
+    [SerializeField]
+    public float horizontalSpeed;
+    [SerializeField]
+    protected float verticalSpeed;
+    [SerializeField]
+    public MovementSide side = MovementSide.LEFTorDOWN;
 
-	[SerializeField] public float horizontalSpeed;
-	[SerializeField] protected float verticalSpeed;
-	[SerializeField] public MovementSide side = MovementSide.LEFTorDOWN;
+    protected Camera mainCamera;
 
-	protected Camera mainCamera;
-	
-	void Start()
-	{
-		Initialize ();
-	}
-	
-	void Update()
-	{
+    private float originalHorizontalSpeed;
+    private float originalVerticalSpeed;    
+
+    void Start()
+    {
+        Initialize();
+    }
+
+    void Update()
+    {
         Updating();
-	}
+    }
 
     protected void Updating()
     {
@@ -44,10 +50,21 @@ public class GenericMovement : MonoBehaviour {
         }
     }
 
-	protected void Initialize()
-	{
-		mainCamera = Camera.main;
-	}
+    protected void Initialize()
+    {
+        mainCamera = Camera.main;
+
+        originalHorizontalSpeed = horizontalSpeed;
+        originalVerticalSpeed = verticalSpeed;
+
+        RestartSpeed();
+    }
+
+    protected void RestartSpeed()
+    {
+        horizontalSpeed = originalHorizontalSpeed;
+        verticalSpeed = originalVerticalSpeed;
+    }
 
     protected virtual void TranslateLeftOrDown()
     {
@@ -73,15 +90,15 @@ public class GenericMovement : MonoBehaviour {
     }
 
     private void RightOrUpMovement()
-	{
-		float xLimit = mainCamera.transform.position.x + (mainCamera.aspect * mainCamera.orthographicSize);
-		float yLimit = mainCamera.transform.position.y + mainCamera.orthographicSize;
+    {
+        float xLimit = mainCamera.transform.position.x + (mainCamera.aspect * mainCamera.orthographicSize);
+        float yLimit = mainCamera.transform.position.y + mainCamera.orthographicSize;
 
-		if (!renderer.isVisible && (renderer.bounds.min.x > xLimit || renderer.bounds.min.y > yLimit))
-		{
-			gameObject.SetActive(false);
-		}
+        if (!renderer.isVisible && (renderer.bounds.min.x > xLimit || renderer.bounds.min.y > yLimit))
+        {
+            gameObject.SetActive(false);
+        }
 
         TranslateRightOrDown();
-	}
+    }
 }

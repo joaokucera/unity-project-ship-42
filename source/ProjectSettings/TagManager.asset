@@ -3,13 +3,14 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - CloudSpawnerLimit
-  - EnemySpawnerLimit
+  - CloudsSpawnerLimit
+  - EnemiesSpawnerLimit
   - EnemyAmmo
   - Enemy
   - Missile
   - Wave
   - Target
+  - Barril
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: CloudSpawnerLimit
-  User Layer 9: EnemySpawnerLimit
+  User Layer 8: CloudsSpawnerLimit
+  User Layer 9: EnemiesSpawnerLimit
   User Layer 10: Player
   User Layer 11: Enemy
   User Layer 12: 

@@ -4,14 +4,16 @@ using System.Collections.Generic;
 
 public enum TagName
 {
-	CloudSpawnerLimit,
-	EnemySpawnerLimit
+    CloudsSpawnerLimit,
+    EnemiesSpawnerLimit,
+    Barril,
+    EnemyAmmo
 }
 
 public enum LayerName
 {
-	CloudSpawnerLimit,
-	EnemySpawnerLimit
+	CloudsSpawnerLimit,
+	EnemiesSpawnerLimit
 }
 
 public class GenericPooling : MonoBehaviour {

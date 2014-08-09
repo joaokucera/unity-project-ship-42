@@ -8,17 +8,6 @@ public class Zepelim : Enemy
     [SerializeField]
     private float increaseSpeed = 20f;
 
-    //void OnBecameInVisible()
-    //{
-    //        foreach (Transform chield in transform)
-    //        {
-    //            if (chield.tag == "Target")
-    //            {
-    //                chield.parent = null;
-    //            }
-    //        }
-    //}
-
     public void IncreaseTorque()
     {
         horizontalSpeed += increaseTorque;

@@ -2,46 +2,56 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CloudSpawn : GenericSpawn {
-	
-	[SerializeField] private float probability;
-	
-	void Start () 
-	{
-		Vector2 startPosition = StartPosition ();
+public enum CloudSize
+{
+    Big,
+    Normal,
+    Little
+}
 
-		transform.parent.CreateTrigger(
-			"Cloud Trigger Up", startPosition,
-			tagName.ToString(), layerName.ToString());
-		
-		transform.parent.CreateTrigger(
-			"Cloud Trigger Down", new Vector2(startPosition.x, yOffset), 
-			tagName.ToString(), layerName.ToString());
-		
-		transform.position = new Vector2 (startPosition.x, startPosition.y / 2);
-		
-		InvokeRepeating ("SpawnEvaluate", 2f, 2f);
-	}
-	
-	void Update () 
-	{
-		transform.TranslateTo (0, yTranslate, 0, Time.deltaTime);
-	}
+public class CloudSpawn : GenericSpawn
+{
+    [SerializeField]
+    private float probability;
+    [SerializeField]
+    private CloudSize cloudSize;
 
-	private void SpawnEvaluate()
-	{
-		float value = Random.value * 100;
-		
-		if (value <= probability)
-		{
-			SpawnCloud ();
-		}
-	}
-	
-	private void SpawnCloud ()
-	{
-		ReverseTranslate ();
+    void Start()
+    {
+        Vector2 startPosition = StartPosition();
 
-		CloudPooling.Instance.SpawnCloudFromPool (transform.position);
-	}
+        transform.parent.CreateTrigger(
+            string.Format("Clouds Trigger Up ({0})", cloudSize), startPosition,
+            tagName.ToString(), layerName.ToString());
+
+        transform.parent.CreateTrigger(
+            string.Format("Clouds Trigger Down ({0})", cloudSize), new Vector2(startPosition.x, yOffset),
+            tagName.ToString(), layerName.ToString());
+
+        transform.position = new Vector2(startPosition.x, startPosition.y / 2);
+
+        InvokeRepeating("SpawnEvaluate", 2f, 2f);
+    }
+
+    void Update()
+    {
+        transform.TranslateTo(0, yTranslate, 0, Time.deltaTime);
+    }
+
+    private void SpawnEvaluate()
+    {
+        float value = Random.value * 100;
+
+        if (value <= probability)
+        {
+            SpawnCloud();
+        }
+    }
+
+    private void SpawnCloud()
+    {
+        ReverseTranslate();
+
+        CloudPooling.Instance.SpawnCloudFromPool(transform.position, cloudSize);
+    }
 }

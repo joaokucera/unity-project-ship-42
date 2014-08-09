@@ -36,14 +36,30 @@ public class CloudPooling : GenericPooling
         }
     }
 
-    public void SpawnCloudFromPool(Vector2 position)
+    public void SpawnCloudFromPool(Vector2 position, CloudSize cloudSize)
     {
         GameObject cloud = GetObjectFromPool(position);
 
         if (cloud != null)
         {
-            cloud.renderer.sortingLayerName = "Background";
-            cloud.renderer.sortingOrder = 1;
+            switch (cloudSize)
+            {
+                case CloudSize.Big:
+                    cloud.transform.localScale = Vector3.one;
+                    cloud.renderer.sortingLayerName = "Background";
+                    cloud.renderer.sortingOrder = 3;
+                    break;
+                case CloudSize.Normal:
+                    cloud.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+                    cloud.renderer.sortingLayerName = "Background";
+                    cloud.renderer.sortingOrder = 2;
+                    break;
+                case CloudSize.Little:
+                    cloud.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    cloud.renderer.sortingLayerName = "Background";
+                    cloud.renderer.sortingOrder = 1;
+                    break;
+            }
 
             int index = Random.Range(0, CloudPooling.instance.cloudSprites.Count);
             ((SpriteRenderer)cloud.renderer).sprite = CloudPooling.instance.cloudSprites[index];

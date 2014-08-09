@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class EnemyHealth : MonoBehaviour, IDamage
 {
     [SerializeField]
-    private int startHealth = 1;
+    protected int startHealth = 1;
     protected int health;
+    protected Enemy enemyScript;
 
     void Start()
     {
         health = startHealth;
+
+        enemyScript = GetComponent<Enemy>();
     }
 
     void Update()
@@ -26,12 +31,22 @@ public class EnemyHealth : MonoBehaviour, IDamage
     }
 
     public void SetDamage()
-    {
+    {       
         health -= 1;
+        DeactivateTargets();
 
         if (health > 0)
         {
             SendMessage("IncreaseTorque");
+        }
+    }
+
+    public void DeactivateTargets()
+    {
+        Target target = GetComponentsInChildren<Target>().FirstOrDefault();
+        if (target != null)
+        {
+            target.SendMessage("Deactivate");
         }
     }
 }

@@ -31,15 +31,13 @@ public class SmokePooling : GenericPooling
     {
         GameObject smoke = GetObjectFromPool(position);
 
-        if (smoke != null)
+        if (smoke != null && smoke.particleSystem != null)
         {
-            smoke.transform.parent = parent;
+                smoke.SendMessage("InvokeDeactivate");
+                smoke.transform.parent = parent;
 
-            if (smoke.particleSystem != null)
-            {
                 smoke.particleSystem.renderer.sortingLayerName = "Foreground";
                 smoke.particleSystem.renderer.sortingOrder = 2;
-            }
         }
     }
 }

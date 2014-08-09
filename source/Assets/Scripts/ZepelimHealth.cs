@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ZepelimHealth : EnemyHealth {
+public class ZepelimHealth : EnemyHealth
+{
+    [SerializeField]
+    private float respawnTime = 10f;
 
     void Update()
     {
@@ -9,5 +12,17 @@ public class ZepelimHealth : EnemyHealth {
         {
             SendMessage("IncreaseSpeed");
         }
+    }
+
+    void OnBecameInvisible()
+    {
+        Invoke("Respawn", respawnTime);
+    }
+
+    private void Respawn()
+    {
+        startHealth++;
+
+        enemyScript.TurnBack();
     }
 }

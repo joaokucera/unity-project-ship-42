@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BossShotSpawn : MonoBehaviour
 {
-
     [SerializeField]
     private LayerMask layerMask;
     private ShotStatus shotStatus = ShotStatus.INACTIVE;
