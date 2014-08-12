@@ -52,18 +52,24 @@ public class Modal : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        playButtonAnimator.enabled = false;
-        giftBoxAnimator.enabled = false;
+        if (menuScript != null)
+        {
+            playButtonAnimator.enabled = false;
+            giftBoxAnimator.enabled = false;
+        }
     }
 
-    private void OnInvisible()
+    private void OnInvisible() 
     {
-        playButtonAnimator.enabled = true;
-        giftBoxAnimator.enabled = true;
-
         gameObject.SetActive(false);
 
-        menuScript.ReactiveButtons();
+        if (menuScript != null)
+        {
+            playButtonAnimator.enabled = true;
+            giftBoxAnimator.enabled = true;
+
+            menuScript.ReactiveButtons();
+        }
     }
 
     private void CheckAction(Vector2 position)
