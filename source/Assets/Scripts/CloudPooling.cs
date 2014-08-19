@@ -61,8 +61,8 @@ public class CloudPooling : GenericPooling
                     break;
             }
 
-            int index = Random.Range(0, CloudPooling.instance.cloudSprites.Count);
-            ((SpriteRenderer)cloud.renderer).sprite = CloudPooling.instance.cloudSprites[index];
+            int index = Random.Range(0, cloudSprites.Count);
+            ((SpriteRenderer)cloud.renderer).sprite = cloudSprites[index];
         }
     }
 }

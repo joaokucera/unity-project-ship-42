@@ -11,6 +11,8 @@ TagManager:
   - Wave
   - Target
   - Barril
+  - FriendsAirplanesSpawnerLimit
+  - Item
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   User Layer 9: EnemiesSpawnerLimit
   User Layer 10: Player
   User Layer 11: Enemy
-  User Layer 12: 
+  User Layer 12: FriendsAirplanesSpawnerLimit
   User Layer 13: 
   User Layer 14: 
   User Layer 15: 

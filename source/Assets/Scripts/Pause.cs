@@ -39,12 +39,22 @@ public class Pause : MonoBehaviour
     {
         if (HasActivated(position, transform.position, renderer.bounds.size))
         {
-            renderer.enabled = false;
-            playButton.enabled = true;
-            reloadButton.enabled = true;
+            if (Time.timeScale == 1f)
+            {
+                renderer.enabled = false;
+                playButton.enabled = true;
+                reloadButton.enabled = true;
 
-            modalScript.OnVisible();
-            Time.timeScale = 0f;
+                if (modalScript.OnVisible())
+                {
+                    Time.timeScale = 0f;
+                }
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                Application.LoadLevel("Level");
+            }
         }
         else if (HasActivated(position, playButton.transform.position, playButton.bounds.size))
         {
@@ -52,14 +62,18 @@ public class Pause : MonoBehaviour
             playButton.enabled = false;
             reloadButton.enabled = false;
 
-            Time.timeScale = 1f;
+            if (modalScript.OnInvisible())
+            {
+                Time.timeScale = 1f;
+            }
         }
-        else if (HasActivated(position, reloadButton.transform.position, reloadButton.bounds.size))
-        {
-            Time.timeScale = 1f;
+        //else if (HasActivated(position, reloadButton.transform.position, reloadButton.bounds.size))
+        //{
+        //    print("reload");
 
-            Application.LoadLevel("Level");
-        }
+        //    Time.timeScale = 1f;
+        //    Application.LoadLevel("Level");
+        //}
     }
 
     private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)

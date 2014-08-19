@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawn : GenericSpawn
+public class FriendAirplaneSpawn : GenericSpawn
 {
-    private float yOffsetAuxiliar = 1f;
-
     void Start()
     {
         Vector2 startPosition = StartPosition();
 
         transform.parent.CreateTrigger(
-            string.Format("{0} Enemies Trigger Up", side), new Vector2(startPosition.x, startPosition.y - yOffset * yOffsetAuxiliar),
+            string.Format("{0} Friends Airplanes Trigger Up", side), new Vector2(startPosition.x, startPosition.y - yOffset),
             tagName.ToString(), layerName.ToString());
 
         transform.parent.CreateTrigger(
-            string.Format("{0} Enemies Trigger Down", side), new Vector2(startPosition.x, 0),
+            string.Format("{0} Friends Airplanes Trigger Down", side), new Vector2(startPosition.x, 0),
             tagName.ToString(), layerName.ToString());
 
         transform.position = new Vector2(startPosition.x, startPosition.y / 2);

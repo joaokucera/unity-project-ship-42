@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
+using UnityEngine;
 
 public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
 {
@@ -24,7 +22,7 @@ public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
 
     //void Start()
     //{
-    //    //animator = GetComponent<Animator>();
+    //    animator = GetComponent<Animator>();
 
     //    base.Initialize();
 
@@ -63,7 +61,7 @@ public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
         rigidbody2D.velocity = Vector2.zero;
 
         //transform.tag = TagName.Barril.ToString();
-        
+
         //animator.SetBool("ToFloat", true);
     }
 

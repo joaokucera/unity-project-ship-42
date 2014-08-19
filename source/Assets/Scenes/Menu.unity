@@ -1516,6 +1516,10 @@ Prefab:
       propertyPath: giftBoxAnimator
       value: 
       objectReference: {fileID: 1856951717}
+    - target: {fileID: 100010, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
   m_RootGameObject: {fileID: 1613771988}

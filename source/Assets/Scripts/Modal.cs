@@ -48,7 +48,7 @@ public class Modal : MonoBehaviour
 #endif
     }
 
-    public void OnVisible()
+    public bool OnVisible()
     {
         gameObject.SetActive(true);
 
@@ -57,9 +57,11 @@ public class Modal : MonoBehaviour
             playButtonAnimator.enabled = false;
             giftBoxAnimator.enabled = false;
         }
+
+        return true;
     }
 
-    private void OnInvisible() 
+    public bool OnInvisible() 
     {
         gameObject.SetActive(false);
 
@@ -70,6 +72,8 @@ public class Modal : MonoBehaviour
 
             menuScript.ReactiveButtons();
         }
+
+        return true;
     }
 
     private void CheckAction(Vector2 position)

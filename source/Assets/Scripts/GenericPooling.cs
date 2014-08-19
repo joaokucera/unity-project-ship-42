@@ -7,13 +7,15 @@ public enum TagName
     CloudsSpawnerLimit,
     EnemiesSpawnerLimit,
     Barril,
-    EnemyAmmo
+    EnemyAmmo,
+    FriendsAirplanesSpawnerLimit
 }
 
 public enum LayerName
 {
 	CloudsSpawnerLimit,
-	EnemiesSpawnerLimit
+	EnemiesSpawnerLimit,
+    FriendsAirplanesSpawnerLimit
 }
 
 public class GenericPooling : MonoBehaviour {

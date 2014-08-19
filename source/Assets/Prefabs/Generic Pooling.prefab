@@ -17,6 +17,8 @@ GameObject:
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11400020}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: Generic Pooling
   m_TagString: Untagged
@@ -170,6 +172,47 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: d3b8dc36522e9bd4eac5aa013dc0ab9d, type: 2}
   poolSize: 4
   poolCanGrow: 1
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61c99e23ea4d6348ae591f681b9ce85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: c6e697edad2ad7b45bf353a7beae082f, type: 2}
+  poolSize: 4
+  poolCanGrow: 1
+  friendItemSprites:
+  - {fileID: 21300000, guid: cebacc879098149d68c1ce9b446dc58a, type: 3}
+  - {fileID: 21300000, guid: ccc5a57a9f54743efaa7dd7951593ab1, type: 3}
+  - {fileID: 21300000, guid: 6b8184b31a0fb4ee1bb973715295c753, type: 3}
+  - {fileID: 21300000, guid: 9ff3af3109d7f4daebb2bb6467071dce, type: 3}
+  - {fileID: 21300000, guid: 2045c4616fea04c38aaeb928c1ae611f, type: 3}
+  - {fileID: 21300000, guid: 6f6859357c9054879b476677a65bde90, type: 3}
+  - {fileID: 21300000, guid: 3de2f56fb8ec74c9aa3b18c0f253ce2f, type: 3}
+  - {fileID: 21300000, guid: 322b809f206e44da8911388a2c2ebddb, type: 3}
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bef0ef2ce2ae6c44942994f34924825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100002, guid: f89e7a96fbc41634baf4cd1e87cf6924, type: 2}
+  poolSize: 4
+  poolCanGrow: 1
+  spawnFriendAirplanePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnTime: 30
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

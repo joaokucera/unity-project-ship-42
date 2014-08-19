@@ -46,7 +46,7 @@ public class EnemyHealth : MonoBehaviour, IDamage
         Target target = GetComponentsInChildren<Target>().FirstOrDefault();
         if (target != null)
         {
-            target.SendMessage("Deactivate");
+            target.Deactivate();
         }
     }
 }

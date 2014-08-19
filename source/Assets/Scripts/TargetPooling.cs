@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TargetPooling : GenericPooling
 {
-
     private static TargetPooling instance;
     public static TargetPooling Instance
     {
@@ -37,7 +36,7 @@ public class TargetPooling : GenericPooling
             shot.transform.parent = parent;
 
             shot.renderer.sortingLayerName = "Foreground";
-            shot.renderer.sortingOrder = 2;
+            shot.renderer.sortingOrder = 1;
         }
 
         return shot;

@@ -1,44 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyShotSpawn : MonoBehaviour {
-	
-	[SerializeField] private LayerMask layerMask;
-    private ShotStatus shotStatus = ShotStatus.INACTIVE;
+public class EnemyShotSpawn : MonoBehaviour
+{
+    [SerializeField]
+    private LayerMask layerMask;
+    [SerializeField]
+    private float spawnMinTime = 0f, spawnMaxTime = 1f;
 
-	void Update()
-	{
-		if (shotStatus == ShotStatus.INACTIVE)
-		{
-			RaycastHit2D hit = Physics2D.Raycast (transform.position, -transform.up, float.MaxValue, layerMask);
+    private float timeFactor = 0.5f;
+    private SpawnStatus spawnStatus = SpawnStatus.INACTIVE;
 
-			if (hit.transform != null)
-			{
-				if (hit.transform.tag == "Player")
-				{
-					shotStatus = ShotStatus.ACTIVE;
+    void Update()
+    {
+        if (spawnStatus == SpawnStatus.INACTIVE)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, float.MaxValue, layerMask);
 
-					Invoke("Shoot", Random.Range(0f, 1f));
-					Invoke("Inactive", Random.Range(0.5f, 1.5f));
-				}
-			}
-		}
-	}
+            if (hit.transform != null)
+            {
+                if (hit.transform.tag == "Player")
+                {
+                    spawnStatus = SpawnStatus.ACTIVE;
 
-	private void Shoot()
-	{
+                    Invoke("Spawn", Random.Range(spawnMinTime, spawnMaxTime));
+                    Invoke("Inactive", Random.Range(spawnMaxTime - timeFactor, spawnMaxTime + timeFactor));
+                }
+            }
+        }
+    }
+
+    private void Spawn()
+    {
         if (transform.parent.gameObject.activeInHierarchy)
         {
             EnemyShotPooling.Instance.SpawnShotFromPool(transform.position);
         }
 
-		CancelInvoke ("Shoot");
-	}
+        CancelInvoke("Spawn");
+    }
 
-	private void Inactive()
-	{
-		shotStatus = ShotStatus.INACTIVE;
-		
-		CancelInvoke ("Inactive");
-	}
+    private void Inactive()
+    {
+        spawnStatus = SpawnStatus.INACTIVE;
+
+        CancelInvoke("Inactive");
+    }
 }

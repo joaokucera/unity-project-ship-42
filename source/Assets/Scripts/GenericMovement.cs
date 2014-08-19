@@ -8,7 +8,7 @@ public enum MovementSide
     RIGHTorUP = 1,
 }
 
-public enum ShotStatus
+public enum SpawnStatus
 {
     INACTIVE,
     ACTIVE

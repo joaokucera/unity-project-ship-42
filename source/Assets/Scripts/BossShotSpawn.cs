@@ -5,11 +5,15 @@ public class BossShotSpawn : MonoBehaviour
 {
     [SerializeField]
     private LayerMask layerMask;
-    private ShotStatus shotStatus = ShotStatus.INACTIVE;
+    [SerializeField]
+    private float spawnMinTime = 0f, spawnMaxTime = 1f;
+
+    private float timeFactor = 0.5f;
+    private SpawnStatus spawnStatus = SpawnStatus.INACTIVE;
 
     void Update()
     {
-        if (shotStatus == ShotStatus.INACTIVE)
+        if (spawnStatus == SpawnStatus.INACTIVE)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, float.MaxValue, layerMask);
 
@@ -17,28 +21,28 @@ public class BossShotSpawn : MonoBehaviour
             {
                 if (hit.transform.tag == "Player")
                 {
-                    shotStatus = ShotStatus.ACTIVE;
+                    spawnStatus = SpawnStatus.ACTIVE;
 
-                    Invoke("Shoot", Random.Range(0f, 1f));
-                    Invoke("Inactive", Random.Range(0.5f, 1.5f));
+                    Invoke("Spawn", Random.Range(spawnMinTime, spawnMaxTime));
+                    Invoke("Inactive", Random.Range(spawnMaxTime - timeFactor, spawnMaxTime + timeFactor));
                 }
             }
         }
     }
 
-    private void Shoot()
+    private void Spawn()
     {
         if (transform.parent.gameObject.activeInHierarchy)
         {
             BossShotPooling.Instance.SpawnShotFromPool(transform.position);
         }
 
-        CancelInvoke("Shoot");
+        CancelInvoke("Spawn");
     }
 
     private void Inactive()
     {
-        shotStatus = ShotStatus.INACTIVE;
+        spawnStatus = SpawnStatus.INACTIVE;
 
         CancelInvoke("Inactive");
     }
