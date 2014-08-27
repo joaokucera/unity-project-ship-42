@@ -28,11 +28,17 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
+        Vector2 position = Vector2.zero;
+
 #if UNITY_EDITOR
-        CheckAction(Controls.MouseAction());
+        if (Controls.MouseAction(ref position))
+        {
 #else
-		CheckAction(Controls.TouchAction());
+        if (Controls.TouchAction(ref position))
+        {
 #endif
+            CheckAction(position);
+        }
     }
 
     private void CheckAction(Vector2 position)
@@ -67,13 +73,6 @@ public class Pause : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
-        //else if (HasActivated(position, reloadButton.transform.position, reloadButton.bounds.size))
-        //{
-        //    print("reload");
-
-        //    Time.timeScale = 1f;
-        //    Application.LoadLevel("Level");
-        //}
     }
 
     private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)

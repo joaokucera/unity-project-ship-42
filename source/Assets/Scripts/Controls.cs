@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Controls : MonoBehaviour
 {
-    public static Vector2 MouseAction()
+    public static bool MouseAction(ref Vector2 position)
     {
         // Just 1 tap.
         if (Input.GetButtonDown("Fire1"))
         {
-            return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            return true;
         }
 
-        return Vector2.zero;
+        return false;
     }
 
-    public static Vector2 TouchAction()
+    public static bool TouchAction(ref Vector2 position)
     {
         // Just 1 tap.
         if (Input.touchCount == 1)
@@ -23,10 +26,12 @@ public class Controls : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                return Camera.main.ScreenToWorldPoint(touch.position);
+                position = Camera.main.ScreenToWorldPoint(touch.position);
+
+                return true;
             }
         }
 
-        return Vector2.zero;
+        return false;
     }
 }

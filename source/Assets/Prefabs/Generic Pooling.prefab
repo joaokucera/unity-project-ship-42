@@ -19,6 +19,7 @@ GameObject:
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400022}
   m_Layer: 0
   m_Name: Generic Pooling
   m_TagString: Untagged
@@ -44,7 +45,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d859b76beee9d4efda0ae7b9d830eeeb, type: 3}
   m_Name: 
@@ -58,7 +59,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e69e207188f834dbf80cd36deb393be9, type: 3}
   m_Name: 
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca344f420ac184d4a8a975d5076f0129, type: 3}
   m_Name: 
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d9b6fed02a90465497ea828c5586778, type: 3}
   m_Name: 
@@ -108,7 +109,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c7d8f25b0c430a4181ad97ba2508914, type: 3}
   m_Name: 
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a279b525a9565b94ca8433c76d77a36b, type: 3}
   m_Name: 
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 149f76520e96da34ebd03defbfb2a369, type: 3}
   m_Name: 
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c35c5b8efe40c44408891e336e436aad, type: 3}
   m_Name: 
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3f9f5ed864a4474d8c92695817d3604, type: 3}
   m_Name: 
@@ -212,7 +213,21 @@ MonoBehaviour:
   spawnFriendAirplanePoints:
   - {fileID: 0}
   - {fileID: 0}
-  spawnTime: 30
+  spawnTime: 10
+--- !u!114 &11400022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac37570f7e768174491421b2ed0a4175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: 020960fc80eac394298a09d7b3363e55, type: 2}
+  poolSize: 4
+  poolCanGrow: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

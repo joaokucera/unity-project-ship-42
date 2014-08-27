@@ -3,8 +3,19 @@ using System.Collections;
 
 public class ShipStockItem : MonoBehaviour
 {
-    //[HideInInspector]
+    [SerializeField]
+    private ModalSafeBuoy modalSafeBuoyScript;
+
+    [HideInInspector]
     public int redCrossAmount, wholePizzaAmount, waterMellonAmount, chickenAmount, hamburguerAmount, slicePizzaAmount, cookieAmount, cokeAmount;
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Safe Buoy")
+        {
+            modalSafeBuoyScript.OnVisible();
+        }
+    }
 
     public void AddItem(FriendItem friendItem)
     {

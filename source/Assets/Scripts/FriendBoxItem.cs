@@ -28,6 +28,8 @@ public class FriendBoxItem : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player" && gameObject.activeInHierarchy)
         {
+            SpawnParticleEffects(transform.position);
+
             collider.gameObject.SendMessage("AddItem", friendItem);
 
             gameObject.SetActive(false);
@@ -37,5 +39,10 @@ public class FriendBoxItem : MonoBehaviour
     public void SetItem(int index)
     {
         friendItem = (FriendItem)index;
+    }
+
+    private void SpawnParticleEffects(Vector2 position)
+    {
+        FireworksPooling.Instance.SpawnFireworksFromPool(null, position);
     }
 }

@@ -44,16 +44,22 @@ public abstract class GenericScreen : MonoBehaviour
 
         if (sceneName == SceneName.Enabled)
         {
+            Vector2 position = Vector2.zero;
+
 #if UNITY_EDITOR
-            CheckAction(Controls.MouseAction());
+            if (Controls.MouseAction(ref position))
+            {
 #else
-            CheckAction(Controls.TouchAction());
+            if (Controls.TouchAction(ref position))
+            {
 #endif
+                CheckAction(position);
+            }
         }
         else if (sceneName == SceneName.Modal)
         {
             sceneName = SceneName.Disabled;
-            
+
             modalScript.OnVisible();
         }
         else

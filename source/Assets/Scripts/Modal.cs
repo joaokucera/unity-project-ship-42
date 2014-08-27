@@ -41,11 +41,17 @@ public class Modal : MonoBehaviour
 
     void Update()
     {
+        Vector2 position = Vector2.zero;
+
 #if UNITY_EDITOR
-        CheckAction(Controls.MouseAction());
+        if (Controls.MouseAction(ref position))
+        {
 #else
-		CheckAction(Controls.TouchAction());
+        if (Controls.TouchAction(ref position))
+        {
 #endif
+            CheckAction(position);
+        }
     }
 
     public bool OnVisible()

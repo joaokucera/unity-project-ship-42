@@ -5,7 +5,18 @@ public class Particle : MonoBehaviour
 {
     public void InvokeDeactivate()
     {
-        Invoke("Deactivate", particleSystem.duration);
+        float duration = 0;
+
+        if (particleSystem != null)
+        {
+            duration = particleSystem.duration;
+        }
+        else if (particleEmitter != null)
+        {
+            duration = particleEmitter.maxEnergy;
+        }
+
+        Invoke("Deactivate", duration);
     }
 
     private void Deactivate()
