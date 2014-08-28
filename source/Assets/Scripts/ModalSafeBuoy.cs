@@ -6,9 +6,7 @@ using System;
 public class ModalSafeBuoy : MonoBehaviour
 {
     [SerializeField]
-    private GameObject playerShotSpawnerObject;
-    [SerializeField]
-    private GameObject crewStatusObject;
+    private GameObject playerShotSpawnerObject, crewStatusObject, warningObject;
 
     [SerializeField]
     private SpriteRenderer giftItemSelected, crewPersonSelected;
@@ -26,7 +24,8 @@ public class ModalSafeBuoy : MonoBehaviour
 
     void Start()
     {
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
+        warningObject.SetActive(false);
 
         giftItemSelected.enabled = false;
         crewPersonSelected.enabled = false;
@@ -110,72 +109,72 @@ public class ModalSafeBuoy : MonoBehaviour
 
     public void CheckAction(Vector2 position)
     {
-        if (HasActivated(position, captainRenderer.transform.position, captainRenderer.bounds.size))
-        {
-            print("captainRenderer");
-            crewPersonSelected.transform.position = captainRenderer.transform.position;
-            crewPersonSelected.enabled = true;
-        }
-        else if (HasActivated(position, mechanicRenderer.transform.position, mechanicRenderer.bounds.size))
-        {
-            print("mechanicRenderer");
-            crewPersonSelected.transform.position = mechanicRenderer.transform.position;
-            crewPersonSelected.enabled = true;
-        }
-        else if (HasActivated(position, soldierRenderer.transform.position, soldierRenderer.bounds.size))
-        {
-            print("soldierRenderer");
-            crewPersonSelected.transform.position = soldierRenderer.transform.position;
-            crewPersonSelected.enabled = true;
-        }
-
+        // Selected ITEM.
         if (HasActivated(position, redCrossRenderer.transform.position, redCrossRenderer.bounds.size))
         {
-            print("redCrossRenderer");
             giftItemSelected.transform.position = redCrossRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, watermelonRenderer.transform.position, watermelonRenderer.bounds.size))
         {
-            print("watermelonRenderer");
             giftItemSelected.transform.position = watermelonRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, chickenRenderer.transform.position, chickenRenderer.bounds.size))
         {
-            print("chickenRenderer");
             giftItemSelected.transform.position = chickenRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, hamburgerRenderer.transform.position, hamburgerRenderer.bounds.size))
         {
-            print("hamburgerRenderer");
             giftItemSelected.transform.position = hamburgerRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, pizzaWholeRenderer.transform.position, pizzaWholeRenderer.bounds.size))
         {
-            print("pizzaWholeRenderer");
             giftItemSelected.transform.position = pizzaWholeRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, pizzaSliceRenderer.transform.position, pizzaSliceRenderer.bounds.size))
         {
-            print("pizzaSliceRenderer");
             giftItemSelected.transform.position = pizzaSliceRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, cookieRenderer.transform.position, cookieRenderer.bounds.size))
         {
-            print("cookieRenderer");
             giftItemSelected.transform.position = cookieRenderer.transform.position;
             giftItemSelected.enabled = true;
         }
         else if (HasActivated(position, cokeRenderer.transform.position, cokeRenderer.bounds.size))
         {
-            print("cokeRenderer");
             giftItemSelected.transform.position = cokeRenderer.transform.position;
             giftItemSelected.enabled = true;
+        }
+
+        // Selected CREW.
+        if (giftItemSelected.enabled == true)
+        {
+            warningObject.SetActive(false);
+
+            if (HasActivated(position, captainRenderer.transform.position, captainRenderer.bounds.size))
+            {
+                crewPersonSelected.transform.position = captainRenderer.transform.position;
+                crewPersonSelected.enabled = true;
+            }
+            else if (HasActivated(position, mechanicRenderer.transform.position, mechanicRenderer.bounds.size))
+            {
+                crewPersonSelected.transform.position = mechanicRenderer.transform.position;
+                crewPersonSelected.enabled = true;
+            }
+            else if (HasActivated(position, soldierRenderer.transform.position, soldierRenderer.bounds.size))
+            {
+                crewPersonSelected.transform.position = soldierRenderer.transform.position;
+                crewPersonSelected.enabled = true;
+            }
+        }
+        else
+        {
+            warningObject.SetActive(true);
         }
     }
 

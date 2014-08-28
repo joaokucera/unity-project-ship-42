@@ -8,77 +8,82 @@ public enum TagName
     EnemiesSpawnerLimit,
     Barril,
     EnemyAmmo,
-    FriendsAirplanesSpawnerLimit
+    FriendsAirplanesSpawnerLimit,
+    SafeBuoyLimit
 }
 
 public enum LayerName
 {
-	CloudsSpawnerLimit,
-	EnemiesSpawnerLimit,
-    FriendsAirplanesSpawnerLimit
+    CloudsSpawnerLimit,
+    EnemiesSpawnerLimit,
+    FriendsAirplanesSpawnerLimit,
+    SafeBuoyLimit
 }
 
-public class GenericPooling : MonoBehaviour {
+public class GenericPooling : MonoBehaviour
+{
+    [SerializeField]
+    protected GameObject prefab;
+    [SerializeField]
+    private int poolSize;
+    [SerializeField]
+    private bool poolCanGrow;
 
-	[SerializeField] protected GameObject prefab;
-	[SerializeField] private int poolSize;
-	[SerializeField] private bool poolCanGrow;
+    private List<GameObject> pool = new List<GameObject>();
 
-	private List<GameObject> pool = new List<GameObject>();
-	
-	void Start () 
-	{
-		Initialize ();
-	}
+    void Start()
+    {
+        Initialize();
+    }
 
-	public GameObject GetObjectFromPool(Vector2 position, bool active = true)
-	{
-		foreach (GameObject obj in pool) 
-		{
-			if (!obj.activeInHierarchy)
-			{
-				return PrepareObjectToResponse (obj, position, active);
-			}
-		}
+    public GameObject GetObjectFromPool(Vector2 position, bool active = true)
+    {
+        foreach (GameObject obj in pool)
+        {
+            if (!obj.activeInHierarchy)
+            {
+                return PrepareObjectToResponse(obj, position, active);
+            }
+        }
 
-		if (poolCanGrow)
-		{
-			GameObject obj = CreateNewObject();
+        if (poolCanGrow)
+        {
+            GameObject obj = CreateNewObject();
 
-			return PrepareObjectToResponse(obj, position, active);
-		}
+            return PrepareObjectToResponse(obj, position, active);
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	protected void Initialize ()
-	{
-		if (prefab == null) 
-		{
-			Debug.LogError ("Has not been defined a prefab!");
-		}
+    protected void Initialize()
+    {
+        if (prefab == null)
+        {
+            Debug.LogError("Has not been defined a prefab!");
+        }
 
-		for (int i = 0; i < poolSize; i++) 
-		{
-			CreateNewObject ();
-		}
-	}
+        for (int i = 0; i < poolSize; i++)
+        {
+            CreateNewObject();
+        }
+    }
 
-	private GameObject CreateNewObject ()
-	{
-		GameObject newObject = Instantiate (prefab) as GameObject;
-		newObject.SetActive (false);
+    private GameObject CreateNewObject()
+    {
+        GameObject newObject = Instantiate(prefab) as GameObject;
+        newObject.SetActive(false);
 
-		pool.Add (newObject);
+        pool.Add(newObject);
 
-		return newObject;
-	}
+        return newObject;
+    }
 
-	private GameObject PrepareObjectToResponse (GameObject obj, Vector2 position, bool active)
-	{
-		obj.transform.position = position;
-		obj.SetActive (active);
+    private GameObject PrepareObjectToResponse(GameObject obj, Vector2 position, bool active)
+    {
+        obj.transform.position = position;
+        obj.SetActive(active);
 
-		return obj;
-	}
+        return obj;
+    }
 }
