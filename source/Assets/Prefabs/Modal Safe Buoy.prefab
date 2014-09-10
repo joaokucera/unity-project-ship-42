@@ -495,6 +495,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400062}
+  - 132: {fileID: 13200022}
+  m_Layer: 0
+  m_Name: Warning Item
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -680,6 +696,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 400024}
+  - {fileID: 400062}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400028
@@ -897,6 +914,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400004}
   m_RootOrder: 12
+--- !u!4 &400062
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .333333343, y: .625, z: 0}
+  m_LocalScale: {x: .666666687, y: .666666687, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400026}
+  m_RootOrder: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -908,11 +937,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eefcc22a08888b409aa234a389c8678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipStockItem: {fileID: 0}
+  pauseObject: {fileID: 0}
   playerShotSpawnerObject: {fileID: 0}
   crewStatusObject: {fileID: 0}
-  warningObject: {fileID: 0}
+  warningGuiText: {fileID: 13200022}
   giftItemSelected: {fileID: 21200034}
   crewPersonSelected: {fileID: 21200032}
+  closeButton: {fileID: 21200004}
   captainRenderer: {fileID: 21200000}
   mechanicRenderer: {fileID: 21200006}
   soldierRenderer: {fileID: 21200002}
@@ -1183,6 +1215,29 @@ GUIText:
   m_Material: {fileID: 0}
   m_FontSize: 25
   m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278242558
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200022
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: First choose which item will be used!
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 20
+  m_FontStyle: 1
   m_Color:
     serializedVersion: 2
     rgba: 4278242558

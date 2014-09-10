@@ -4,7 +4,7 @@ using System.Collections;
 public class ShipStockItem : MonoBehaviour
 {
     [SerializeField]
-    private ModalSafeBuoy modalSafeBuoyScript;
+    private ModalSafeBuoy modalSafeBuoyScript = null;
 
     [HideInInspector]
     public int redCrossAmount, wholePizzaAmount, waterMellonAmount, chickenAmount, hamburguerAmount, slicePizzaAmount, cookieAmount, cokeAmount;
@@ -13,6 +13,8 @@ public class ShipStockItem : MonoBehaviour
     {
         if (collider.tag == "Safe Buoy")
         {
+            collider.SendMessage("Replace");
+
             modalSafeBuoyScript.OnVisible();
         }
     }
@@ -21,13 +23,13 @@ public class ShipStockItem : MonoBehaviour
     {
         switch (friendItem)
         {
-            case FriendItem.RedCross:
+            case FriendItem.Red_Cross:
                 redCrossAmount++;
                 break;
-            case FriendItem.WholePizza:
+            case FriendItem.Whole_Pizza:
                 wholePizzaAmount++;
                 break;
-            case FriendItem.WaterMellon:
+            case FriendItem.Watermelon:
                 waterMellonAmount++;
                 break;
             case FriendItem.Chicken:
@@ -36,7 +38,7 @@ public class ShipStockItem : MonoBehaviour
             case FriendItem.Hamburguer:
                 hamburguerAmount++;
                 break;
-            case FriendItem.SlicePizza:
+            case FriendItem.Slice_Pizza:
                 slicePizzaAmount++;
                 break;
             case FriendItem.Cookie:

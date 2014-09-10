@@ -3,12 +3,12 @@ using System.Collections;
 
 public enum FriendItem
 {
-    RedCross,// = 10,
-    WholePizza,// = 9, //3 x 3 (3 para cada personagem)
-    WaterMellon,// = 8,
+    Red_Cross,// = 10,
+    Whole_Pizza,// = 9, //3 x 3 (3 para cada personagem)
+    Watermelon,// = 8,
     Chicken,// = 6,
     Hamburguer,// = 4,
-    SlicePizza,// = 3,
+    Slice_Pizza,// = 3,
     Cookie,// = 2,
     Coke// = 1
 }

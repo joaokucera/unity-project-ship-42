@@ -4,12 +4,12 @@ using System.Collections;
 public class Modal : MonoBehaviour
 {
     [SerializeField]
-    private Menu menuScript;
+    private Menu menuScript = null;
 
     [SerializeField]
-    private Animator playButtonAnimator;
+    private Animator playButtonAnimator = null;
     [SerializeField]
-    private Animator giftBoxAnimator;
+    private Animator giftBoxAnimator = null;
 
     [SerializeField]
     private Transform lightBox = null, background = null;
@@ -23,8 +23,6 @@ public class Modal : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
-
         mainCamera = Camera.main;
 
         Vector2 modalScale = lightBox.localScale;
@@ -67,7 +65,7 @@ public class Modal : MonoBehaviour
         return true;
     }
 
-    public bool OnInvisible() 
+    public bool OnInvisible()
     {
         gameObject.SetActive(false);
 
@@ -105,11 +103,11 @@ public class Modal : MonoBehaviour
             ChangeButtonSprite(hapticsButton);
         }
     }
-    
+
     private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
     {
-        return Mathf.Abs(positionA.x - positionB.x) <= size.x / 2 &&
-               Mathf.Abs(positionA.y - positionB.y) <= size.y / 2;
+        return Mathf.Abs(positionA.x - positionB.x) <= size.x &&
+               Mathf.Abs(positionA.y - positionB.y) <= size.y;
     }
 
     private void ChangeButtonSprite(SpriteRenderer buttonRenderer)

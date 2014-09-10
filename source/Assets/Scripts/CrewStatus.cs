@@ -27,15 +27,13 @@ public class CrewStatus : MonoBehaviour
     }
 
     private Camera mainCamera;
+    public float captainStamina = 50, mechanicStamina = 50, soldierStamina = 50;
+    public GUIText captainText = null, mechanicText = null, soldierText = null;
 
     [SerializeField]
     private float crewStaminaDecreaseFactor = 10, captainBoostDecreaseFactor = 20;
     [SerializeField]
     private GUITexture captainTexture = null, mechanicTexture = null, soldierTexture = null;
-    [SerializeField]
-    private GUIText captainText = null, mechanicText = null, soldierText = null;
-    [SerializeField]
-    public float captainStamina = 50, mechanicStamina = 50, soldierStamina = 50;
     [SerializeField]
     private GUITexture captainBox = null, mechanicBox = null, soldierBox = null;
     [SerializeField]

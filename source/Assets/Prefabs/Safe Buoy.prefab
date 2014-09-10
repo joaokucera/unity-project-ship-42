@@ -68,8 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66fa8cf651338f74bb65cc2d0c586cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modalSafeBuoy: {fileID: 0}
   tagName: 5
   layerName: 3
+  timeToRestart: 5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

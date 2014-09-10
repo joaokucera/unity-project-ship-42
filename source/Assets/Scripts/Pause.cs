@@ -7,7 +7,7 @@ public class Pause : MonoBehaviour
     private float xOffset = 5f;
 
     [SerializeField]
-    private Modal modalScript;
+    private Modal modalScript = null;
     [SerializeField]
     private SpriteRenderer playButton = null, reloadButton = null;
 
@@ -45,33 +45,39 @@ public class Pause : MonoBehaviour
     {
         if (HasActivated(position, transform.position, renderer.bounds.size))
         {
-            if (Time.timeScale == 1f)
-            {
-                renderer.enabled = false;
-                playButton.enabled = true;
-                reloadButton.enabled = true;
-
-                if (modalScript.OnVisible())
-                {
-                    Time.timeScale = 0f;
-                }
-            }
-            else
-            {
-                Time.timeScale = 1f;
-                Application.LoadLevel("Level");
-            }
+            PauseOrReload();
         }
         else if (HasActivated(position, playButton.transform.position, playButton.bounds.size))
         {
-            renderer.enabled = true;
-            playButton.enabled = false;
-            reloadButton.enabled = false;
+            Continue();
+        }
+    }
 
-            if (modalScript.OnInvisible())
+    private void PauseOrReload()
+    {
+        if (Time.timeScale == 1f)
+        {
+            ShowContinueAndReloadButtons();
+
+            if (modalScript.OnVisible())
             {
-                Time.timeScale = 1f;
+                Time.timeScale = 0f;
             }
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            Application.LoadLevel("Level");
+        }
+    }
+
+    private void Continue()
+    {
+        HideContinueAndReloadButtons();
+
+        if (modalScript.OnInvisible())
+        {
+            Time.timeScale = 1f;
         }
     }
 
@@ -79,5 +85,19 @@ public class Pause : MonoBehaviour
     {
         return Mathf.Abs(positionA.x - positionB.x) <= size.x &&
                Mathf.Abs(positionA.y - positionB.y) <= size.y;
+    }
+
+    public void HideContinueAndReloadButtons()
+    {
+        renderer.enabled = true;
+        playButton.enabled = false;
+        reloadButton.enabled = false;
+    }
+
+    public void ShowContinueAndReloadButtons()
+    {
+        renderer.enabled = false;
+        playButton.enabled = true;
+        reloadButton.enabled = true;
     }
 }

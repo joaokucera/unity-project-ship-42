@@ -4,12 +4,16 @@ using System.Collections;
 public class SafeBuoy : MonoBehaviour
 {
     [SerializeField]
-    private TagName tagName;
+    private TagName tagName = TagName.SafeBuoyLimit;
     [SerializeField]
-    private LayerName layerName;
+    private LayerName layerName = LayerName.SafeBuoyLimit;
+    [SerializeField]
+    private float timeToRestart = 20f;
 
     private float xOffset = 1.15f;
     private float xTranslate = 2f;
+    private bool isMoving = false;
+    private Vector2 startPosition;
 
     void Start()
     {
@@ -27,13 +31,20 @@ public class SafeBuoy : MonoBehaviour
             tagName.ToString(), layerName.ToString());
 
         transform.parent.CreateTrigger(
-            string.Format("{0} Safe Buoy Trigger Down", MovementSide.RIGHTorUP), transform.position,
+            string.Format("{0} Safe Buoy Trigger Down", MovementSide.RIGHTorUP), transform.position + new Vector3(xOffset * 5, 0, 0),
             tagName.ToString(), layerName.ToString());
+
+        InvokeRepeating("Restart", timeToRestart, timeToRestart);
+
+        startPosition = transform.position;
     }
 
     void Update()
     {
-        transform.TranslateTo(xTranslate, 0, 0, Time.deltaTime);
+        if (isMoving)
+        {
+            transform.TranslateTo(xTranslate, 0, 0, Time.deltaTime);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -41,11 +52,26 @@ public class SafeBuoy : MonoBehaviour
         if (collider.tag == tagName.ToString())
         {
             ReverseTranslate();
+
+            if (collider.name.Contains("RIGHT"))
+            {
+                isMoving = false;
+            }
         }
     }
 
-    public void ReverseTranslate()
+    private void ReverseTranslate()
     {
         xTranslate *= -1;
+    }
+
+    private void Restart()
+    {
+        isMoving = true;
+    }
+
+    public void Replace()
+    {
+        transform.position = startPosition;
     }
 }

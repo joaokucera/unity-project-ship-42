@@ -1,20 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Linq;
-using System;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ModalSafeBuoy : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject playerShotSpawnerObject, crewStatusObject, warningObject;
+    private const string WarningChooseAnItem = "First choose which item will be used!";
+    private const string WarningThereIsNoItem = "There is no {0} item available!";
+    private const string WarningWholePizza = "A whole pizza improves all crew equally!";
 
     [SerializeField]
-    private SpriteRenderer giftItemSelected, crewPersonSelected;
-
-    private Camera mainCamera;
+    private ShipStockItem shipStockItem;
+    [SerializeField]
+    private GameObject pauseObject;
 
     [SerializeField]
-    private SpriteRenderer captainRenderer = null, mechanicRenderer = null, soldierRenderer = null,
+    private GameObject playerShotSpawnerObject = null, crewStatusObject = null;
+
+    [SerializeField]
+    private GUIText warningGuiText = null;
+
+    [SerializeField]
+    private SpriteRenderer giftItemSelected = null, crewPersonSelected = null;
+
+    [SerializeField]
+    private SpriteRenderer closeButton = null, captainRenderer = null, mechanicRenderer = null, soldierRenderer = null,
                            redCrossRenderer = null, watermelonRenderer = null, chickenRenderer = null, hamburgerRenderer = null,
                            pizzaWholeRenderer = null, pizzaSliceRenderer = null, cookieRenderer = null, cokeRenderer = null;
     [SerializeField]
@@ -22,11 +31,16 @@ public class ModalSafeBuoy : MonoBehaviour
                     redCrossText = null, watermelonText = null, chickenText = null, hamburgerText = null,
                     pizzaWholeText = null, pizzaSliceText = null, cookieText = null, cokeText = null;
 
+    private Camera mainCamera;
+
+    private FriendItem currentFriendItem;
+    private float timeToWarningTextHide;
+    private float LimitTimeToWarningTextHide = 2.5f;
+    private float lastDeltaTime;
+
     void Start()
     {
-        gameObject.SetActive(false);
-        warningObject.SetActive(false);
-
+        warningGuiText.enabled = false;
         giftItemSelected.enabled = false;
         crewPersonSelected.enabled = false;
 
@@ -84,16 +98,33 @@ public class ModalSafeBuoy : MonoBehaviour
         gameObject.SetActive(true);
 
         playerShotSpawnerObject.SetActive(false);
-        foreach (Transform item in crewStatusObject.transform)
-        {
-            item.position = new Vector3(item.position.x, item.position.y, 1);
-        }
+        crewStatusObject.SetActive(false);
+
+        pauseObject.SetActive(false);
 
         Time.timeScale = 0f;
     }
 
+    private void OnInvisible()
+    {
+        gameObject.SetActive(false);
+        warningGuiText.enabled = false;
+
+        playerShotSpawnerObject.SetActive(true);
+        crewStatusObject.SetActive(true);
+
+        pauseObject.SetActive(true);
+
+        Time.timeScale = 1f;
+    }
+
     void Update()
     {
+        if (Time.deltaTime > 0)
+        {
+            lastDeltaTime = Time.deltaTime;
+        }
+
         Vector2 position = Vector2.zero;
 
 #if UNITY_EDITOR
@@ -105,76 +136,275 @@ public class ModalSafeBuoy : MonoBehaviour
 #endif
             CheckAction(position);
         }
+
+        UpdateTextItems();
+
+        if (warningGuiText.enabled)
+        {
+            timeToWarningTextHide += lastDeltaTime;
+            if (timeToWarningTextHide >= LimitTimeToWarningTextHide)
+            {
+                warningGuiText.enabled = false;
+            }
+        }
+        else
+        {
+            timeToWarningTextHide = 0f;
+        }
+    }
+
+    private void UpdateTextItems()
+    {
+        captainText.text = CrewStatus.Instance.captainStamina.ToString("00");
+        mechanicText.text = CrewStatus.Instance.mechanicStamina.ToString("00");
+        soldierText.text = CrewStatus.Instance.soldierStamina.ToString("00");
+
+        redCrossText.text = shipStockItem.redCrossAmount.ToString();
+        watermelonText.text = shipStockItem.waterMellonAmount.ToString();
+        chickenText.text = shipStockItem.chickenAmount.ToString();
+        hamburgerText.text = shipStockItem.hamburguerAmount.ToString();
+        pizzaWholeText.text = shipStockItem.wholePizzaAmount.ToString();
+        pizzaSliceText.text = shipStockItem.slicePizzaAmount.ToString();
+        cookieText.text = shipStockItem.cookieAmount.ToString();
+        cokeText.text = shipStockItem.cokeAmount.ToString();
     }
 
     public void CheckAction(Vector2 position)
     {
+        if (HasActivated(position, closeButton.transform.position, closeButton.bounds.size))
+        {
+            OnInvisible();
+        }
+
+        bool thereIsNoItem = false;
+
         // Selected ITEM.
         if (HasActivated(position, redCrossRenderer.transform.position, redCrossRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = redCrossRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Red_Cross;
+
+            if (shipStockItem.redCrossAmount > 0)
+            {
+                giftItemSelected.transform.position = redCrossRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, watermelonRenderer.transform.position, watermelonRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = watermelonRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Watermelon;
+
+            if (shipStockItem.waterMellonAmount > 0)
+            {
+                giftItemSelected.transform.position = watermelonRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, chickenRenderer.transform.position, chickenRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = chickenRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Chicken;
+
+            if (shipStockItem.chickenAmount > 0)
+            {
+                giftItemSelected.transform.position = chickenRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, hamburgerRenderer.transform.position, hamburgerRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = hamburgerRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Hamburguer;
+
+            if (shipStockItem.hamburguerAmount > 0)
+            {
+                giftItemSelected.transform.position = hamburgerRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, pizzaWholeRenderer.transform.position, pizzaWholeRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = pizzaWholeRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Whole_Pizza;
+
+            if (shipStockItem.wholePizzaAmount > 0)
+            {
+                giftItemSelected.transform.position = pizzaWholeRenderer.transform.position;
+                giftItemSelected.enabled = true;
+
+                warningGuiText.text = WarningWholePizza;
+                warningGuiText.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, pizzaSliceRenderer.transform.position, pizzaSliceRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = pizzaSliceRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Slice_Pizza;
+
+            if (shipStockItem.slicePizzaAmount > 0)
+            {
+                giftItemSelected.transform.position = pizzaSliceRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, cookieRenderer.transform.position, cookieRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = cookieRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Cookie;
+
+            if (shipStockItem.cookieAmount > 0)
+            {
+                giftItemSelected.transform.position = cookieRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
         }
         else if (HasActivated(position, cokeRenderer.transform.position, cokeRenderer.bounds.size))
         {
-            giftItemSelected.transform.position = cokeRenderer.transform.position;
-            giftItemSelected.enabled = true;
+            currentFriendItem = FriendItem.Coke;
+
+            if (shipStockItem.cokeAmount > 0)
+            {
+                giftItemSelected.transform.position = cokeRenderer.transform.position;
+                giftItemSelected.enabled = true;
+            }
+            else
+            {
+                thereIsNoItem = true;
+            }
+        }
+
+        // If there is no item available.
+        if (thereIsNoItem)
+        {
+            warningGuiText.text = string.Format(WarningThereIsNoItem, currentFriendItem.ToString().ToLower().Replace("_", " "));
+            warningGuiText.enabled = true;
+
+            return;
         }
 
         // Selected CREW.
         if (giftItemSelected.enabled == true)
         {
-            warningObject.SetActive(false);
+            warningGuiText.enabled = false;
+            bool increased = false;
 
             if (HasActivated(position, captainRenderer.transform.position, captainRenderer.bounds.size))
             {
+                if (currentFriendItem != FriendItem.Whole_Pizza)
+                {
+                    FriendBoxValues.GetInstance().GetValue(currentFriendItem, ref CrewStatus.Instance.captainStamina);
+                }
+
+                increased = true;
+
                 crewPersonSelected.transform.position = captainRenderer.transform.position;
                 crewPersonSelected.enabled = true;
+
+                giftItemSelected.enabled = false;
             }
             else if (HasActivated(position, mechanicRenderer.transform.position, mechanicRenderer.bounds.size))
             {
+                if (currentFriendItem != FriendItem.Whole_Pizza)
+                {
+                    FriendBoxValues.GetInstance().GetValue(currentFriendItem, ref CrewStatus.Instance.mechanicStamina);
+                }
+
+                increased = true;
+
                 crewPersonSelected.transform.position = mechanicRenderer.transform.position;
                 crewPersonSelected.enabled = true;
+
+                giftItemSelected.enabled = false;
             }
             else if (HasActivated(position, soldierRenderer.transform.position, soldierRenderer.bounds.size))
             {
+                if (currentFriendItem != FriendItem.Whole_Pizza)
+                {
+                    FriendBoxValues.GetInstance().GetValue(currentFriendItem, ref CrewStatus.Instance.soldierStamina);
+                }
+
                 crewPersonSelected.transform.position = soldierRenderer.transform.position;
                 crewPersonSelected.enabled = true;
+
+                giftItemSelected.enabled = false;
+            }
+
+            if (increased)
+            {
+                if (currentFriendItem == FriendItem.Whole_Pizza)
+                {
+                    var staminas = FriendBoxValues.GetInstance().GetWholePizza(currentFriendItem, new float[] 
+                    { 
+                        CrewStatus.Instance.captainStamina, 
+                        CrewStatus.Instance.mechanicStamina, 
+                        CrewStatus.Instance.soldierStamina
+                    });
+
+                    CrewStatus.Instance.captainStamina = staminas[0];
+                    CrewStatus.Instance.mechanicStamina = staminas[1];
+                    CrewStatus.Instance.soldierStamina = staminas[2];
+                }
+
+                RemoveItem(currentFriendItem);
             }
         }
         else
         {
-            warningObject.SetActive(true);
+            warningGuiText.text = WarningChooseAnItem;
+            warningGuiText.enabled = true;
+        }
+    }
+
+    private void RemoveItem(FriendItem friendItem)
+    {
+        switch (friendItem)
+        {
+            case FriendItem.Red_Cross:
+                shipStockItem.redCrossAmount--;
+                break;
+            case FriendItem.Whole_Pizza:
+                shipStockItem.wholePizzaAmount--;
+                break;
+            case FriendItem.Watermelon:
+                shipStockItem.waterMellonAmount--;
+                break;
+            case FriendItem.Chicken:
+                shipStockItem.chickenAmount--;
+                break;
+            case FriendItem.Hamburguer:
+                shipStockItem.hamburguerAmount--;
+                break;
+            case FriendItem.Slice_Pizza:
+                shipStockItem.slicePizzaAmount--;
+                break;
+            case FriendItem.Cookie:
+                shipStockItem.cookieAmount--;
+                break;
+            case FriendItem.Coke:
+                shipStockItem.cokeAmount--;
+                break;
         }
     }
 
