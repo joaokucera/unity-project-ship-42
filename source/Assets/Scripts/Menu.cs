@@ -31,19 +31,19 @@ public class Menu : GenericScreen
 
     protected override void CheckAction(Vector2 position)
     {
-        if (HasActivated(position, playButton.position, playButton.renderer.bounds.size))
+        if (position.HasActivated(playButton.position, playButton.renderer.bounds.size, true, true))
         {
             ActivateButton(playButton.renderer, playButtonActivated, SceneName.Level);
         }
-        else if (HasActivated(position, aboutButton.position, aboutButton.renderer.bounds.size))
+        else if (position.HasActivated(aboutButton.position, aboutButton.renderer.bounds.size, true, true))
         {
             ActivateButton(aboutButton.renderer, aboutButtonActivated, SceneName.About);
         }
-        else if (HasActivated(position, exitButton.position, exitButton.renderer.bounds.size))
+        else if (position.HasActivated(exitButton.position, exitButton.renderer.bounds.size, true, true))
         {
             ActivateButton(exitButton.renderer, exitButtonActivated, SceneName.Exit);
         }
-        else if (HasActivated(position, settingsButton.position, settingsButton.renderer.bounds.size))
+        else if (position.HasActivated(settingsButton.position, settingsButton.renderer.bounds.size, true, true))
         {
             ActivateButton(settingsButton.renderer, settingsButtonActivated, SceneName.Modal);
         }

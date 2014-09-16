@@ -8,8 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Sounds
   m_TagString: Untagged
@@ -39,9 +39,9 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -98,9 +98,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce15851055edb54c96e06740e0de9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionSound: {fileID: 0}
-  playerShotSound: {fileID: 0}
-  enemyShotSound: {fileID: 0}
+  clickButtonSound: {fileID: 8300000, guid: 827604ab6fe68e048ab65e63f1b3615c, type: 3}
+  startGameSound: {fileID: 8300000, guid: afb3795af5c596c459e879aa1ec75382, type: 3}
+  shipAttackSound: {fileID: 8300000, guid: 14b8c2db628de8248b343193c4b6e4fd, type: 3}
+  shipExtraAttackSound: {fileID: 8300000, guid: 1f633fd6583c85541bb1c1ffac853595,
+    type: 3}
+  shipFallingOceanSound: {fileID: 8300000, guid: 3a5fc752e61a48c4080b87ef6a6a3696,
+    type: 3}
+  shipHitSound: {fileID: 8300000, guid: b18dd17e52255d74998165e9cc264bb6, type: 3}
+  shipTakeItemSound: {fileID: 8300000, guid: af1f30f8a52c5174594c4f64d9bdca9d, type: 3}
+  shipTakeSpecialItemSound: {fileID: 8300000, guid: be24bb88ff871a044ac65f1e83e4a608,
+    type: 3}
+  shipRecoverHealthSound: {fileID: 8300000, guid: e105ba016dca7364988a1126fb96325f,
+    type: 3}
+  enemyShowingSound: {fileID: 8300000, guid: 94213b51cd8b2414492405c3858bb9ca, type: 3}
+  enemyBombFallingSkySound: {fileID: 8300000, guid: 967e27c2d4fa99b4592ac4577dbbdda1,
+    type: 3}
+  enemyBombFallingOceanSound: {fileID: 8300000, guid: 248e583487366d445a636036237ea29e,
+    type: 3}
+  enemyHitSound: {fileID: 8300000, guid: a8352808abef51c48afc1d2d3cd0bd97, type: 3}
+  enemyDestroyedSound: {fileID: 8300000, guid: 7608441b1818adc48807a777b781ff6a, type: 3}
+  collisionBetweenShotsSound: {fileID: 8300000, guid: 19165fc24e8b48545b8ec0850715234b,
+    type: 3}
+  gameTimeEndingSound: {fileID: 8300000, guid: 37cc0ca0b543bf34b8711bf12742ae11, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

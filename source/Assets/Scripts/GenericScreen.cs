@@ -16,13 +16,13 @@ public enum SceneName
 public abstract class GenericScreen : MonoBehaviour
 {
     [SerializeField]
-    private Transform title;
+    private Transform title = null;
     [SerializeField]
-    private SpriteRenderer giftBoxRenderer;
+    private SpriteRenderer giftBoxRenderer = null;
     [SerializeField]
-    private List<Sprite> giftBoxSprites;
+    private List<Sprite> giftBoxSprites = null;
     [SerializeField]
-    private Modal modalScript;
+    private Modal modalScript = null;
 
     protected Camera mainCamera;
     protected SceneName sceneName = SceneName.Enabled;
@@ -64,7 +64,16 @@ public abstract class GenericScreen : MonoBehaviour
         }
         else
         {
-            Invoke("LoadLevel", 0f);
+            //Invoke("LoadLevel", 0f);
+
+            if (sceneName == SceneName.Exit)
+            {
+                Application.Quit();
+            }
+            else
+            {
+                Application.LoadLevel(sceneName.ToString());
+            }
         }
     }
 
@@ -84,25 +93,32 @@ public abstract class GenericScreen : MonoBehaviour
         giftBoxRenderer.sprite = giftBoxSprites[index];
     }
 
-    protected void LoadLevel()
-    {
-        if (sceneName == SceneName.Exit)
-        {
-            Application.Quit();
-        }
-        else
-        {
-            Application.LoadLevel(sceneName.ToString());
-        }
+    //protected void LoadLevel()
+    //{
+    //    if (sceneName == SceneName.Exit)
+    //    {
+    //        Application.Quit();
+    //    }
+    //    else
+    //    {
+    //        Application.LoadLevel(sceneName.ToString());
+    //    }
 
-        CancelInvoke("LoadLevel");
-    }
+    //    CancelInvoke("LoadLevel");
+    //}
 
-    protected bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    {
-        return Mathf.Abs(positionA.x - positionB.x) <= size.x / 2 &&
-               Mathf.Abs(positionA.y - positionB.y) <= size.y / 2;
-    }
+    //protected bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
+    //{
+    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x / 2 &&
+    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y / 2;
+
+    //    if (hasActivated)
+    //    {
+    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
+    //    }
+
+    //    return hasActivated;
+    //}
 
     protected void ActivateButton(Renderer buttonRenderer, Sprite buttonSpriteActivated, SceneName sceneToLoad)
     {

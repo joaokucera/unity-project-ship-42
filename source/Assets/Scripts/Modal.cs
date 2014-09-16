@@ -4,6 +4,8 @@ using System.Collections;
 public class Modal : MonoBehaviour
 {
     [SerializeField]
+    private Pause pauseScript = null;
+    [SerializeField]
     private Menu menuScript = null;
 
     [SerializeField]
@@ -62,6 +64,13 @@ public class Modal : MonoBehaviour
             giftBoxAnimator.enabled = false;
         }
 
+        if (pauseScript != null)
+        {
+            pauseScript.ShowContinueAndReloadButtons();
+
+            Time.timeScale = 0f;
+        }
+
         return true;
     }
 
@@ -77,41 +86,57 @@ public class Modal : MonoBehaviour
             menuScript.ReactiveButtons();
         }
 
+        if (pauseScript != null)
+        {
+            pauseScript.HideContinueAndReloadButtons();
+
+            Time.timeScale = 1f;
+        }
+
         return true;
     }
 
     private void CheckAction(Vector2 position)
     {
-        if (HasActivated(position, closeButton.transform.position, closeButton.bounds.size))
+        if (position.HasActivated(closeButton.transform.position, closeButton.bounds.size, false, true))
         {
             OnInvisible();
         }
-        else if (HasActivated(position, musicButton.transform.position, musicButton.bounds.size))
+        else if (position.HasActivated(musicButton.transform.position, musicButton.bounds.size))
         {
             ChangeButtonSprite(musicButton);
         }
-        else if (HasActivated(position, fxsButton.transform.position, fxsButton.bounds.size))
+        else if (position.HasActivated(fxsButton.transform.position, fxsButton.bounds.size))
         {
             ChangeButtonSprite(fxsButton);
         }
-        else if (HasActivated(position, acceleratorButton.transform.position, acceleratorButton.bounds.size))
+        else if (position.HasActivated(acceleratorButton.transform.position, acceleratorButton.bounds.size))
         {
             ChangeButtonSprite(acceleratorButton);
         }
-        else if (HasActivated(position, hapticsButton.transform.position, hapticsButton.bounds.size))
+        else if (position.HasActivated(hapticsButton.transform.position, hapticsButton.bounds.size))
         {
             ChangeButtonSprite(hapticsButton);
         }
     }
 
-    private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    {
-        return Mathf.Abs(positionA.x - positionB.x) <= size.x &&
-               Mathf.Abs(positionA.y - positionB.y) <= size.y;
-    }
+    //private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
+    //{
+    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x &&
+    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y;
+
+    //    if (hasActivated)
+    //    {
+    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
+    //    }
+
+    //    return hasActivated;
+    //}
 
     private void ChangeButtonSprite(SpriteRenderer buttonRenderer)
     {
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
+
         if (buttonRenderer.sprite.name == buttonON.name)
         {
             buttonRenderer.sprite = buttonOFF;

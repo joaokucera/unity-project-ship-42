@@ -21,7 +21,7 @@ public class About : GenericScreen {
 
 	protected override void CheckAction (Vector2 position)
 	{
-		if (HasActivated (position, backButton.position, backButton.renderer.bounds.size)) 
+        if (position.HasActivated(backButton.position, backButton.renderer.bounds.size, false, true)) 
 		{
 			ActivateButton(backButton.renderer, backButtonActivated, SceneName.Menu);
 		}

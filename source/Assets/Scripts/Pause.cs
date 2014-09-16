@@ -43,11 +43,11 @@ public class Pause : MonoBehaviour
 
     private void CheckAction(Vector2 position)
     {
-        if (HasActivated(position, transform.position, renderer.bounds.size))
+        if (position.HasActivated(transform.position, renderer.bounds.size, false, true))
         {
             PauseOrReload();
         }
-        else if (HasActivated(position, playButton.transform.position, playButton.bounds.size))
+        else if (position.HasActivated(playButton.transform.position, playButton.bounds.size, false, true))
         {
             Continue();
         }
@@ -81,11 +81,18 @@ public class Pause : MonoBehaviour
         }
     }
 
-    private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    {
-        return Mathf.Abs(positionA.x - positionB.x) <= size.x &&
-               Mathf.Abs(positionA.y - positionB.y) <= size.y;
-    }
+    //private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
+    //{
+    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x &&
+    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y;
+
+    //    if (hasActivated)
+    //    {
+    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
+    //    }
+
+    //    return hasActivated;
+    //}
 
     public void HideContinueAndReloadButtons()
     {
