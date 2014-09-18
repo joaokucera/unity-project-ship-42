@@ -17,27 +17,24 @@ public class EnemyHealth : MonoBehaviour, IDamage
         enemyScript = GetComponent<Enemy>();
     }
 
-    void Update()
-    {
-        if (health <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
     void OnBecameVisible()
     {
         health = startHealth;
     }
 
     public void SetDamage()
-    {       
+    {
         health -= 1;
+
         DeactivateTargets();
 
         if (health > 0)
         {
             SendMessage("IncreaseTorque");
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 

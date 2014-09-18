@@ -21,21 +21,16 @@ public class CloudSpawn : GenericSpawn
         Vector2 startPosition = StartPosition();
 
         transform.parent.CreateTrigger(
-            string.Format("Clouds Trigger Up ({0})", cloudSize), startPosition,
+            string.Format("Clouds Trigger Up ({0})", cloudSize), new Vector2(startPosition.x, startPosition.y * 2 - 1),
             tagName.ToString(), layerName.ToString());
 
         transform.parent.CreateTrigger(
             string.Format("Clouds Trigger Down ({0})", cloudSize), new Vector2(startPosition.x, yOffset),
             tagName.ToString(), layerName.ToString());
 
-        transform.position = new Vector2(startPosition.x, startPosition.y / 2);
+        transform.position = new Vector2(startPosition.x, startPosition.y - yOffset);
 
         InvokeRepeating("SpawnEvaluate", 2f, 2f);
-    }
-
-    void Update()
-    {
-        transform.TranslateTo(0, yTranslate, 0, Time.deltaTime);
     }
 
     private void SpawnEvaluate()

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BossShotPooling : GenericPooling
 {
-	private static BossShotPooling instance;
+    private static BossShotPooling instance;
     public static BossShotPooling Instance
     {
         get
@@ -35,6 +35,8 @@ public class BossShotPooling : GenericPooling
         {
             shot.GetComponentInChildren<Renderer>().sortingLayerName = "Foreground";
             shot.GetComponentInChildren<Renderer>().sortingOrder = 0;
+
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyBarrilAttack);
         }
     }
 }

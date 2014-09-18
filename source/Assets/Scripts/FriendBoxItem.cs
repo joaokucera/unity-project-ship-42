@@ -28,7 +28,7 @@ public class FriendBoxItem : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player" && gameObject.activeInHierarchy)
         {
-            SpawnParticleEffects(transform.position);
+            SpawnParticleEffectsAndSound(transform.position);
 
             collider.gameObject.SendMessage("AddItem", friendItem);
 
@@ -41,8 +41,10 @@ public class FriendBoxItem : MonoBehaviour
         friendItem = (FriendItem)index;
     }
 
-    private void SpawnParticleEffects(Vector2 position)
+    private void SpawnParticleEffectsAndSound(Vector2 position)
     {
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipTakeItemSound);
+
         FireworksPooling.Instance.SpawnFireworksFromPool(null, position);
     }
 }

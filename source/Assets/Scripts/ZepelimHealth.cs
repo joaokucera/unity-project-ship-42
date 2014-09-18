@@ -3,8 +3,10 @@ using System.Collections;
 
 public class ZepelimHealth : EnemyHealth
 {
-    [SerializeField]
-    private float respawnTime = 10f;
+    /// <summary>
+    /// BALANCE: Spawn a cada 21 segundos.
+    /// </summary>
+    private float respawnTime = 21f;
 
     void Update()
     {
@@ -12,6 +14,13 @@ public class ZepelimHealth : EnemyHealth
         {
             SendMessage("IncreaseSpeed");
         }
+    }
+
+    void OnBecameVisible()
+    {
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyShowingSound);
+
+        health = startHealth;
     }
 
     void OnBecameInvisible()

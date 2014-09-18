@@ -38,8 +38,6 @@ public class FireworksPooling : GenericPooling
 
             fireworks.particleEmitter.renderer.sortingLayerName = "Foreground";
             fireworks.particleEmitter.renderer.sortingOrder = 2;
-
-
         }
     }
 }

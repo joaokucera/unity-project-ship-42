@@ -42,7 +42,7 @@ public static class TransformExtensions
         return trigger;
     }
 
-    public static bool HasActivated(this Vector2 positionA, Vector2 positionB, Vector2 size, bool half = false, bool enableSound = false)
+    public static bool HasActivated(this Vector2 positionA, Vector2 positionB, Vector2 size, bool half /*= false*/, bool enableSound/* = false*/, SoundEffectClip soundEffect = SoundEffectClip.ClickButton)
     {
         if (half)
         {
@@ -54,7 +54,7 @@ public static class TransformExtensions
 
         if (hasActivated && enableSound)
         {
-            SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
+            SoundEffectScript.Instance.PlaySound(soundEffect);
         }
 
         return hasActivated;

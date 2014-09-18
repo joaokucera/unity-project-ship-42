@@ -21,6 +21,14 @@ public class FriendItemPooling : GenericPooling
         }
     }
 
+    /// <summary>
+    /// BALANCE: De 1 a 8 itens, aumentando a cada 21 segundos.
+    /// </summary>
+    private int limitIndex;
+    private const int minLimitIndex = 1;
+    private int maxLimitIndex;
+    private const float timeToImprove = 21;
+
     void Start()
     {
         if (instance == null)
@@ -34,6 +42,24 @@ public class FriendItemPooling : GenericPooling
         {
             Debug.LogError("There are no friend item sprites available!");
         }
+
+        limitIndex = minLimitIndex;
+        maxLimitIndex = friendItemSprites.Count;
+
+        StartCoroutine(Improve());
+    }
+
+    private IEnumerator Improve()
+    {
+        if (GameSettings.Instance.SailedTime % timeToImprove == 0)
+        {
+            limitIndex++;
+            limitIndex = Mathf.Clamp(limitIndex, minLimitIndex, maxLimitIndex);
+
+            print("ITEM: " + limitIndex);
+        }
+
+        yield return 0;
     }
 
     public void SpawnFriendItemFromPool(Vector2 position)
@@ -45,7 +71,7 @@ public class FriendItemPooling : GenericPooling
             friendItem.renderer.sortingLayerName = "Foreground";
             friendItem.renderer.sortingOrder = 0;
 
-            int index = Random.Range(0, friendItemSprites.Count);
+            int index = Random.Range(0, limitIndex);
             ((SpriteRenderer)friendItem.renderer).sprite = friendItemSprites[index];
 
             friendItem.SendMessage("SetItem", index);

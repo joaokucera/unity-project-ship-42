@@ -29,16 +29,18 @@ public class TargetPooling : GenericPooling
 
     public GameObject SpawnTargetFromPool(Vector2 position, Transform parent)
     {
-        GameObject shot = GetObjectFromPool(position);
+        GameObject target = GetObjectFromPool(position);
 
-        if (shot != null)
+        if (target != null)
         {
-            shot.transform.parent = parent;
+            target.transform.parent = parent;
 
-            shot.renderer.sortingLayerName = "Foreground";
-            shot.renderer.sortingOrder = 1;
+            target.renderer.sortingLayerName = "Foreground";
+            target.renderer.sortingOrder = 5;
+
+            print("SPAWN TARGET (activeInHierarchy): " + target.activeInHierarchy);
         }
 
-        return shot;
+        return target;
     }
 }

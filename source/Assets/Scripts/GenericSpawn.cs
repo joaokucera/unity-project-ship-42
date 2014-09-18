@@ -24,9 +24,14 @@ public class GenericSpawn : MonoBehaviour
 
         Vector2 position = new Vector2();
         position.x = currentCameraPosition.x + (direction * mainCamera.aspect * mainCamera.orthographicSize) + (direction * xOffset);
-        position.y = currentCameraPosition.y + mainCamera.orthographicSize + yOffset;
+        position.y = (currentCameraPosition.y + mainCamera.orthographicSize) / 2;// +yOffset;
 
         return position;
+    }
+
+    void Update()
+    {
+        transform.TranslateTo(0, yTranslate, 0, Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

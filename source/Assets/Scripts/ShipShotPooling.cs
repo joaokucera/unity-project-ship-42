@@ -39,6 +39,8 @@ public class ShipShotPooling : GenericPooling {
             Missile missile = shot.GetComponent<Missile>();
             missile.missileAttack = missileAttack;
             missile.target = target;
+
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipMissileAttack);
         }
     }
 }

@@ -11,12 +11,12 @@ public class Menu : GenericScreen
 
     void Start()
     {
-        if (playButton == null || aboutButton == null || exitButton == null)
+        if (playButton == null || exitButton == null)
         {
             Debug.LogError("There are no transform buttons available!");
         }
 
-        if (playButtonActivated == null || aboutButtonActivated == null || exitButtonActivated == null || settingsButtonActivated == null)
+        if (playButtonActivated == null || exitButtonActivated == null)
         {
             Debug.LogError("There are no sprite buttons available!");
         }
@@ -24,9 +24,15 @@ public class Menu : GenericScreen
         base.Initialize();
 
         playButton.position = new Vector2(mainCamera.aspect * mainCamera.orthographicSize / 2, playButton.position.y);
-        aboutButton.position = new Vector2(mainCamera.aspect * mainCamera.orthographicSize / 2, aboutButton.position.y);
+        if (aboutButton != null)
+        {
+            aboutButton.position = new Vector2(mainCamera.aspect * mainCamera.orthographicSize / 2, aboutButton.position.y);
+        }
         exitButton.position = new Vector2(mainCamera.aspect * mainCamera.orthographicSize / 2, exitButton.position.y);
-        settingsButton.position = new Vector2(mainCamera.aspect * -mainCamera.orthographicSize / 2, settingsButton.position.y);
+        if (settingsButton != null)
+        {
+            settingsButton.position = new Vector2(mainCamera.aspect * -mainCamera.orthographicSize / 2, settingsButton.position.y);
+        }
     }
 
     protected override void CheckAction(Vector2 position)
@@ -35,7 +41,7 @@ public class Menu : GenericScreen
         {
             ActivateButton(playButton.renderer, playButtonActivated, SceneName.Level);
         }
-        else if (position.HasActivated(aboutButton.position, aboutButton.renderer.bounds.size, true, true))
+        else if (aboutButton != null && position.HasActivated(aboutButton.position, aboutButton.renderer.bounds.size, true, true))
         {
             ActivateButton(aboutButton.renderer, aboutButtonActivated, SceneName.About);
         }
@@ -43,7 +49,7 @@ public class Menu : GenericScreen
         {
             ActivateButton(exitButton.renderer, exitButtonActivated, SceneName.Exit);
         }
-        else if (position.HasActivated(settingsButton.position, settingsButton.renderer.bounds.size, true, true))
+        else if (settingsButton != null && position.HasActivated(settingsButton.position, settingsButton.renderer.bounds.size, true, true))
         {
             ActivateButton(settingsButton.renderer, settingsButtonActivated, SceneName.Modal);
         }

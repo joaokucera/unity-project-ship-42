@@ -13,6 +13,8 @@ public class ShipStockItem : MonoBehaviour
     {
         if (collider.tag == "Safe Buoy")
         {
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipTakeSafeBuoy);
+
             collider.SendMessage("Replace");
 
             modalSafeBuoyScript.OnVisible();

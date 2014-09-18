@@ -71,11 +71,11 @@ public class ShipShotSpawn : MonoBehaviour
         {
             if (collider.transform.tag.Contains("Enemy"))
             {
-                GameObject target = TargetPooling.Instance.SpawnTargetFromPool(position, collider.transform);
+                //GameObject target = TargetPooling.Instance.SpawnTargetFromPool(position, collider.transform);
 
                 StartCoroutine(MissileAmmoCooldownVerification());
 
-                ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, target.transform);
+                ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
             }
         }
     }

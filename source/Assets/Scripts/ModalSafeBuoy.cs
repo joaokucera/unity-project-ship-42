@@ -171,15 +171,21 @@ public class ModalSafeBuoy : MonoBehaviour
 
     public void CheckAction(Vector2 position)
     {
-        if (position.HasActivated(closeButton.transform.position, closeButton.bounds.size, true, true))
+        if (position.HasActivated(closeButton.transform.position, closeButton.bounds.size, false, true))
         {
+            warningGuiText.enabled = false;
+            warningGuiText.text = string.Empty;
+
+            giftItemSelected.enabled = false;
+            crewPersonSelected.enabled = false;
+
             OnInvisible();
         }
 
         bool thereIsNoItem = false;
 
         // Selected ITEM.
-        if (position.HasActivated(redCrossRenderer.transform.position, redCrossRenderer.bounds.size))
+        if (position.HasActivated(redCrossRenderer.transform.position, redCrossRenderer.bounds.size, false, (shipStockItem.redCrossAmount > 0)))
         {
             currentFriendItem = FriendItem.Red_Cross;
 
@@ -193,7 +199,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(watermelonRenderer.transform.position, watermelonRenderer.bounds.size))
+        else if (position.HasActivated(watermelonRenderer.transform.position, watermelonRenderer.bounds.size, false, (shipStockItem.waterMellonAmount > 0)))
         {
             currentFriendItem = FriendItem.Watermelon;
 
@@ -207,7 +213,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(chickenRenderer.transform.position, chickenRenderer.bounds.size))
+        else if (position.HasActivated(chickenRenderer.transform.position, chickenRenderer.bounds.size, false, (shipStockItem.chickenAmount > 0)))
         {
             currentFriendItem = FriendItem.Chicken;
 
@@ -221,7 +227,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(hamburgerRenderer.transform.position, hamburgerRenderer.bounds.size))
+        else if (position.HasActivated(hamburgerRenderer.transform.position, hamburgerRenderer.bounds.size, false, (shipStockItem.hamburguerAmount > 0)))
         {
             currentFriendItem = FriendItem.Hamburguer;
 
@@ -235,7 +241,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(pizzaWholeRenderer.transform.position, pizzaWholeRenderer.bounds.size))
+        else if (position.HasActivated(pizzaWholeRenderer.transform.position, pizzaWholeRenderer.bounds.size, false, (shipStockItem.wholePizzaAmount > 0)))
         {
             currentFriendItem = FriendItem.Whole_Pizza;
 
@@ -252,7 +258,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(pizzaSliceRenderer.transform.position, pizzaSliceRenderer.bounds.size))
+        else if (position.HasActivated(pizzaSliceRenderer.transform.position, pizzaSliceRenderer.bounds.size, false, (shipStockItem.slicePizzaAmount > 0)))
         {
             currentFriendItem = FriendItem.Slice_Pizza;
 
@@ -266,7 +272,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(cookieRenderer.transform.position, cookieRenderer.bounds.size))
+        else if (position.HasActivated(cookieRenderer.transform.position, cookieRenderer.bounds.size, false, (shipStockItem.cookieAmount > 0)))
         {
             currentFriendItem = FriendItem.Cookie;
 
@@ -280,7 +286,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 thereIsNoItem = true;
             }
         }
-        else if (position.HasActivated(cokeRenderer.transform.position, cokeRenderer.bounds.size))
+        else if (position.HasActivated(cokeRenderer.transform.position, cokeRenderer.bounds.size, false, (shipStockItem.cokeAmount > 0)))
         {
             currentFriendItem = FriendItem.Coke;
 
@@ -298,7 +304,6 @@ public class ModalSafeBuoy : MonoBehaviour
         // If there is no item available.
         if (thereIsNoItem)
         {
-            print(thereIsNoItem);
             warningGuiText.text = string.Format(WarningThereIsNoItem, currentFriendItem.ToString().ToLower().Replace("_", " "));
             warningGuiText.enabled = true;
 
@@ -309,7 +314,7 @@ public class ModalSafeBuoy : MonoBehaviour
         bool enableDefaultWarning = false;
         bool increased = false;
 
-        if (position.HasActivated(captainRenderer.transform.position, captainRenderer.bounds.size))
+        if (position.HasActivated(captainRenderer.transform.position, captainRenderer.bounds.size, false, (giftItemSelected.enabled == true), SoundEffectClip.ShipRecoverHealth))
         {
             if (giftItemSelected.enabled == true)
             {
@@ -332,7 +337,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 enableDefaultWarning = true;
             }
         }
-        else if (position.HasActivated(mechanicRenderer.transform.position, mechanicRenderer.bounds.size))
+        else if (position.HasActivated(mechanicRenderer.transform.position, mechanicRenderer.bounds.size, false, (giftItemSelected.enabled == true), SoundEffectClip.ShipRecoverHealth))
         {
             if (giftItemSelected.enabled == true)
             {
@@ -355,7 +360,7 @@ public class ModalSafeBuoy : MonoBehaviour
                 enableDefaultWarning = true;
             }
         }
-        else if (position.HasActivated(soldierRenderer.transform.position, soldierRenderer.bounds.size))
+        else if (position.HasActivated(soldierRenderer.transform.position, soldierRenderer.bounds.size, false, (giftItemSelected.enabled == true), SoundEffectClip.ShipRecoverHealth))
         {
             if (giftItemSelected.enabled == true)
             {

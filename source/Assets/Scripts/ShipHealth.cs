@@ -15,8 +15,12 @@ public class ShipHealth : MonoBehaviour
     [SerializeField]
     private GUITexture shipLoadBar = null;
 
+    private bool isDead = false;
+
     void Start()
     {
+        GameSettings.Instance.SailedTime = 0;
+
         health = StartHealth;
         loadBarFactor = shipBox.pixelInset.width / StartHealth;
 
@@ -25,20 +29,42 @@ public class ShipHealth : MonoBehaviour
         shipLoadBar.transform.position = new Vector2(0.5f, 0.03f);
     }
 
+    void Update()
+    {
+        if (health <= 0)
+        {
+            if (!isDead)
+            {
+                isDead = true;
+                SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipFallingOcean);
+            }
+
+            Application.LoadLevel("Score");
+
+            Destroy(gameObject);
+        }
+        else
+        {
+            GameSettings.Instance.SailedTime += Time.deltaTime;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "EnemyAmmo" && collider.renderer.enabled)
         {
             Vector2 position = collider.transform.position - Vector3.up * 1.5f;
-            SpawnParticleEffects(position);
+            SpawnParticleEffectsAndSound(position);
 
             collider.gameObject.SetActive(false);
             StartCoroutine(HealthCooldownVerification(((IAmmo)collider.GetComponent<GenericMovement>()).Damage));
         }
     }
 
-    private void SpawnParticleEffects(Vector2 position)
+    private void SpawnParticleEffectsAndSound(Vector2 position)
     {
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipHit);
+
         ExplosionPooling.Instance.SpawnExplosionFromPool(transform, position);
         SmokePooling.Instance.SpawnSmokeFromPool(transform, position);
     }

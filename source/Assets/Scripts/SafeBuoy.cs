@@ -7,8 +7,12 @@ public class SafeBuoy : MonoBehaviour
     private TagName tagName = TagName.SafeBuoyLimit;
     [SerializeField]
     private LayerName layerName = LayerName.SafeBuoyLimit;
+
+    /// <summary>
+    /// BALANCE: Spawn da bóia salva vidas a cada 42 segundos.
+    /// </summary>
     [SerializeField]
-    private float timeToRestart = 20f;
+    private float respawnTime = 42f;
 
     private float xOffset = 1.15f;
     private float xTranslate = 2f;
@@ -34,7 +38,7 @@ public class SafeBuoy : MonoBehaviour
             string.Format("{0} Safe Buoy Trigger Down", MovementSide.RIGHTorUP), transform.position + new Vector3(xOffset * 5, 0, 0),
             tagName.ToString(), layerName.ToString());
 
-        InvokeRepeating("Restart", timeToRestart, timeToRestart);
+        InvokeRepeating("Restart", respawnTime, respawnTime);
 
         startPosition = transform.position;
     }

@@ -4,23 +4,43 @@ using System.Collections.Generic;
 
 public class FriendAirplanePooling : GenericPooling
 {
+    private static FriendAirplanePooling instance;
+    public static FriendAirplanePooling Instance
+    {
+        get
+        {
+            if (FriendAirplanePooling.instance == null)
+            {
+                FriendAirplanePooling.instance = GameObject.Find("Generic Pooling").GetComponent<FriendAirplanePooling>();
+            }
+
+            return FriendAirplanePooling.instance;
+        }
+    }
+
     [SerializeField]
     private List<FriendAirplaneSpawn> spawnFriendAirplanePoints;
-    public float spawnTime = 5f;
+
+    /// <summary>
+    /// BALANCE: Spawn de aviões amigos a cada 14 segundos.
+    /// </summary>
+    private float spawnTime = 14;
 
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        base.Initialize();
+
         if (spawnFriendAirplanePoints == null || spawnFriendAirplanePoints.Count == 0)
         {
             Debug.LogError("There are no spawn points available!");
         }
 
-        base.Initialize();
-    }
-
-    void Update()
-    {
-        Invoke("SpawnFriendAirplane", spawnTime);
+        InvokeRepeating("SpawnFriendAirplane", spawnTime, spawnTime);
     }
 
     private void SpawnFriendAirplane()

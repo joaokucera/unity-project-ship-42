@@ -127,6 +127,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  spawnMinTime: 0
+  spawnMaxTime: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -35,6 +35,8 @@ public class EnemyShotPooling : GenericPooling
         {
             shot.renderer.sortingLayerName = "Foreground";
             shot.renderer.sortingOrder = 0;
+
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyBombAttack);
         }
     }
 }

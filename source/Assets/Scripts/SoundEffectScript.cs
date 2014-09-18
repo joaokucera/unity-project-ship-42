@@ -6,15 +6,15 @@ public enum SoundEffectClip
 {
     ClickButton,
     StartGame,
-    ShipAttack,
-    ShipExtraAttack,
+    EnemyBarrilAttack,
+    ShipMissileAttack,
     ShipFallingOcean,
     ShipHit,
     ShipTakeItemSound,
-    ShipTakeSpecialItem,
+    ShipTakeSafeBuoy,
     ShipRecoverHealth,
     EnemyShowingSound,
-    EnemyBombFallingSky,
+    EnemyBombAttack,
     EnemyBombFallingOcean,
     EnemyHit,
     EnemyDestroyed,
@@ -31,7 +31,7 @@ public class SoundEffectScript : MonoBehaviour
         {
             if (SoundEffectScript.instance == null)
             {
-                SoundEffectScript.instance = GameObject.Find("Sounds").GetComponent<SoundEffectScript>();
+                SoundEffectScript.instance = GameObject.Find("Sound Effects").GetComponent<SoundEffectScript>();
             }
 
             return SoundEffectScript.instance;
@@ -45,9 +45,9 @@ public class SoundEffectScript : MonoBehaviour
     private AudioClip startGameSound;
     // SHIP
     [SerializeField]
-    private AudioClip shipAttackSound;
+    private AudioClip enemyBarrilAttackSound;
     [SerializeField]
-    private AudioClip shipExtraAttackSound;
+    private AudioClip shipMissileAttackSound;
     [SerializeField]
     private AudioClip shipFallingOceanSound;
     [SerializeField]
@@ -55,14 +55,14 @@ public class SoundEffectScript : MonoBehaviour
     [SerializeField]
     private AudioClip shipTakeItemSound;
     [SerializeField]
-    private AudioClip shipTakeSpecialItemSound;
+    private AudioClip shipTakeSafeBuoySound;
     [SerializeField]
     private AudioClip shipRecoverHealthSound;
     // ENEMY
     [SerializeField]
     private AudioClip enemyShowingSound;
     [SerializeField]
-    private AudioClip enemyBombFallingSkySound;
+    private AudioClip enemyBombAttackSound;
     [SerializeField]
     private AudioClip enemyBombFallingOceanSound;
     [SerializeField]
@@ -88,15 +88,22 @@ public class SoundEffectScript : MonoBehaviour
 
             DontDestroyOnLoad(this);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void PlaySound(SoundEffectClip soundEffectClip)
     {
-        AudioClip originalClip;
-
-        if (clipDictionary.TryGetValue(soundEffectClip, out originalClip))
+        if (GameSettings.Instance.specialEffectsEnabled)
         {
-            MakeSound(originalClip);
+            AudioClip originalClip;
+
+            if (clipDictionary.TryGetValue(soundEffectClip, out originalClip))
+            {
+                MakeSound(originalClip);
+            }
         }
     }
 
@@ -107,18 +114,18 @@ public class SoundEffectScript : MonoBehaviour
         clipDictionary.Add(SoundEffectClip.ClickButton, clickButtonSound);
         clipDictionary.Add(SoundEffectClip.CollisionBetweenShots, collisionBetweenShotsSound);
         clipDictionary.Add(SoundEffectClip.EnemyBombFallingOcean, enemyBombFallingOceanSound);
-        clipDictionary.Add(SoundEffectClip.EnemyBombFallingSky, enemyBombFallingSkySound);
+        clipDictionary.Add(SoundEffectClip.EnemyBombAttack, enemyBombAttackSound);
         clipDictionary.Add(SoundEffectClip.EnemyDestroyed, enemyDestroyedSound);
         clipDictionary.Add(SoundEffectClip.EnemyHit, enemyHitSound);
         clipDictionary.Add(SoundEffectClip.EnemyShowingSound, enemyShowingSound);
         clipDictionary.Add(SoundEffectClip.GameTimeEnding, gameTimeEndingSound);
-        clipDictionary.Add(SoundEffectClip.ShipAttack, shipAttackSound);
-        clipDictionary.Add(SoundEffectClip.ShipExtraAttack, shipExtraAttackSound);
+        clipDictionary.Add(SoundEffectClip.EnemyBarrilAttack, enemyBarrilAttackSound);
+        clipDictionary.Add(SoundEffectClip.ShipMissileAttack, shipMissileAttackSound);
         clipDictionary.Add(SoundEffectClip.ShipFallingOcean, shipFallingOceanSound);
         clipDictionary.Add(SoundEffectClip.ShipHit, shipHitSound);
         clipDictionary.Add(SoundEffectClip.ShipRecoverHealth, shipRecoverHealthSound);
         clipDictionary.Add(SoundEffectClip.ShipTakeItemSound, shipTakeItemSound);
-        clipDictionary.Add(SoundEffectClip.ShipTakeSpecialItem, shipTakeSpecialItemSound);
+        clipDictionary.Add(SoundEffectClip.ShipTakeSafeBuoy, shipTakeSafeBuoySound);
         clipDictionary.Add(SoundEffectClip.StartGame, startGameSound);
     }
 

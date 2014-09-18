@@ -27,7 +27,7 @@ public class Missile : GenericMovement, IAmmo
         base.Initialize();
 
         TrailRenderer trail = GetComponentInChildren<TrailRenderer>();
-        
+
         if (trail != null)
         {
             trail.sortingLayerName = "Middleground";
@@ -44,7 +44,7 @@ public class Missile : GenericMovement, IAmmo
     {
         if (collider.tag.Contains("Enemy") && collider.renderer.enabled)
         {
-            SpawnParticleEffects(transform.position);
+            SpawnParticleEffectsAndSound(transform.position, collider.name);
 
             collider.SendMessage("SetDamage");
 
@@ -73,8 +73,22 @@ public class Missile : GenericMovement, IAmmo
         }
     }
 
-    private void SpawnParticleEffects(Vector2 position)
+    private void SpawnParticleEffectsAndSound(Vector2 position, string name)
     {
+        if (name.Contains("Zepelim"))
+        {
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyHit);
+        }
+        else// if (name.Contains("Badass Airplane"))
+        {
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyDestroyed);
+        }
+        //else
+        //{
+            
+            //SoundEffectScript.Instance.PlaySound(SoundEffectClip.CollisionBetweenShots);
+        //}
+
         ExplosionPooling.Instance.SpawnExplosionFromPool(null, position);
         SmokePooling.Instance.SpawnSmokeFromPool(null, position);
     }

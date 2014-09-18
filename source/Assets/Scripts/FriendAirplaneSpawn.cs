@@ -8,7 +8,7 @@ public class FriendAirplaneSpawn : GenericSpawn
         Vector2 startPosition = StartPosition();
 
         transform.parent.CreateTrigger(
-            string.Format("{0} Friends Airplanes Trigger Up", side), new Vector2(startPosition.x, startPosition.y - yOffset),
+            string.Format("{0} Friends Airplanes Trigger Up", side), startPosition,
             tagName.ToString(), layerName.ToString());
 
         transform.parent.CreateTrigger(
@@ -16,10 +16,5 @@ public class FriendAirplaneSpawn : GenericSpawn
             tagName.ToString(), layerName.ToString());
 
         transform.position = new Vector2(startPosition.x, startPosition.y / 2);
-    }
-
-    void Update()
-    {
-        transform.TranslateTo(0, yTranslate, 0, Time.deltaTime);
     }
 }

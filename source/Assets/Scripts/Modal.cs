@@ -37,6 +37,11 @@ public class Modal : MonoBehaviour
         backgroundScale.x *= size;
         backgroundScale.y *= size;
         background.localScale = backgroundScale;
+
+        SetButtonSettings(musicButton, GameSettings.Instance.musicEnabled);
+        SetButtonSettings(fxsButton, GameSettings.Instance.specialEffectsEnabled);
+        SetButtonSettings(acceleratorButton, GameSettings.Instance.acceleratorEnabled);
+        SetButtonSettings(hapticsButton, GameSettings.Instance.hapticsEnabled);
     }
 
     void Update()
@@ -102,48 +107,40 @@ public class Modal : MonoBehaviour
         {
             OnInvisible();
         }
-        else if (position.HasActivated(musicButton.transform.position, musicButton.bounds.size))
+        else if (position.HasActivated(musicButton.transform.position, musicButton.bounds.size, false, true))
         {
-            ChangeButtonSprite(musicButton);
+            ChangeButtonSprite(musicButton, ref GameSettings.Instance.musicEnabled);
         }
-        else if (position.HasActivated(fxsButton.transform.position, fxsButton.bounds.size))
+        else if (position.HasActivated(fxsButton.transform.position, fxsButton.bounds.size, false, true))
         {
-            ChangeButtonSprite(fxsButton);
+            ChangeButtonSprite(fxsButton, ref GameSettings.Instance.specialEffectsEnabled);
         }
-        else if (position.HasActivated(acceleratorButton.transform.position, acceleratorButton.bounds.size))
+        else if (position.HasActivated(acceleratorButton.transform.position, acceleratorButton.bounds.size, false, true))
         {
-            ChangeButtonSprite(acceleratorButton);
+            ChangeButtonSprite(acceleratorButton, ref GameSettings.Instance.acceleratorEnabled);
         }
-        else if (position.HasActivated(hapticsButton.transform.position, hapticsButton.bounds.size))
+        else if (position.HasActivated(hapticsButton.transform.position, hapticsButton.bounds.size, false, true))
         {
-            ChangeButtonSprite(hapticsButton);
+            ChangeButtonSprite(hapticsButton, ref GameSettings.Instance.hapticsEnabled);
         }
     }
 
-    //private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    //{
-    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x &&
-    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y;
-
-    //    if (hasActivated)
-    //    {
-    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
-    //    }
-
-    //    return hasActivated;
-    //}
-
-    private void ChangeButtonSprite(SpriteRenderer buttonRenderer)
+    private void ChangeButtonSprite(SpriteRenderer buttonRenderer, ref bool settingsEnabled)
     {
-        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
+        settingsEnabled = !settingsEnabled;
 
-        if (buttonRenderer.sprite.name == buttonON.name)
+        SetButtonSettings(buttonRenderer, settingsEnabled);
+    }
+
+    private void SetButtonSettings(SpriteRenderer buttonRenderer, bool settingsEnabled)
+    {
+        if (settingsEnabled)
         {
-            buttonRenderer.sprite = buttonOFF;
+            buttonRenderer.sprite = buttonON;
         }
         else
         {
-            buttonRenderer.sprite = buttonON;
+            buttonRenderer.sprite = buttonOFF;
         }
     }
 }

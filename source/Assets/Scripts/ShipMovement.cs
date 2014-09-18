@@ -16,6 +16,8 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.StartGame);
+
         mainCamera = Camera.main;
         boundSize = renderer.bounds.size / 2;
 

@@ -37,6 +37,8 @@ public class WaterSplashPooling : GenericPooling
  
             splashRenderer.sortingLayerName = "Foreground";
             splashRenderer.sortingOrder = 0;
+
+            SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyBombFallingOcean);
         }
     }
 }
