@@ -19,7 +19,7 @@ public class ShipHealth : MonoBehaviour
 
     void Start()
     {
-        GameSettings.Instance.SailedTime = 0;
+        GameSettings.Instance.sailedTime = 0;
 
         health = StartHealth;
         loadBarFactor = shipBox.pixelInset.width / StartHealth;
@@ -45,7 +45,7 @@ public class ShipHealth : MonoBehaviour
         }
         else
         {
-            GameSettings.Instance.SailedTime += Time.deltaTime;
+            GameSettings.Instance.sailedTime += Time.deltaTime;
         }
     }
 

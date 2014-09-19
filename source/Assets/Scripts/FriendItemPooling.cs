@@ -51,7 +51,7 @@ public class FriendItemPooling : GenericPooling
 
     private IEnumerator Improve()
     {
-        if (GameSettings.Instance.SailedTime % timeToImprove == 0)
+        if (GameSettings.Instance.sailedTime % timeToImprove == 0)
         {
             limitIndex++;
             limitIndex = Mathf.Clamp(limitIndex, minLimitIndex, maxLimitIndex);

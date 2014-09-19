@@ -50,7 +50,7 @@ public class EnemyPooling : GenericPooling
 
     private IEnumerator Improve()
     {
-        if (GameSettings.Instance.SailedTime % timeToImprove == 0)
+        if (GameSettings.Instance.sailedTime % timeToImprove == 0)
         {
             spawnTime--;
             spawnTime = Mathf.Clamp(spawnTime, firstSpawnTime, lastSpawnTime);

@@ -30,7 +30,7 @@ public class GameSettings : MonoBehaviour
     /// TEMPO DE JOGO.
     /// </summary>
     [HideInInspector]
-    public float SailedTime = 0;
+    public float sailedTime = 0;
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class GameSettings : MonoBehaviour
 
         if (Application.loadedLevelName == "Score")
         {
-            int sailedTime = (int)GameSettings.Instance.SailedTime;
+            int sailedTime = (int)GameSettings.Instance.sailedTime;
 
             GUIText guiTextScore = GameObject.Find("GUI Text Score").guiText;
             guiTextScore.text = string.Format(guiTextScore.text, sailedTime);

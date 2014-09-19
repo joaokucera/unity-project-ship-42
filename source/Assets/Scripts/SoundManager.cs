@@ -5,6 +5,8 @@ public class SoundManager : MonoBehaviour
 {
     private const float maxAudioVolume = 0.5f;
 
+    private bool lastStatus;
+
     void Start()
     {
         AudioClip sceneClip = Resources.Load<AudioClip>(string.Format("Musics/{0}", Application.loadedLevelName));
@@ -18,6 +20,23 @@ public class SoundManager : MonoBehaviour
         audio.Play();
 
         StartCoroutine(IncreaseVolume());
+    }
+
+    void Update()
+    {
+        if (GameSettings.Instance.musicEnabled != lastStatus)
+        {
+            if (GameSettings.Instance.musicEnabled)
+            {
+                audio.Play();
+            }
+            else
+            {
+                audio.Pause();
+            }
+        }
+
+        lastStatus = GameSettings.Instance.musicEnabled;
     }
 
     IEnumerator IncreaseVolume()
