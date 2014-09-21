@@ -79,15 +79,10 @@ public class Missile : GenericMovement, IAmmo
         {
             SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyHit);
         }
-        else// if (name.Contains("Badass Airplane"))
+        else
         {
             SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyDestroyed);
         }
-        //else
-        //{
-            
-            //SoundEffectScript.Instance.PlaySound(SoundEffectClip.CollisionBetweenShots);
-        //}
 
         ExplosionPooling.Instance.SpawnExplosionFromPool(null, position);
         SmokePooling.Instance.SpawnSmokeFromPool(null, position);

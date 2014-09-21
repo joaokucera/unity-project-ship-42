@@ -31,17 +31,13 @@ public class ShipHealth : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
-            if (!isDead)
-            {
-                isDead = true;
-                SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipFallingOcean);
-            }
+            isDead = true;
 
-            Application.LoadLevel("Score");
+            transform.GetChild(0).gameObject.SetActive(false);
 
-            Destroy(gameObject);
+            gameObject.SendMessage("Die");
         }
         else
         {
@@ -86,7 +82,7 @@ public class ShipHealth : MonoBehaviour
         while (health < StartHealth)
         {
             float adder = Time.deltaTime;
-            cooldownHealth = 100 / CrewStatus.Instance.mechanicStamina;
+            cooldownHealth = 500 / CrewStatus.Instance.mechanicStamina;
 
             for (float timer = 0; timer <= cooldownHealth; timer += adder)
             {
@@ -95,7 +91,7 @@ public class ShipHealth : MonoBehaviour
                 yield return 0;
             }
 
-            if (health < StartHealth)
+            if (!isDead && health < StartHealth)
             {
                 health++;
                 SetHealthBar();

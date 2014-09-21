@@ -3,14 +3,14 @@ using System.Collections;
 
 public enum FriendItem
 {
-    Red_Cross,// = 10,
-    Whole_Pizza,// = 9, //3 x 3 (3 para cada personagem)
-    Watermelon,// = 8,
-    Chicken,// = 6,
-    Hamburguer,// = 4,
-    Slice_Pizza,// = 3,
+    Coke,// = 1,
     Cookie,// = 2,
-    Coke// = 1
+    Slice_Pizza,// = 3,
+    Hamburguer,// = 4,
+    Chicken,// = 6,
+    Watermelon,// = 8,
+    Whole_Pizza,// = 9, //3 x 3 (3 para cada personagem)
+    Red_Cross,// = 10,
 }
 
 public class FriendBoxItem : MonoBehaviour

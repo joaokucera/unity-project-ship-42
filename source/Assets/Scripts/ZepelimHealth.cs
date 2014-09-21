@@ -8,17 +8,9 @@ public class ZepelimHealth : EnemyHealth
     /// </summary>
     private float respawnTime = 21f;
 
-    void Update()
-    {
-        if (health <= 0)
-        {
-            SendMessage("IncreaseSpeed");
-        }
-    }
-
     void OnBecameVisible()
     {
-        SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyShowingSound);
+        //SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyShowingSound);
 
         health = startHealth;
     }

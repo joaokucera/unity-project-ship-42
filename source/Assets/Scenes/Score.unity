@@ -620,7 +620,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 6145ad9211dd7d641ab9575daa6dc600, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: .689999998
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 6145ad9211dd7d641ab9575daa6dc600, type: 2}
       propertyPath: m_LocalPosition.y
@@ -652,11 +652,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 13200002, guid: 6145ad9211dd7d641ab9575daa6dc600, type: 2}
       propertyPath: m_Text
-      value: You sailed for {0} seconds!
+      value: Ahoy, you sailed for {0}:{1} minutes!
       objectReference: {fileID: 0}
     - target: {fileID: 13200000, guid: 6145ad9211dd7d641ab9575daa6dc600, type: 2}
       propertyPath: m_Text
-      value: You sailed for {0} seconds!
+      value: Ahoy, you sailed for {0}:{1} minutes!
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 6145ad9211dd7d641ab9575daa6dc600, type: 2}
       propertyPath: m_Name
@@ -1031,8 +1031,7 @@ MonoBehaviour:
   specialEffectsEnabled: 1
   acceleratorEnabled: 0
   hapticsEnabled: 0
-  SailedTime: 0
-  SafeBuoyTime: 2
+  sailedTime: 0
 --- !u!4 &1962939482
 Transform:
   m_ObjectHideFlags: 0
@@ -1069,7 +1068,7 @@ Transform:
   m_PrefabInternal: {fileID: 876042510}
   m_GameObject: {fileID: 1980452230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: .50000006, z: 0}
+  m_LocalPosition: {x: .689999998, y: .50000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2054175194}
@@ -1099,7 +1098,7 @@ GUIText:
   m_GameObject: {fileID: 1980452230}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: You sailed for {0} seconds!
+  m_Text: Ahoy, you sailed for {0}:{1} minutes!
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -1139,7 +1138,7 @@ GUIText:
   m_GameObject: {fileID: 2054175192}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: You sailed for {0} seconds!
+  m_Text: Ahoy, you sailed for {0}:{1} minutes!
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}

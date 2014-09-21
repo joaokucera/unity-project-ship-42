@@ -37,8 +37,6 @@ public class TargetPooling : GenericPooling
 
             target.renderer.sortingLayerName = "Foreground";
             target.renderer.sortingOrder = 5;
-
-            print("SPAWN TARGET (activeInHierarchy): " + target.activeInHierarchy);
         }
 
         return target;

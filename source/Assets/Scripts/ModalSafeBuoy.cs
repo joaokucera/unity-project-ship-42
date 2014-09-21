@@ -9,7 +9,11 @@ public class ModalSafeBuoy : MonoBehaviour
     private const string WarningWholePizza = "A whole pizza improves all crew equally!";
 
     [SerializeField]
+    private Transform lightBox = null;
+
+    [SerializeField]
     private ShipStockItem shipStockItem = null;
+    
     [SerializeField]
     private GameObject pauseObject = null;
 
@@ -45,6 +49,11 @@ public class ModalSafeBuoy : MonoBehaviour
         crewPersonSelected.enabled = false;
 
         mainCamera = Camera.main;
+
+        Vector2 modalScale = lightBox.localScale;
+        modalScale.x = mainCamera.aspect * mainCamera.orthographicSize / 2;
+        modalScale.y = mainCamera.aspect * mainCamera.orthographicSize / 2;
+        lightBox.localScale = modalScale;
 
         // CAPTAIN
         Vector3 captainSize = (captainRenderer.bounds.max - captainRenderer.bounds.min) * 1.15f;
@@ -438,17 +447,4 @@ public class ModalSafeBuoy : MonoBehaviour
                 break;
         }
     }
-
-    //private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    //{
-    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x &&
-    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y;
-
-    //    if (hasActivated)
-    //    {
-    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
-    //    }
-
-    //    return hasActivated;
-    //}
 }

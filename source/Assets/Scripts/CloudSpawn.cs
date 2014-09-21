@@ -28,7 +28,7 @@ public class CloudSpawn : GenericSpawn
             string.Format("Clouds Trigger Down ({0})", cloudSize), new Vector2(startPosition.x, yOffset),
             tagName.ToString(), layerName.ToString());
 
-        transform.position = new Vector2(startPosition.x, startPosition.y - yOffset);
+        transform.position = new Vector2(startPosition.x, startPosition.y);
 
         InvokeRepeating("SpawnEvaluate", 2f, 2f);
     }

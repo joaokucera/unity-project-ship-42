@@ -81,19 +81,6 @@ public class Pause : MonoBehaviour
         }
     }
 
-    //private bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    //{
-    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x &&
-    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y;
-
-    //    if (hasActivated)
-    //    {
-    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
-    //    }
-
-    //    return hasActivated;
-    //}
-
     public void HideContinueAndReloadButtons()
     {
         renderer.enabled = true;

@@ -28,6 +28,7 @@ public class EnemyPooling : GenericPooling
     private float firstSpawnTime = 7;
     private float lastSpawnTime = 2;
     private const float timeToImprove = 21;
+    private const float decreaseValue = 0.25f;
 
     void Start()
     {
@@ -45,20 +46,13 @@ public class EnemyPooling : GenericPooling
 
         spawnTime = firstSpawnTime;
 
-        StartCoroutine(Improve());
+        InvokeRepeating("Improve", timeToImprove, timeToImprove);
     }
 
-    private IEnumerator Improve()
+    private void Improve()
     {
-        if (GameSettings.Instance.sailedTime % timeToImprove == 0)
-        {
-            spawnTime--;
-            spawnTime = Mathf.Clamp(spawnTime, firstSpawnTime, lastSpawnTime);
-
-            print("ENEMY: " + spawnTime);
-        }
-
-        yield return 0;
+        spawnTime -= decreaseValue;
+        spawnTime = Mathf.Clamp(spawnTime, lastSpawnTime, firstSpawnTime);
     }
 
     void Update()

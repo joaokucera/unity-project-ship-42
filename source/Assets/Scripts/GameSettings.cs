@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameSettings : MonoBehaviour
 {
@@ -48,12 +49,36 @@ public class GameSettings : MonoBehaviour
         if (Application.loadedLevelName == "Score")
         {
             int sailedTime = (int)GameSettings.Instance.sailedTime;
+            TimeSpan time = new TimeSpan(0, 0, sailedTime);
 
             GUIText guiTextScore = GameObject.Find("GUI Text Score").guiText;
-            guiTextScore.text = string.Format(guiTextScore.text, sailedTime);
+            guiTextScore.text = string.Format(guiTextScore.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
 
             GUIText guiTextScoreShadow = GameObject.Find("GUI Text Score Shadow").guiText;
-            guiTextScoreShadow.text = string.Format(guiTextScoreShadow.text, sailedTime);
+            guiTextScoreShadow.text = string.Format(guiTextScoreShadow.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Application.loadedLevelName == SceneName.Menu.ToString())
+            {
+                Application.Quit();
+            }
+            else if (Application.loadedLevelName == SceneName.About.ToString())
+            {
+                Application.LoadLevel(SceneName.Menu.ToString());
+            }
+            else if (Application.loadedLevelName == SceneName.Score.ToString())
+            {
+                Application.LoadLevel(SceneName.Menu.ToString());
+            }
+            if (Application.loadedLevelName == SceneName.Level.ToString())
+            {
+                Application.LoadLevel(SceneName.Menu.ToString());
+            }
         }
     }
 }

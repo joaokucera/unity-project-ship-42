@@ -11,23 +11,11 @@ public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
     [SerializeField]
     private float timeToFloat = 0.25f;
 
-    //private Animator animator;
-    //private float originalTurningSpeed;
-
     public bool Splashed { get; set; }
     public int Damage
     {
         get { return (int)AmmoDamage.Barril; }
     }
-
-    //void Start()
-    //{
-    //    animator = GetComponent<Animator>();
-
-    //    base.Initialize();
-
-    //    originalTurningSpeed = turningSpeed;
-    //}
 
     void Update()
     {
@@ -36,10 +24,6 @@ public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
             transform.Rotate(new Vector3(0, 0, turningSpeed * Time.deltaTime));
 
             base.Updating();
-        }
-        else
-        {
-            //TODO: Talvez, criar uma feature para 
         }
     }
 
@@ -59,10 +43,6 @@ public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
     {
         rigidbody2D.gravityScale = 0f;
         rigidbody2D.velocity = Vector2.zero;
-
-        //transform.tag = TagName.Barril.ToString();
-
-        //animator.SetBool("ToFloat", true);
     }
 
     void OnBecameVisible()
@@ -71,9 +51,6 @@ public class Barril : GenericMovement, IAmmo, IDamage, IEnemy
         rigidbody2D.gravityScale = gravityScale;
 
         transform.rotation = Quaternion.Euler(Vector3.zero);
-        //transform.tag = TagName.EnemyAmmo.ToString();
-
-        //animator.SetBool("ToFloat", false);
     }
 
     public void SetDamage()

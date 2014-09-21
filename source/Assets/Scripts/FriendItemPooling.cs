@@ -46,20 +46,13 @@ public class FriendItemPooling : GenericPooling
         limitIndex = minLimitIndex;
         maxLimitIndex = friendItemSprites.Count;
 
-        StartCoroutine(Improve());
+        InvokeRepeating("Improve", timeToImprove, timeToImprove);
     }
 
-    private IEnumerator Improve()
+    private void Improve()
     {
-        if (GameSettings.Instance.sailedTime % timeToImprove == 0)
-        {
-            limitIndex++;
-            limitIndex = Mathf.Clamp(limitIndex, minLimitIndex, maxLimitIndex);
-
-            print("ITEM: " + limitIndex);
-        }
-
-        yield return 0;
+        limitIndex++;
+        limitIndex = Mathf.Clamp(limitIndex, minLimitIndex, maxLimitIndex);
     }
 
     public void SpawnFriendItemFromPool(Vector2 position)

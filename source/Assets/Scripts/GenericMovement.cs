@@ -17,7 +17,7 @@ public enum SpawnStatus
 public class GenericMovement : MonoBehaviour
 {
     [SerializeField]
-    public float horizontalSpeed;
+    protected float horizontalSpeed;
     [SerializeField]
     protected float verticalSpeed;
     [SerializeField]
@@ -25,12 +25,14 @@ public class GenericMovement : MonoBehaviour
 
     protected Camera mainCamera;
 
-    private float originalHorizontalSpeed;
-    private float originalVerticalSpeed;    
+    protected float originalHorizontalSpeed;
+    protected float originalVerticalSpeed;
 
     void Start()
     {
         Initialize();
+
+        RestartSpeed();
     }
 
     void Update()
@@ -56,8 +58,6 @@ public class GenericMovement : MonoBehaviour
 
         originalHorizontalSpeed = horizontalSpeed;
         originalVerticalSpeed = verticalSpeed;
-
-        RestartSpeed();
     }
 
     protected void RestartSpeed()

@@ -22,9 +22,9 @@ public class FriendAirplanePooling : GenericPooling
     private List<FriendAirplaneSpawn> spawnFriendAirplanePoints;
 
     /// <summary>
-    /// BALANCE: Spawn de aviões amigos a cada 14 segundos.
+    /// BALANCE: Spawn de aviões amigos a cada 21 segundos.
     /// </summary>
-    private float spawnTime = 14;
+    private float spawnTime = 21f;
 
     void Start()
     {
@@ -51,8 +51,6 @@ public class FriendAirplanePooling : GenericPooling
         friendAirplaneSpawn.ReverseTranslate();
 
         SpawnFriendAirplaneFromPool(friendAirplaneSpawn.transform.position, friendAirplaneSpawn.side);
-
-        CancelInvoke("SpawnFriendAirplane");
     }
 
     public GameObject SpawnFriendAirplaneFromPool(Vector2 position, MovementSide side)

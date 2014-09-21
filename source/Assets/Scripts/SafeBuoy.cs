@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum SafeBuoyStatus
+{
+    Waiting,
+    Moving
+}
+
 public class SafeBuoy : MonoBehaviour
 {
     [SerializeField]
@@ -11,17 +17,18 @@ public class SafeBuoy : MonoBehaviour
     /// <summary>
     /// BALANCE: Spawn da bóia salva vidas a cada 42 segundos.
     /// </summary>
-    [SerializeField]
     private float respawnTime = 42f;
 
     private float xOffset = 1.15f;
-    private float xTranslate = 2f;
-    private bool isMoving = false;
+    private float xTranslate = -2f;
     private Vector2 startPosition;
+
+    private SafeBuoyStatus status = SafeBuoyStatus.Waiting;
+    private Camera mainCamera;
 
     void Start()
     {
-        Camera mainCamera = Camera.main;
+        mainCamera = Camera.main;
 
         Vector2 position = new Vector2();
         position.x = mainCamera.aspect * mainCamera.orthographicSize;
@@ -31,21 +38,21 @@ public class SafeBuoy : MonoBehaviour
                                         -position.y + renderer.bounds.size.y * xOffset);
 
         transform.parent.CreateTrigger(
-            string.Format("{0} Safe Buoy Trigger Up", MovementSide.LEFTorDOWN), new Vector2(position.x / 2, transform.position.y),
+            string.Format("{0} Safe Buoy Trigger Left", MovementSide.LEFTorDOWN), new Vector2(position.x / 2, transform.position.y),
             tagName.ToString(), layerName.ToString());
 
         transform.parent.CreateTrigger(
-            string.Format("{0} Safe Buoy Trigger Down", MovementSide.RIGHTorUP), transform.position + new Vector3(xOffset * 5, 0, 0),
+            string.Format("{0} Safe Buoy Trigger Right", MovementSide.RIGHTorUP), transform.position + new Vector3(xOffset * 5, 0, 0),
             tagName.ToString(), layerName.ToString());
 
-        InvokeRepeating("Restart", respawnTime, respawnTime);
+        Invoke("Restart", respawnTime);
 
         startPosition = transform.position;
     }
 
     void Update()
     {
-        if (isMoving)
+        if (status == SafeBuoyStatus.Moving)
         {
             transform.TranslateTo(xTranslate, 0, 0, Time.deltaTime);
         }
@@ -59,7 +66,7 @@ public class SafeBuoy : MonoBehaviour
 
             if (collider.name.Contains("RIGHT"))
             {
-                isMoving = false;
+                ToWait();
             }
         }
     }
@@ -71,11 +78,24 @@ public class SafeBuoy : MonoBehaviour
 
     private void Restart()
     {
-        isMoving = true;
+        status = SafeBuoyStatus.Moving;
+
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.EnemyShowingSound);
+
+        CancelInvoke("Restart");
+    }
+
+    private void ToWait()
+    {
+        status = SafeBuoyStatus.Waiting;
+     
+        Invoke("Restart", respawnTime);
     }
 
     public void Replace()
     {
         transform.position = startPosition;
+
+        ToWait();
     }
 }

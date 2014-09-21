@@ -10,7 +10,8 @@ public enum SceneName
     About,
     Level,
     Exit,
-    Modal
+    Modal,
+    Score
 }
 
 public abstract class GenericScreen : MonoBehaviour
@@ -64,8 +65,6 @@ public abstract class GenericScreen : MonoBehaviour
         }
         else
         {
-            //Invoke("LoadLevel", 0f);
-
             if (sceneName == SceneName.Exit)
             {
                 Application.Quit();
@@ -92,33 +91,6 @@ public abstract class GenericScreen : MonoBehaviour
         int index = Random.Range(0, giftBoxSprites.Count);
         giftBoxRenderer.sprite = giftBoxSprites[index];
     }
-
-    //protected void LoadLevel()
-    //{
-    //    if (sceneName == SceneName.Exit)
-    //    {
-    //        Application.Quit();
-    //    }
-    //    else
-    //    {
-    //        Application.LoadLevel(sceneName.ToString());
-    //    }
-
-    //    CancelInvoke("LoadLevel");
-    //}
-
-    //protected bool HasActivated(Vector2 positionA, Vector2 positionB, Vector2 size)
-    //{
-    //    bool hasActivated = Mathf.Abs(positionA.x - positionB.x) <= size.x / 2 &&
-    //                        Mathf.Abs(positionA.y - positionB.y) <= size.y / 2;
-
-    //    if (hasActivated)
-    //    {
-    //        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ClickButton);
-    //    }
-
-    //    return hasActivated;
-    //}
 
     protected void ActivateButton(Renderer buttonRenderer, Sprite buttonSpriteActivated, SceneName sceneToLoad)
     {

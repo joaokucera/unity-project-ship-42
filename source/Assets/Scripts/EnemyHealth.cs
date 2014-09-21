@@ -21,6 +21,11 @@ public class EnemyHealth : MonoBehaviour, IDamage
 
     void Start()
     {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         health = startHealth;
 
         enemyScript = GetComponent<Enemy>();
@@ -37,11 +42,11 @@ public class EnemyHealth : MonoBehaviour, IDamage
 
         DeactivateTargets();
 
-        if (health > 0)
+        if (enemyType == EnemyType.Zepelim)
         {
             SendMessage("IncreaseTorque");
         }
-        else if (enemyType == EnemyType.BadassAirplane)
+        else if (enemyType == EnemyType.BadassAirplane && health <= 0)
         {
             gameObject.SetActive(false);
         }

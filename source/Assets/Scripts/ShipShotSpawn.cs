@@ -93,7 +93,7 @@ public class ShipShotSpawn : MonoBehaviour
         }
 
         float adder = Time.deltaTime;
-        cooldownMissileAmmo = 100 / CrewStatus.Instance.soldierStamina;
+        cooldownMissileAmmo = 250 / CrewStatus.Instance.soldierStamina;
 
         for (float timer = 0; timer <= cooldownMissileAmmo; timer += adder)
         {

@@ -31,7 +31,7 @@ public class CrewStatus : MonoBehaviour
     public GUIText captainText = null, mechanicText = null, soldierText = null;
 
     [SerializeField]
-    private float crewStaminaDecreaseFactor = 10, captainBoostDecreaseFactor = 20;
+    private float crewStaminaDecreaseFactor = 1, captainBoostDecreaseFactor = 20;
     [SerializeField]
     private GUITexture captainTexture = null, mechanicTexture = null, soldierTexture = null;
     [SerializeField]
@@ -56,27 +56,27 @@ public class CrewStatus : MonoBehaviour
         Vector2 viewport = mainCamera.WorldToViewportPoint(new Vector2(-mainCamera.aspect * mainCamera.orthographicSize, mainCamera.orthographicSize));
 
         // HUD Crew Pictures.
-        captainTexture.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.075f);
-        mechanicTexture.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.075f);
-        soldierTexture.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.075f);
+        captainTexture.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.1f);
+        mechanicTexture.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.1f);
+        soldierTexture.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.1f);
 
         // HUD Crew Health.
-        captainText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.125f);
-        mechanicText.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.125f);
-        soldierText.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.125f);
+        captainText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.17f);
+        mechanicText.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.17f);
+        soldierText.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.17f);
 
         // HUD Crew Box.
-        captainBox.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.03f);
-        mechanicBox.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.03f);
-        soldierBox.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.03f);
+        captainBox.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.04f);
+        mechanicBox.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.04f);
+        soldierBox.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.04f);
 
         // HUD Crew Load Bar.
-        captainLoadBar.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.03f);
-        mechanicLoadBar.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.03f);
-        soldierLoadBar.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.03f);
+        captainLoadBar.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.04f);
+        mechanicLoadBar.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.04f);
+        soldierLoadBar.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.04f);
 
         // HUD Captain Boost.
-        captainBoostText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.15f);
+        captainBoostText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.2f);
         captainBoostText.enabled = false;
     }
 

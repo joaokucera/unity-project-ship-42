@@ -391,7 +391,7 @@ MonoBehaviour:
   specialEffectsEnabled: 1
   acceleratorEnabled: 0
   hapticsEnabled: 0
-  SafeBuoyTime: 2
+  sailedTime: 0
 --- !u!4 &492488728
 Transform:
   m_ObjectHideFlags: 0

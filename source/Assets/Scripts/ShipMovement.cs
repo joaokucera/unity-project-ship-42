@@ -14,6 +14,8 @@ public class ShipMovement : MonoBehaviour
     private Vector2 boundSize;
     private float fixedVerticalPosition;
 
+    private bool keepMoving = true;
+
     void Start()
     {
         SoundEffectScript.Instance.PlaySound(SoundEffectClip.StartGame);
@@ -36,41 +38,64 @@ public class ShipMovement : MonoBehaviour
 
     void Update()
     {
-        var movement = (int)movementSide * (CrewStatus.Instance.captainStamina / 10);
-        if (CrewStatus.Instance.LoadBarCaptain(movement, Time.deltaTime))
+        if (keepMoving)
         {
-            speed += movement / speedIncreaseFactor;
-            CrewStatus.Instance.CaptainBoost = true;
-
-            if (movementSide == MovementSide.LEFTorDOWN)
+            var movement = (int)movementSide * (CrewStatus.Instance.captainStamina / 10);
+            if (CrewStatus.Instance.LoadBarCaptain(movement, Time.deltaTime))
             {
-                rightParticleSplash.enabled = true;
+                speed += movement / speedIncreaseFactor;
+                CrewStatus.Instance.CaptainBoost = true;
+
+                if (movementSide == MovementSide.LEFTorDOWN)
+                {
+                    rightParticleSplash.enabled = true;
+                }
+                else if (movementSide == MovementSide.RIGHTorUP)
+                {
+                    leftParticleSplash.enabled = true;
+                }
             }
-            else if (movementSide == MovementSide.RIGHTorUP)
+            else
             {
-                leftParticleSplash.enabled = true;
+                speed = movement;
+                CrewStatus.Instance.CaptainBoost = false;
+
+                leftParticleSplash.enabled = false;
+                rightParticleSplash.enabled = false;
             }
-        }
-        else
-        {
-            speed = movement;
-            CrewStatus.Instance.CaptainBoost = false;
 
-            leftParticleSplash.enabled = false;
-            rightParticleSplash.enabled = false;
-        }
-
-        transform.TranslateTo(speed, 0, 0, Time.deltaTime);
-        transform.position = new Vector2(transform.position.x, fixedVerticalPosition);
+            transform.TranslateTo(speed, 0, 0, Time.deltaTime);
+            transform.position = new Vector2(transform.position.x, fixedVerticalPosition);
 
 #if UNITY_EDITOR
-        MouseAction();
+            MouseAction();
 #else
 		TouchAction ();
 #endif
 
-        // Enforce ship inside the screen.
-        EnforceBounds();
+            // Enforce ship inside the screen.
+            EnforceBounds();
+        }
+        else
+        {
+            transform.TranslateTo(0, -1, 0, Time.deltaTime);
+        }
+    }
+
+    public void Die()
+    {
+        keepMoving = false;
+
+        Invoke("GoToScore", 5f);
+
+        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipFallingOcean);
+    }
+
+    private void GoToScore()
+    {
+        Application.LoadLevel("Score");
+
+        CancelInvoke("GoToScore");
     }
 
     private void MouseAction()

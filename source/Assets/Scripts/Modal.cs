@@ -14,7 +14,7 @@ public class Modal : MonoBehaviour
     private Animator giftBoxAnimator = null;
 
     [SerializeField]
-    private Transform lightBox = null, background = null;
+    private Transform lightBox = null;
 
     [SerializeField]
     private SpriteRenderer closeButton = null, musicButton = null, fxsButton = null, acceleratorButton = null, hapticsButton = null;
@@ -31,12 +31,6 @@ public class Modal : MonoBehaviour
         modalScale.x = mainCamera.aspect * mainCamera.orthographicSize / 2;
         modalScale.y = mainCamera.aspect * mainCamera.orthographicSize / 2;
         lightBox.localScale = modalScale;
-
-        float size = mainCamera.aspect * (mainCamera.orthographicSize / 20);
-        Vector2 backgroundScale = background.localScale;
-        backgroundScale.x *= size;
-        backgroundScale.y *= size;
-        background.localScale = backgroundScale;
 
         SetButtonSettings(musicButton, GameSettings.Instance.musicEnabled);
         SetButtonSettings(fxsButton, GameSettings.Instance.specialEffectsEnabled);

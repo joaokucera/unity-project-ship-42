@@ -67,12 +67,12 @@ public class WaveParallax : MonoBehaviour {
 			{
 				Transform lastWave = waves.LastOrDefault();
 
-				//print("Name: " + firstWave.name + " | " + lastWave.name);
+				//print("PRE WAVE: " + firstWave.name + " | " + lastWave.name);
 
 				Vector3 lastPosition = lastWave.position;
 				Vector3 lastSize = lastWave.renderer.bounds.max - lastWave.renderer.bounds.min;
 
-				//print("POS: " + lastPosition.x + " | " + lastSize.x);
+				//print("POS WAVE: " + lastPosition.x + " | " + lastSize.x);
 
 				firstWave.position = new Vector3(lastPosition.x + lastSize.x, 
 				                                  firstWave.position.y, 
