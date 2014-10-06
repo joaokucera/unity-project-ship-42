@@ -27,7 +27,7 @@ public class FriendItemPooling : GenericPooling
     private int limitIndex;
     private const int minLimitIndex = 1;
     private int maxLimitIndex;
-    private const float timeToImprove = 21;
+    private const float timeToImprove = 42;
 
     void Start()
     {

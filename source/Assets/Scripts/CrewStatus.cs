@@ -11,6 +11,8 @@ public class CrewStatus : MonoBehaviour
         {
             if (CrewStatus.instance == null)
             {
+                print(GameObject.Find("Crew Status").name);
+
                 CrewStatus.instance = GameObject.Find("Crew Status").GetComponent<CrewStatus>();
             }
 
@@ -61,22 +63,22 @@ public class CrewStatus : MonoBehaviour
         soldierTexture.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.1f);
 
         // HUD Crew Health.
-        captainText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.17f);
-        mechanicText.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.17f);
-        soldierText.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.17f);
+        captainText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.18f);
+        mechanicText.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.18f);
+        soldierText.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.18f);
 
         // HUD Crew Box.
-        captainBox.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.04f);
-        mechanicBox.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.04f);
-        soldierBox.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.04f);
+        captainBox.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.03f);
+        mechanicBox.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.03f);
+        soldierBox.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.03f);
 
         // HUD Crew Load Bar.
-        captainLoadBar.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.04f);
-        mechanicLoadBar.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.04f);
-        soldierLoadBar.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.04f);
+        captainLoadBar.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.03f);
+        mechanicLoadBar.transform.position = new Vector2(viewport.x + 0.15f, viewport.y - 0.03f);
+        soldierLoadBar.transform.position = new Vector2(viewport.x + 0.25f, viewport.y - 0.03f);
 
         // HUD Captain Boost.
-        captainBoostText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.2f);
+        captainBoostText.transform.position = new Vector2(viewport.x + 0.05f, viewport.y - 0.21f);
         captainBoostText.enabled = false;
     }
 

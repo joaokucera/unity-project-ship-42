@@ -30,7 +30,7 @@ public class Pause : MonoBehaviour
     {
         Vector2 position = Vector2.zero;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBPLAYER
         if (Controls.MouseAction(ref position))
         {
 #else

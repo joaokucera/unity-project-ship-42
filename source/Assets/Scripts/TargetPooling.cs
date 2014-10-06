@@ -36,7 +36,7 @@ public class TargetPooling : GenericPooling
             target.transform.parent = parent;
 
             target.renderer.sortingLayerName = "Foreground";
-            target.renderer.sortingOrder = 5;
+            target.renderer.sortingOrder = 2;
         }
 
         return target;

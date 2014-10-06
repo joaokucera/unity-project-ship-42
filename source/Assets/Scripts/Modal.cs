@@ -21,6 +21,9 @@ public class Modal : MonoBehaviour
     [SerializeField]
     private Sprite buttonON = null, buttonOFF = null;
 
+    [SerializeField]
+    private MusicManager musicManagerScript;
+
     private Camera mainCamera;
 
     void Start()
@@ -42,7 +45,7 @@ public class Modal : MonoBehaviour
     {
         Vector2 position = Vector2.zero;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBPLAYER
         if (Controls.MouseAction(ref position))
         {
 #else
@@ -104,6 +107,8 @@ public class Modal : MonoBehaviour
         else if (position.HasActivated(musicButton.transform.position, musicButton.bounds.size, false, true))
         {
             ChangeButtonSprite(musicButton, ref GameSettings.Instance.musicEnabled);
+
+            musicManagerScript.PlayOrPause();
         }
         else if (position.HasActivated(fxsButton.transform.position, fxsButton.bounds.size, false, true))
         {

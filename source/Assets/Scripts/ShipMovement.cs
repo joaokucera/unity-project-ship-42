@@ -7,6 +7,8 @@ public class ShipMovement : MonoBehaviour
     private float speedIncreaseFactor = 100;
     [SerializeField]
     private Renderer leftParticleSplash = null, rightParticleSplash = null;
+    [SerializeField]
+    private GameOver gameOverScript;
 
     private float speed;
     private MovementSide movementSide = MovementSide.NONE;
@@ -15,6 +17,7 @@ public class ShipMovement : MonoBehaviour
     private float fixedVerticalPosition;
 
     private bool keepMoving = true;
+    private float increaseAccelerationFactor = 20f;
 
     void Start()
     {
@@ -64,10 +67,15 @@ public class ShipMovement : MonoBehaviour
                 rightParticleSplash.enabled = false;
             }
 
+            if (GameSettings.Instance.acceleratorEnabled)
+            {
+                speed = AcceleratorAction();
+            }
+
             transform.TranslateTo(speed, 0, 0, Time.deltaTime);
             transform.position = new Vector2(transform.position.x, fixedVerticalPosition);
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBPLAYER
             MouseAction();
 #else
 		TouchAction ();
@@ -93,7 +101,9 @@ public class ShipMovement : MonoBehaviour
 
     private void GoToScore()
     {
-        Application.LoadLevel("Score");
+        gameOverScript.OnVisible();
+
+        //Application.LoadLevel("Score");
 
         CancelInvoke("GoToScore");
     }
@@ -134,6 +144,25 @@ public class ShipMovement : MonoBehaviour
         {
             movementSide = MovementSide.NONE;
         }
+    }
+
+    private float AcceleratorAction()
+    {
+        Vector2 accelerationPosition = Vector2.zero;
+
+        // Got acceleration.
+        if (Input.accelerationEventCount > 0)
+        {
+            accelerationPosition.x = Input.acceleration.x;
+            accelerationPosition.y = 0;
+
+            if (accelerationPosition.sqrMagnitude > 1)
+            {
+                accelerationPosition.Normalize();
+            }
+        }
+
+        return accelerationPosition.x * increaseAccelerationFactor;
     }
 
     private void Movement(Vector2 position)

@@ -13,7 +13,7 @@ public class ModalSafeBuoy : MonoBehaviour
 
     [SerializeField]
     private ShipStockItem shipStockItem = null;
-    
+
     [SerializeField]
     private GameObject pauseObject = null;
 
@@ -108,7 +108,6 @@ public class ModalSafeBuoy : MonoBehaviour
 
         playerShotSpawnerObject.SetActive(false);
         crewStatusObject.SetActive(false);
-
         pauseObject.SetActive(false);
 
         Time.timeScale = 0f;
@@ -121,7 +120,6 @@ public class ModalSafeBuoy : MonoBehaviour
 
         playerShotSpawnerObject.SetActive(true);
         crewStatusObject.SetActive(true);
-
         pauseObject.SetActive(true);
 
         Time.timeScale = 1f;
@@ -136,7 +134,7 @@ public class ModalSafeBuoy : MonoBehaviour
 
         Vector2 position = Vector2.zero;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBPLAYER
         if (Controls.MouseAction(ref position))
         {
 #else
@@ -379,6 +377,8 @@ public class ModalSafeBuoy : MonoBehaviour
                 {
                     FriendBoxValues.GetInstance().GetValue(currentFriendItem, ref CrewStatus.Instance.soldierStamina);
                 }
+
+                increased = true;
 
                 crewPersonSelected.transform.position = soldierRenderer.transform.position;
                 crewPersonSelected.enabled = true;

@@ -26,7 +26,7 @@ public class EnemyPooling : GenericPooling
     /// </summary>
     private float spawnTime;
     private float firstSpawnTime = 7;
-    private float lastSpawnTime = 2;
+    private float lastSpawnTime = 1;
     private const float timeToImprove = 21;
     private const float decreaseValue = 0.25f;
 

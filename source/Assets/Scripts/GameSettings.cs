@@ -43,20 +43,20 @@ public class GameSettings : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
-        if (Application.loadedLevelName == "Score")
-        {
-            int sailedTime = (int)GameSettings.Instance.sailedTime;
-            TimeSpan time = new TimeSpan(0, 0, sailedTime);
+        //if (Application.loadedLevelName == "Score")
+        //{
+        //    int sailedTime = (int)GameSettings.Instance.sailedTime;
+        //    TimeSpan time = new TimeSpan(0, 0, sailedTime);
 
-            GUIText guiTextScore = GameObject.Find("GUI Text Score").guiText;
-            guiTextScore.text = string.Format(guiTextScore.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
+        //    GUIText guiTextScore = GameObject.Find("GUI Text Score").guiText;
+        //    guiTextScore.text = string.Format(guiTextScore.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
 
-            GUIText guiTextScoreShadow = GameObject.Find("GUI Text Score Shadow").guiText;
-            guiTextScoreShadow.text = string.Format(guiTextScoreShadow.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
-        }
+        //    GUIText guiTextScoreShadow = GameObject.Find("GUI Text Score Shadow").guiText;
+        //    guiTextScoreShadow.text = string.Format(guiTextScoreShadow.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
+        //}
     }
 
     void Update()

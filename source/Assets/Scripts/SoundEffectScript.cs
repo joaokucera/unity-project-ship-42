@@ -19,7 +19,8 @@ public enum SoundEffectClip
     EnemyHit,
     EnemyDestroyed,
     CollisionBetweenShots,
-    GameTimeEnding
+    GameTimeEnding,
+    GameOver
 }
 
 public class SoundEffectScript : MonoBehaviour
@@ -75,6 +76,8 @@ public class SoundEffectScript : MonoBehaviour
     //GAME
     [SerializeField]
     private AudioClip gameTimeEndingSound;
+    [SerializeField]
+    private AudioClip gameOverSound;
 
     private Dictionary<SoundEffectClip, AudioClip> clipDictionary;
 
@@ -118,6 +121,7 @@ public class SoundEffectScript : MonoBehaviour
         clipDictionary.Add(SoundEffectClip.EnemyDestroyed, enemyDestroyedSound);
         clipDictionary.Add(SoundEffectClip.EnemyHit, enemyHitSound);
         clipDictionary.Add(SoundEffectClip.EnemyShowingSound, enemyShowingSound);
+        clipDictionary.Add(SoundEffectClip.GameOver, gameOverSound);
         clipDictionary.Add(SoundEffectClip.GameTimeEnding, gameTimeEndingSound);
         clipDictionary.Add(SoundEffectClip.EnemyBarrilAttack, enemyBarrilAttackSound);
         clipDictionary.Add(SoundEffectClip.ShipMissileAttack, shipMissileAttackSound);

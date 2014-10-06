@@ -26,35 +26,35 @@ public class Tips : MonoBehaviour
         modalScale.y = mainCamera.aspect * mainCamera.orthographicSize / 2;
         lightBox.localScale = modalScale;
 
-        string aspect = mainCamera.aspect.ToString("0.00");
-        int fontSize = 1;
+        //string aspect = mainCamera.aspect.ToString("0.00");
+        //int fontSize = 1;
 
-        if (aspect == (3f / 2f).ToString("0.00"))
-        {
-            fontSize = (int)(mainCamera.aspect * 11.5f);
-        }
-        else if (aspect == (16f / 10f).ToString("0.00"))
-        {
-            fontSize = (int)(mainCamera.aspect * 11f);
-        }
-        else if (aspect == (16f / 9f).ToString("0.00"))
-        {
-            fontSize = (int)(mainCamera.aspect * 10f);
-        }
-        else if (aspect == (4f / 3f).ToString("0.00"))
-        {
-            fontSize = (int)(mainCamera.aspect * 13f);
-        }
-        else if (aspect == (17f / 10f).ToString("0.00"))
-        {
-            fontSize = (int)(mainCamera.aspect * 10.5f);
-        }
+        //if (aspect == (3f / 2f).ToString("0.00"))
+        //{
+        //    fontSize = (int)(mainCamera.aspect * 11.5f);
+        //}
+        //else if (aspect == (16f / 10f).ToString("0.00"))
+        //{
+        //    fontSize = (int)(mainCamera.aspect * 11f);
+        //}
+        //else if (aspect == (16f / 9f).ToString("0.00"))
+        //{
+        //    fontSize = (int)(mainCamera.aspect * 10f);
+        //}
+        //else if (aspect == (4f / 3f).ToString("0.00"))
+        //{
+        //    fontSize = (int)(mainCamera.aspect * 13f);
+        //}
+        //else if (aspect == (17f / 10f).ToString("0.00"))
+        //{
+        //    fontSize = (int)(mainCamera.aspect * 10.5f);
+        //}
 
-        GUIText[] childrenGuiText = GetComponentsInChildren<GUIText>();
-        for (int i = 0; i < childrenGuiText.Length; i++)
-        {
-            childrenGuiText[i].fontSize = fontSize;
-        }
+        //GUIText[] childrenGuiText = GetComponentsInChildren<GUIText>();
+        //for (int i = 0; i < childrenGuiText.Length; i++)
+        //{
+        //    childrenGuiText[i].fontSize = fontSize;
+        //}
 
         Time.timeScale = 0f;
     }
@@ -63,7 +63,7 @@ public class Tips : MonoBehaviour
     {
         Vector2 position = Vector2.zero;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBPLAYER
         if (Controls.MouseAction(ref position))
         {
 #else

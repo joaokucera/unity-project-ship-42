@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SoundManager : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
     private const float maxAudioVolume = 0.5f;
-
-    private bool lastStatus;
 
     void Start()
     {
@@ -13,30 +11,23 @@ public class SoundManager : MonoBehaviour
 
         audio.clip = sceneClip;
         audio.volume = 0;
-        if (sceneClip.name != "Score")
-        {
-            audio.loop = true;
-        }
-        audio.Play();
+        audio.loop = true;
+
+        PlayOrPause();
 
         StartCoroutine(IncreaseVolume());
     }
 
-    void Update()
+    public void PlayOrPause()
     {
-        if (GameSettings.Instance.musicEnabled != lastStatus)
+        if (GameSettings.Instance.musicEnabled)
         {
-            if (GameSettings.Instance.musicEnabled)
-            {
-                audio.Play();
-            }
-            else
-            {
-                audio.Pause();
-            }
+            audio.Play();
         }
-
-        lastStatus = GameSettings.Instance.musicEnabled;
+        else
+        {
+            audio.Pause();
+        }
     }
 
     IEnumerator IncreaseVolume()

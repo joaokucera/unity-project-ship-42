@@ -24,7 +24,7 @@ public class FriendAirplanePooling : GenericPooling
     /// <summary>
     /// BALANCE: Spawn de aviões amigos a cada 21 segundos.
     /// </summary>
-    private float spawnTime = 21f;
+    private float spawnTime = 28f;
 
     void Start()
     {

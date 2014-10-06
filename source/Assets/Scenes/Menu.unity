@@ -381,7 +381,7 @@ GameObject:
   - 82: {fileID: 307569143}
   - 114: {fileID: 307569145}
   m_Layer: 0
-  m_Name: Music
+  m_Name: Music Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -939,6 +939,7 @@ MonoBehaviour:
   collisionBetweenShotsSound: {fileID: 8300000, guid: 19165fc24e8b48545b8ec0850715234b,
     type: 3}
   gameTimeEndingSound: {fileID: 8300000, guid: 37cc0ca0b543bf34b8711bf12742ae11, type: 3}
+  gameOverSound: {fileID: 0}
 --- !u!4 &723705702
 Transform:
   m_ObjectHideFlags: 0
@@ -1118,6 +1119,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &997035883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,7 +1531,7 @@ GameObject:
   - 4: {fileID: 1613771989}
   - 114: {fileID: 1613771990}
   m_Layer: 0
-  m_Name: Modal (Settings)
+  m_Name: Modal Configuration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1566,7 +1568,6 @@ MonoBehaviour:
   playButtonAnimator: {fileID: 922807752}
   giftBoxAnimator: {fileID: 1856951717}
   lightBox: {fileID: 552712721}
-  background: {fileID: 46263550}
   closeButton: {fileID: 1231053377}
   musicButton: {fileID: 997035884}
   fxsButton: {fileID: 1066098377}
@@ -1574,6 +1575,7 @@ MonoBehaviour:
   hapticsButton: {fileID: 1648421625}
   buttonON: {fileID: 21300000, guid: 250c170f5cccf2949a4f5bfa04ce4963, type: 3}
   buttonOFF: {fileID: 21300000, guid: 9455a0d2931e6b046bd666755c6618db, type: 3}
+  musicManagerScript: {fileID: 307569145}
 --- !u!1 &1648421623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,6 +1747,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1914273466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1882,7 @@ MonoBehaviour:
   specialEffectsEnabled: 1
   acceleratorEnabled: 0
   hapticsEnabled: 0
+  sailedTime: 0
 --- !u!4 &1962939482
 Transform:
   m_ObjectHideFlags: 0
@@ -1936,7 +1940,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
       propertyPath: m_Name
-      value: Modal (Settings)
+      value: Modal Configuration
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
       propertyPath: menuScript
@@ -1954,6 +1958,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
+      propertyPath: soundManagerScript
+      value: 
+      objectReference: {fileID: 307569145}
+    - target: {fileID: 11400000, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
+      propertyPath: musicManagerScript
+      value: 
+      objectReference: {fileID: 307569145}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dc878d427f70bc49a7fcb00ceecd532, type: 2}
   m_RootGameObject: {fileID: 1613771988}

@@ -6,6 +6,8 @@ public class Enemy : GenericMovement, IEnemy
 {
     public void TurnBack()
     {
+        RestartSpeed();
+
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;

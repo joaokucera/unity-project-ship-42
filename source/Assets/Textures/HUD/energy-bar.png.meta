@@ -1,6 +1,13 @@
 fileFormatVersion: 2
 guid: 584672094a1a4554a9ee0ba3311b0863
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: energy-bar_0
+    21300002: energy-bar_1
+    21300004: energy-bar_2
+    21300006: energy-bar_3
+    21300008: energy-bar_4
+    21300010: energy-bar_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -31,8 +31,6 @@ public class GenericMovement : MonoBehaviour
     void Start()
     {
         Initialize();
-
-        RestartSpeed();
     }
 
     void Update()

@@ -32,7 +32,7 @@ public class ShipShotSpawn : MonoBehaviour
 
     void Update()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBPLAYER
         MouseAction();
 #else
 		TouchAction ();
@@ -44,7 +44,9 @@ public class ShipShotSpawn : MonoBehaviour
         // Just 1 tap.
         if (Input.GetButtonDown("Fire1"))
         {
-            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+
             ActivateMissile(mousePosition);
         }
     }
@@ -57,7 +59,9 @@ public class ShipShotSpawn : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                Vector2 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
+                Vector3 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
+                touchPosition.z = 0;
+
                 ActivateMissile(touchPosition);
             }
         }
@@ -71,11 +75,11 @@ public class ShipShotSpawn : MonoBehaviour
         {
             if (collider.transform.tag.Contains("Enemy"))
             {
-                //GameObject target = TargetPooling.Instance.SpawnTargetFromPool(position, collider.transform);
+                GameObject target = TargetPooling.Instance.SpawnTargetFromPool(position, collider.transform);
 
                 StartCoroutine(MissileAmmoCooldownVerification());
 
-                ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, collider.transform);
+                ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, target.transform);
             }
         }
     }

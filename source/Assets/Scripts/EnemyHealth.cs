@@ -40,24 +40,24 @@ public class EnemyHealth : MonoBehaviour, IDamage
     {
         health -= 1;
 
-        DeactivateTargets();
-
         if (enemyType == EnemyType.Zepelim)
         {
             SendMessage("IncreaseTorque");
         }
         else if (enemyType == EnemyType.BadassAirplane && health <= 0)
         {
+            DeactivateTargets();
+
             gameObject.SetActive(false);
         }
     }
 
     public void DeactivateTargets()
     {
-        Target target = GetComponentsInChildren<Target>().FirstOrDefault();
-        if (target != null)
+        Target[] targets = GetComponentsInChildren<Target>();
+        for (int i = 0; i < targets.Length; i++)
         {
-            target.Deactivate();
+            targets[i].Deactivate();
         }
     }
 }
