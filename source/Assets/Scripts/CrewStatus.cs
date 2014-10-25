@@ -11,8 +11,6 @@ public class CrewStatus : MonoBehaviour
         {
             if (CrewStatus.instance == null)
             {
-                print(GameObject.Find("Crew Status").name);
-
                 CrewStatus.instance = GameObject.Find("Crew Status").GetComponent<CrewStatus>();
             }
 
@@ -27,6 +25,9 @@ public class CrewStatus : MonoBehaviour
             captainBoostText.enabled = value;
         }
     }
+
+    [SerializeField]
+    private bool isTutorial;
 
     private Camera mainCamera;
     public float captainStamina = 50, mechanicStamina = 50, soldierStamina = 50;
@@ -49,7 +50,7 @@ public class CrewStatus : MonoBehaviour
         {
             instance = this;
         }
-
+ 
         ClearBarCaptain();
         ClearBarMechanic();
         ClearBarSoldier();
@@ -84,6 +85,8 @@ public class CrewStatus : MonoBehaviour
 
     void Update()
     {
+        if (isTutorial) return;
+
         SetCrewStamina();
 
         captainText.text = string.Format("{0}/100", (int)captainStamina);

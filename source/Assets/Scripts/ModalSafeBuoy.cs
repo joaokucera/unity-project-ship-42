@@ -189,12 +189,13 @@ public class ModalSafeBuoy : MonoBehaviour
             OnInvisible();
         }
 
+        FriendItem clickedFriendItem = FriendItem.Coke;
         bool thereIsNoItem = false;
 
         // Selected ITEM.
         if (position.HasActivated(redCrossRenderer.transform.position, redCrossRenderer.bounds.size, false, (shipStockItem.redCrossAmount > 0)))
         {
-            currentFriendItem = FriendItem.Red_Cross;
+            clickedFriendItem = FriendItem.Red_Cross;
 
             if (shipStockItem.redCrossAmount > 0)
             {
@@ -208,7 +209,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(watermelonRenderer.transform.position, watermelonRenderer.bounds.size, false, (shipStockItem.waterMellonAmount > 0)))
         {
-            currentFriendItem = FriendItem.Watermelon;
+            clickedFriendItem = FriendItem.Watermelon;
 
             if (shipStockItem.waterMellonAmount > 0)
             {
@@ -222,7 +223,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(chickenRenderer.transform.position, chickenRenderer.bounds.size, false, (shipStockItem.chickenAmount > 0)))
         {
-            currentFriendItem = FriendItem.Chicken;
+            clickedFriendItem = FriendItem.Chicken;
 
             if (shipStockItem.chickenAmount > 0)
             {
@@ -236,7 +237,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(hamburgerRenderer.transform.position, hamburgerRenderer.bounds.size, false, (shipStockItem.hamburguerAmount > 0)))
         {
-            currentFriendItem = FriendItem.Hamburguer;
+            clickedFriendItem = FriendItem.Hamburguer;
 
             if (shipStockItem.hamburguerAmount > 0)
             {
@@ -250,7 +251,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(pizzaWholeRenderer.transform.position, pizzaWholeRenderer.bounds.size, false, (shipStockItem.wholePizzaAmount > 0)))
         {
-            currentFriendItem = FriendItem.Whole_Pizza;
+            clickedFriendItem = FriendItem.Whole_Pizza;
 
             if (shipStockItem.wholePizzaAmount > 0)
             {
@@ -267,7 +268,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(pizzaSliceRenderer.transform.position, pizzaSliceRenderer.bounds.size, false, (shipStockItem.slicePizzaAmount > 0)))
         {
-            currentFriendItem = FriendItem.Slice_Pizza;
+            clickedFriendItem = FriendItem.Slice_Pizza;
 
             if (shipStockItem.slicePizzaAmount > 0)
             {
@@ -281,7 +282,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(cookieRenderer.transform.position, cookieRenderer.bounds.size, false, (shipStockItem.cookieAmount > 0)))
         {
-            currentFriendItem = FriendItem.Cookie;
+            clickedFriendItem = FriendItem.Cookie;
 
             if (shipStockItem.cookieAmount > 0)
             {
@@ -295,7 +296,7 @@ public class ModalSafeBuoy : MonoBehaviour
         }
         else if (position.HasActivated(cokeRenderer.transform.position, cokeRenderer.bounds.size, false, (shipStockItem.cokeAmount > 0)))
         {
-            currentFriendItem = FriendItem.Coke;
+            clickedFriendItem = FriendItem.Coke;
 
             if (shipStockItem.cokeAmount > 0)
             {
@@ -311,10 +312,14 @@ public class ModalSafeBuoy : MonoBehaviour
         // If there is no item available.
         if (thereIsNoItem)
         {
-            warningGuiText.text = string.Format(WarningThereIsNoItem, currentFriendItem.ToString().ToLower().Replace("_", " "));
+            warningGuiText.text = string.Format(WarningThereIsNoItem, clickedFriendItem.ToString().ToLower().Replace("_", " "));
             warningGuiText.enabled = true;
 
             return;
+        }
+        else
+        {
+            currentFriendItem = clickedFriendItem;
         }
 
         // Selected CREW.

@@ -33,7 +33,7 @@ public class GameSettings : MonoBehaviour
     [HideInInspector]
     public float sailedTime = 0;
 
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -43,20 +43,8 @@ public class GameSettings : MonoBehaviour
         }
         else
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-
-        //if (Application.loadedLevelName == "Score")
-        //{
-        //    int sailedTime = (int)GameSettings.Instance.sailedTime;
-        //    TimeSpan time = new TimeSpan(0, 0, sailedTime);
-
-        //    GUIText guiTextScore = GameObject.Find("GUI Text Score").guiText;
-        //    guiTextScore.text = string.Format(guiTextScore.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
-
-        //    GUIText guiTextScoreShadow = GameObject.Find("GUI Text Score Shadow").guiText;
-        //    guiTextScoreShadow.text = string.Format(guiTextScoreShadow.text, time.Minutes.ToString("00"), time.Seconds.ToString("00"));
-        //}
     }
 
     void Update()
@@ -71,11 +59,11 @@ public class GameSettings : MonoBehaviour
             {
                 Application.LoadLevel(SceneName.Menu.ToString());
             }
-            else if (Application.loadedLevelName == SceneName.Score.ToString())
+            else if (Application.loadedLevelName == SceneName.Tutorial.ToString())
             {
                 Application.LoadLevel(SceneName.Menu.ToString());
             }
-            if (Application.loadedLevelName == SceneName.Level.ToString())
+            else if (Application.loadedLevelName == SceneName.Level.ToString())
             {
                 Application.LoadLevel(SceneName.Menu.ToString());
             }

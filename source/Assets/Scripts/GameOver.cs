@@ -68,15 +68,18 @@ public class GameOver : MonoBehaviour
     {
         if (position.HasActivated(reloadButton.transform.position, reloadButton.bounds.size, false, true))
         {
-            Time.timeScale = 1f;
-
-            Application.LoadLevel(SceneName.Level.ToString());
+            ApplyButton(SceneName.Level);
         }
         else if (position.HasActivated(endGameButton.transform.position, endGameButton.bounds.size, false, true))
         {
-            Time.timeScale = 1f;
-
-            Application.LoadLevel(SceneName.Menu.ToString());
+            ApplyButton(SceneName.Menu);
         }
+    }
+
+    private void ApplyButton(SceneName sceneName)
+    {
+        AdvertisementManager.Instance.ShowAds(sceneName);
+
+        gameObject.SetActive(false);
     }
 }

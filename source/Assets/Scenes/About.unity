@@ -189,6 +189,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &345406072
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +257,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &437771362
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +689,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &951826127
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +909,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1728747790
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +921,7 @@ GameObject:
   - 82: {fileID: 1728747791}
   - 114: {fileID: 1728747793}
   m_Layer: 0
-  m_Name: Music
+  m_Name: Music Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,6 +1218,7 @@ MonoBehaviour:
   collisionBetweenShotsSound: {fileID: 8300000, guid: 19165fc24e8b48545b8ec0850715234b,
     type: 3}
   gameTimeEndingSound: {fileID: 8300000, guid: 37cc0ca0b543bf34b8711bf12742ae11, type: 3}
+  gameOverSound: {fileID: 0}
 --- !u!82 &2041636532
 AudioSource:
   m_ObjectHideFlags: 0

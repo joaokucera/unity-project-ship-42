@@ -4,11 +4,16 @@ using System.Collections;
 public class ShipMovement : MonoBehaviour
 {
     [SerializeField]
+    private bool isTutorial;
+
+    [SerializeField]
     private float speedIncreaseFactor = 100;
     [SerializeField]
     private Renderer leftParticleSplash = null, rightParticleSplash = null;
     [SerializeField]
     private GameOver gameOverScript;
+
+    private ShipShotSpawn shipShotSpawnScript;
 
     private float speed;
     private MovementSide movementSide = MovementSide.NONE;
@@ -21,65 +26,88 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
-        SoundEffectScript.Instance.PlaySound(SoundEffectClip.StartGame);
+        PlaySound(SoundEffectClip.StartGame);
 
         mainCamera = Camera.main;
         boundSize = renderer.bounds.size / 2;
 
+        shipShotSpawnScript = GetComponentInChildren<ShipShotSpawn>();
+
         float yPosition = -mainCamera.orthographicSize + (renderer.bounds.size.y / 3f);
         Vector2 startPosition = new Vector2(0, yPosition);
-        transform.position = startPosition;
+        if (!isTutorial)
+        {
+            transform.position = startPosition;
+        }
         fixedVerticalPosition = startPosition.y;
 
-        leftParticleSplash.sortingLayerName = "Middleground";
-        leftParticleSplash.sortingOrder = 0;
-        leftParticleSplash.enabled = false;
-        rightParticleSplash.sortingLayerName = "Middleground";
-        rightParticleSplash.sortingOrder = 0;
-        rightParticleSplash.enabled = false;
+        if (leftParticleSplash && rightParticleSplash)
+        {
+            leftParticleSplash.sortingLayerName = "Middleground";
+            leftParticleSplash.sortingOrder = 0;
+            leftParticleSplash.enabled = false;
+
+            rightParticleSplash.sortingLayerName = "Middleground";
+            rightParticleSplash.sortingOrder = 0;
+            rightParticleSplash.enabled = false;
+        }
+    }
+
+    private static void PlaySound(SoundEffectClip soundEffect)
+    {
+        if (Application.loadedLevelName != SceneName.Tutorial.ToString())
+        {
+            SoundEffectScript.Instance.PlaySound(soundEffect);
+        }
     }
 
     void Update()
     {
         if (keepMoving)
         {
-            var movement = (int)movementSide * (CrewStatus.Instance.captainStamina / 10);
-            if (CrewStatus.Instance.LoadBarCaptain(movement, Time.deltaTime))
+            if (!shipShotSpawnScript.isShooting)
             {
-                speed += movement / speedIncreaseFactor;
-                CrewStatus.Instance.CaptainBoost = true;
-
-                if (movementSide == MovementSide.LEFTorDOWN)
+                var movement = (int)movementSide * (CrewStatus.Instance.captainStamina / 10);
+                if (CrewStatus.Instance.LoadBarCaptain(movement, Time.deltaTime))
                 {
-                    rightParticleSplash.enabled = true;
+                    speed += movement / speedIncreaseFactor;
+                    CrewStatus.Instance.CaptainBoost = true;
+
+                    if (movementSide == MovementSide.LEFTorDOWN && rightParticleSplash)
+                    {
+                        rightParticleSplash.enabled = true;
+                    }
+                    else if (movementSide == MovementSide.RIGHTorUP && leftParticleSplash)
+                    {
+                        leftParticleSplash.enabled = true;
+                    }
                 }
-                else if (movementSide == MovementSide.RIGHTorUP)
+                else
                 {
-                    leftParticleSplash.enabled = true;
+                    speed = movement;
+                    CrewStatus.Instance.CaptainBoost = false;
+
+                    if (leftParticleSplash && rightParticleSplash)
+                    {
+                        leftParticleSplash.enabled = false;
+                        rightParticleSplash.enabled = false;
+                    }
                 }
-            }
-            else
-            {
-                speed = movement;
-                CrewStatus.Instance.CaptainBoost = false;
 
-                leftParticleSplash.enabled = false;
-                rightParticleSplash.enabled = false;
-            }
+                if (GameSettings.Instance.acceleratorEnabled)
+                {
+                    speed = AcceleratorAction();
+                }
 
-            if (GameSettings.Instance.acceleratorEnabled)
-            {
-                speed = AcceleratorAction();
-            }
-
-            transform.TranslateTo(speed, 0, 0, Time.deltaTime);
-            transform.position = new Vector2(transform.position.x, fixedVerticalPosition);
+                transform.TranslateTo(speed, 0, 0, Time.deltaTime);
+                transform.position = new Vector2(transform.position.x, fixedVerticalPosition);
 
 #if UNITY_EDITOR || UNITY_WEBPLAYER
             MouseAction();
 #else
-		TouchAction ();
+                TouchAction();
 #endif
+            }
 
             // Enforce ship inside the screen.
             EnforceBounds();
@@ -96,7 +124,7 @@ public class ShipMovement : MonoBehaviour
 
         Invoke("GoToScore", 5f);
 
-        SoundEffectScript.Instance.PlaySound(SoundEffectClip.ShipFallingOcean);
+        PlaySound(SoundEffectClip.ShipFallingOcean);
     }
 
     private void GoToScore()

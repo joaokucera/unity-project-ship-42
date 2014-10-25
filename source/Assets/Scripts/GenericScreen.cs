@@ -8,6 +8,7 @@ public enum SceneName
     Disabled,
     Menu,
     About,
+    Tutorial,
     Level,
     Exit,
     Modal,

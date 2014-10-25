@@ -54,6 +54,12 @@ public class ShipHealth : MonoBehaviour
 
             collider.gameObject.SetActive(false);
             StartCoroutine(HealthCooldownVerification(((IAmmo)collider.GetComponent<GenericMovement>()).Damage));
+
+            if (GameSettings.Instance.hapticsEnabled)
+            {
+                CameraShake.Instance.Shake();
+                Handheld.Vibrate();
+            }
         }
     }
 

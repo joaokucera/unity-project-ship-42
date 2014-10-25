@@ -49,6 +49,12 @@ public class Missile : GenericMovement, IAmmo
             collider.SendMessage("SetDamage");
 
             gameObject.SetActive(false);
+
+            if (GameSettings.Instance.hapticsEnabled)
+            {
+                CameraShake.Instance.Shake();
+                Handheld.Vibrate();
+            }
         }
     }
 

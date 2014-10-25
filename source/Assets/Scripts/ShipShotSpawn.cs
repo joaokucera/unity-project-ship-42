@@ -18,6 +18,7 @@ public class ShipShotSpawn : MonoBehaviour
 
     private int missileAmmo;
     private float cooldownMissileAmmo;
+    public bool isShooting;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class ShipShotSpawn : MonoBehaviour
 #if UNITY_EDITOR || UNITY_WEBPLAYER
         MouseAction();
 #else
-		TouchAction ();
+        TouchAction();
 #endif
     }
 
@@ -75,12 +76,22 @@ public class ShipShotSpawn : MonoBehaviour
         {
             if (collider.transform.tag.Contains("Enemy"))
             {
+                isShooting = true;
+
                 GameObject target = TargetPooling.Instance.SpawnTargetFromPool(position, collider.transform);
 
                 StartCoroutine(MissileAmmoCooldownVerification());
 
                 ShipShotPooling.Instance.SpawnShotFromPool(transform.position, missileAttack, target.transform);
             }
+            else
+            {
+                isShooting = false;
+            }
+        }
+        else
+        {
+            isShooting = false;
         }
     }
 

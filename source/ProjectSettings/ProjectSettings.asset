@@ -99,8 +99,8 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: C:/Users/samsung/Google Drive/Project V (Rescue Ship)/Game/Android/ship42.keystore
-  AndroidKeyaliasName: ship 42
+  AndroidKeystoreName: C:/Users/samsung/Google Drive/Project V (Rescue Ship)/Game/android/ship42.keystore
+  AndroidKeyaliasName: ship42
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
@@ -155,6 +155,7 @@ PlayerSettings:
   spritePackerPolicy: 
   scriptingDefineSymbols:
     4: 
+    7: 
   metroPackageName: Project
   metroPackageLogo: 
   metroPackageLogo140: 
