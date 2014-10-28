@@ -189,7 +189,7 @@ public class ModalSafeBuoy : MonoBehaviour
             OnInvisible();
         }
 
-        FriendItem clickedFriendItem = FriendItem.Coke;
+        FriendItem clickedFriendItem = FriendItem.NONE;
         bool thereIsNoItem = false;
 
         // Selected ITEM.
@@ -317,7 +317,7 @@ public class ModalSafeBuoy : MonoBehaviour
 
             return;
         }
-        else
+        else if (clickedFriendItem != FriendItem.NONE)
         {
             currentFriendItem = clickedFriendItem;
         }
@@ -401,11 +401,11 @@ public class ModalSafeBuoy : MonoBehaviour
             if (currentFriendItem == FriendItem.Whole_Pizza)
             {
                 var staminas = FriendBoxValues.GetInstance().GetWholePizza(currentFriendItem, new float[] 
-                    { 
-                        CrewStatus.Instance.captainStamina, 
-                        CrewStatus.Instance.mechanicStamina, 
-                        CrewStatus.Instance.soldierStamina
-                    });
+                { 
+                    CrewStatus.Instance.captainStamina, 
+                    CrewStatus.Instance.mechanicStamina, 
+                    CrewStatus.Instance.soldierStamina
+                });
 
                 CrewStatus.Instance.captainStamina = staminas[0];
                 CrewStatus.Instance.mechanicStamina = staminas[1];

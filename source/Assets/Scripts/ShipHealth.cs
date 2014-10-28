@@ -57,7 +57,6 @@ public class ShipHealth : MonoBehaviour
 
             if (GameSettings.Instance.hapticsEnabled)
             {
-                CameraShake.Instance.Shake();
                 Handheld.Vibrate();
             }
         }

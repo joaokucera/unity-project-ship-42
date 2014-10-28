@@ -89,9 +89,9 @@ public class CrewStatus : MonoBehaviour
 
         SetCrewStamina();
 
-        captainText.text = string.Format("{0}/100", (int)captainStamina);
-        mechanicText.text = string.Format("{0}/100", (int)mechanicStamina);
-        soldierText.text = string.Format("{0}/100", (int)soldierStamina);
+        captainText.text = string.Format("{0}/99", (int)captainStamina);
+        mechanicText.text = string.Format("{0}/99", (int)mechanicStamina);
+        soldierText.text = string.Format("{0}/99", (int)soldierStamina);
     }
 
     private void SetCrewStamina()

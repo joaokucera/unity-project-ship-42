@@ -52,7 +52,6 @@ public class Missile : GenericMovement, IAmmo
 
             if (GameSettings.Instance.hapticsEnabled)
             {
-                CameraShake.Instance.Shake();
                 Handheld.Vibrate();
             }
         }

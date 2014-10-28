@@ -66,12 +66,12 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.joaokucera.ship42
+  iPhoneBundleIdentifier: com.joaokucera.games.ship42
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: a605f6af4530f4da4a311e0db82a91fa
-  iPhoneBundleVersion: 0.1
-  AndroidBundleVersionCode: 1
+  iPhoneBundleVersion: 1.2
+  AndroidBundleVersionCode: 3
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -99,7 +99,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: C:/Users/samsung/Google Drive/Project V (Rescue Ship)/Game/android/ship42.keystore
+  AndroidKeystoreName: C:/Users/samsung/Documents/GitHub/unity-project-ship-42/build/android/ship42.keystore
   AndroidKeyaliasName: ship42
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:

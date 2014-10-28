@@ -65,7 +65,7 @@ public class ShipMovement : MonoBehaviour
     {
         if (keepMoving)
         {
-            if (!shipShotSpawnScript.isShooting)
+            if (!shipShotSpawnScript.isShooting || GameSettings.Instance.acceleratorEnabled)
             {
                 var movement = (int)movementSide * (CrewStatus.Instance.captainStamina / 10);
                 if (CrewStatus.Instance.LoadBarCaptain(movement, Time.deltaTime))

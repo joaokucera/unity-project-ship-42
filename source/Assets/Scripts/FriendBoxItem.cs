@@ -11,6 +11,7 @@ public enum FriendItem
     Watermelon,// = 8,
     Whole_Pizza,// = 9, //3 x 3 (3 para cada personagem)
     Red_Cross,// = 10,
+    NONE
 }
 
 public class FriendBoxItem : MonoBehaviour

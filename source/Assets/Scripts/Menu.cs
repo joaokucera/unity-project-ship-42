@@ -39,7 +39,7 @@ public class Menu : GenericScreen
     {
         if (position.HasActivated(playButton.position, playButton.renderer.bounds.size, true, true))
         {
-            ActivateButton(playButton.renderer, playButtonActivated, SceneName.Level);
+            ActivateButton(playButton.renderer, playButtonActivated, SceneName.Tutorial);
         }
         else if (aboutButton != null && position.HasActivated(aboutButton.position, aboutButton.renderer.bounds.size, true, true))
         {

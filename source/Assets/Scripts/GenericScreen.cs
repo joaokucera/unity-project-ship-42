@@ -82,7 +82,7 @@ public abstract class GenericScreen : MonoBehaviour
         mainCamera = Camera.main;
 
         title.position = new Vector2(mainCamera.aspect * mainCamera.orthographicSize / 2,
-                                      (mainCamera.orthographicSize + title.renderer.bounds.size.y) / 2);
+                                    (mainCamera.orthographicSize + title.renderer.bounds.size.y) / 2);
 
         if (giftBoxSprites == null || giftBoxSprites.Count == 0)
         {
