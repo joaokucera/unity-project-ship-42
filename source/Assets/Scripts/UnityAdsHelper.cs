@@ -62,36 +62,37 @@ public class UnityAdsHelper : MonoBehaviour
         return Advertisement.isReady(zone);
     }
 
-    public static void Show(SceneName sceneName, string zone = null, bool pauseGameDuringAd = true)
+    public static void Show(string zone = null, bool pauseGameDuringAd = true)
     {
         ShowOptions options = new ShowOptions();
         options.pause = pauseGameDuringAd;
 
-        switch (sceneName)
-        {
-            case SceneName.Menu:
-                options.resultCallback = HandleShowResultMenu;
-                break;
-            case SceneName.Level:
-                options.resultCallback = HandleShowResultLevel;
-                break;
-        }
+        //switch (sceneName)
+        //{
+        //    case SceneName.Menu:
+        //        options.resultCallback = HandleShowResultMenu;
+        //        break;
+        //    case SceneName.Level:
+        //        options.resultCallback = HandleShowResultLevel;
+        //        break;
+        //}
 
+        options.resultCallback = HandleShowResult;
         Advertisement.Show(zone, options);
     }
 
     private static void HandleShowResultMenu(ShowResult result)
     {
-        //HandleShowResult(result);
+        HandleShowResult(result);
 
-        Application.LoadLevel(SceneName.Menu.ToString());
+        //Application.LoadLevel(SceneName.Menu.ToString());
     }
 
     private static void HandleShowResultLevel(ShowResult result)
     {
-        //HandleShowResult(result);
+        HandleShowResult(result);
 
-        Application.LoadLevel(SceneName.Level.ToString());
+        //Application.LoadLevel(SceneName.Level.ToString());
     }
 
     private static void HandleShowResult(ShowResult result)

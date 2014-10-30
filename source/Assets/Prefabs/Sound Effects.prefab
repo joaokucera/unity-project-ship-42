@@ -122,6 +122,7 @@ MonoBehaviour:
   collisionBetweenShotsSound: {fileID: 8300000, guid: 19165fc24e8b48545b8ec0850715234b,
     type: 3}
   gameTimeEndingSound: {fileID: 8300000, guid: 37cc0ca0b543bf34b8711bf12742ae11, type: 3}
+  gameOverSound: {fileID: 8300000, guid: eb656868224ddc2478dd952d8228daf3, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

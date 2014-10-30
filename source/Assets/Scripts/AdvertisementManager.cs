@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Advertisements;
 
 public class AdvertisementManager : MonoBehaviour
 {
@@ -18,6 +17,8 @@ public class AdvertisementManager : MonoBehaviour
         }
     }
 
+    private bool showAds = false;
+
     void Awake()
     {
         if (instance == null)
@@ -32,10 +33,24 @@ public class AdvertisementManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (showAds)
+        {
+            if (UnityAdsHelper.isReady())
+            {
+                UnityAdsHelper.Show();
+            }
+
+            showAds = false;
+        }
+    }
+
     public void ShowAds(SceneName sceneName)
     {
+        showAds = true;
         Time.timeScale = 1f;
 
-        UnityAdsHelper.Show(sceneName);
+        Application.LoadLevel(sceneName.ToString());
     }
 }
